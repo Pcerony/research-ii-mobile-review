@@ -16,8 +16,10 @@ const url=process.env.REVIEW_URL||'http://127.0.0.1:8765/04_PPT工作区/review.
   await page.locator('#annotate-slide-region').tap();
   const bounds=await frame.locator('#deck .slide.is-current').boundingBox();
   const session=await context.newCDPSession(page);
-  const touch=async(type,x,y)=>session.send('Input.dispatchTouchEvent',{type,touchPoints:type==='touchEnd'?[]:[{x,y,id:1}]});
+  const touch=async(type,x,y)=>session.send('Input.dispatchTouchEvent',{type,touchPoints:['touchEnd','touchCancel'].includes(type)?[]:[{x,y,id:1}]});
   const x=bounds.x+bounds.width*.3,y=bounds.y+bounds.height*.3;
+  await touch('touchStart',x,y);await touch('touchMove',x+80,y+50);await touch('touchCancel');assert.equal(await frame.locator('.slide-review-capture').count(),0);assert.equal(await page.locator('#notes-count').textContent(),'0');checks.push('interrupted touch discards incomplete region');
+  await page.locator('#annotate-slide-region').tap();
   await touch('touchStart',x,y);await touch('touchMove',x+120,y+65);await touch('touchEnd');
   await page.locator('#note-text').fill('手机触摸区域：保留目标与定位');
   assert.ok(await page.locator('.inspector').isVisible());
@@ -43,7 +45,8 @@ const url=process.env.REVIEW_URL||'http://127.0.0.1:8765/04_PPT工作区/review.
   assert.equal(await page.locator('#note-text').inputValue(),'');assert.equal(await page.locator('#notes-count').textContent(),'0');checks.push('deleted edited note does not resurrect after reload');
   await page.locator('#toggle-inspector').tap();await page.locator('#notes-tab').tap();await page.locator('#import-file').setInputFiles(out+'/review-export.json');await page.waitForFunction(()=>document.getElementById('notes-count').textContent==='1');
   await page.locator('#close-inspector').tap();await page.locator('#annotate-slide-region').tap();await page.locator('#annotate-slide-region').tap();assert.equal(await frame.locator('.slide-review-capture').count(),0);checks.push('visible tap cancellation');
-  await page.locator('#offline-save').tap();await page.waitForFunction(()=>document.getElementById('offline-status').textContent==='离线已就绪',{},{timeout:180000});
+  await context.setOffline(true);await page.locator('#offline-save').tap();await page.waitForFunction(()=>document.getElementById('offline-status').textContent.includes('下载失败'));assert.ok(await page.locator('#offline-save').isEnabled());checks.push('failed offline preparation reports failure and permits retry');
+  await context.setOffline(false);await page.locator('#offline-save').tap();await page.waitForFunction(()=>document.getElementById('offline-status').textContent==='离线已就绪',{},{timeout:180000});
   await context.setOffline(true);await page.reload();await page.locator('#play:not([disabled])').waitFor();
   await page.locator('#play').tap();await page.waitForFunction(()=>document.getElementById('narration').currentTime>.2&&!document.getElementById('narration').paused);await page.locator('#play').tap();
   await page.locator('#next-clip').tap();await page.waitForFunction(()=>document.getElementById('narration').readyState>=1);

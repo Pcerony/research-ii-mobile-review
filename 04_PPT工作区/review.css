@@ -28,6 +28,7 @@ button,select,textarea,input{font:inherit}button{cursor:pointer;color:inherit;ba
 @media(max-width:900px){.review-workspace{grid-template-columns:minmax(0,1fr) 300px}}
 @media(max-width:640px){.review-workspace{grid-template-columns:1fr;grid-template-rows:minmax(180px,.9fr) minmax(240px,1.1fr)}.transcript-tools{gap:6px;padding:7px 0}.transcript-tools>button:not(.icon-button){font-size:12px;padding:5px 8px}.clip-row .clip-text,.clip-row .clip-edit{font-size:14px}}
 #toggle-inspector,#close-inspector{display:none}#offline-status{font-size:11px;color:#53664f;margin-left:2px}#offline-save{margin-left:auto}button{touch-action:manipulation}#import-file{display:none}.notes-tools{gap:6px}.notes-tools #storage-status{margin-right:auto;overflow-wrap:anywhere}.notes-tools .icon-button{flex:none}
+@media(max-width:1024px){.language-mode button{min-height:42px;min-width:38px}.review-scope a{min-height:44px;display:flex;align-items:center}.header-actions>.icon-button{height:44px;width:44px}}
 @media(max-width:1024px) and (orientation:landscape){
   body{height:var(--visible-height,100dvh);grid-template-rows:44px minmax(0,1fr) 66px;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);padding-bottom:env(safe-area-inset-bottom)}
   .review-header{padding:0 8px;gap:8px}.review-header h1{font-size:14px}.review-header h1 span{font-size:12px;margin-left:5px}.header-actions{gap:6px}.review-meta{display:none}

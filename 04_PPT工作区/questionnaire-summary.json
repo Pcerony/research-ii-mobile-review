@@ -1,0 +1,14 @@
+{
+  "source": "[PRIVATE_SOURCE_LINK_REMOVED]",
+  "accessedDate": "2026-10-21",
+  "method": "Read-only authenticated browser; response chart accessibility tables and question-view scale endpoints",
+  "totalResponses": 4,
+  "scope": "Part 4, section 4-2: common post-experience items; not an experiment-one-only instrument",
+  "linkedToEyeTrackingN9": false,
+  "identifiersCollectedInThisExtract": false,
+  "items": [
+    {"id":"calibration","question":"4. 校正や視線追跡の流れは理解しやすかったですか。","n":4,"scale":[1,2,3,4,5],"counts":[0,0,2,2,0],"low":"まったくそう思わない","high":"とてもそう思う"},
+    {"id":"tension","question":"5. カメラや機器によって緊張しましたか。","n":4,"scale":[1,2,3,4,5],"counts":[2,0,0,2,0],"low":"まったく緊張しなかった","high":"とても緊張した"}
+  ],
+  "excluded": ["Part 1 identity fields", "Part 3 screen-sign experience", "whole-experiment fatigue attribution", "respondent-level linkage"]
+}

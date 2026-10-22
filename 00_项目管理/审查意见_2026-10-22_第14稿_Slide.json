@@ -1,0 +1,265 @@
+{
+  "version": 2,
+  "scope": "main",
+  "speechVersion": 14,
+  "language": "zh-CN",
+  "speechHash": "a9c071ff9c7c023d0263b0e87abd07844808dc1ffa825bc9f347aae9a9a3772b",
+  "deckHash": "725b8ee386be15b793ee2f16f7e140a87eae005899de07e8b42082b614e69601",
+  "audioVoice": "Tingting",
+  "audioMatchesDraft": true,
+  "edits": [],
+  "notes": [
+    {
+      "clipIndex": 1,
+      "clipId": "p02",
+      "slide": 2,
+      "offset": 0,
+      "time": 20.223718820861677,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 1,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null
+        },
+        "aspectRatio": 1.3333333333333333,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.51798074,
+          "y": 0.54326572,
+          "width": 0.36922629,
+          "height": 0.07034677
+        }
+      },
+      "id": "3427035d-fa34-4cde-94d7-0d5cf3e68d33",
+      "text": "这里不是内容与阅读方式的问题，而是这个设计问题有很多。但简单来说，就是内容缺乏吸引力，难以被学习",
+      "createdAt": "2026-10-22T01:45:38.774Z"
+    },
+    {
+      "clipIndex": 1,
+      "clipId": "p02",
+      "slide": 2,
+      "offset": 0,
+      "time": 20.223718820861677,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 1,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null
+        },
+        "aspectRatio": 1.3333333333333333,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.50606497,
+          "y": 0.29965049,
+          "width": 0.46508361,
+          "height": 0.41109284
+        }
+      },
+      "id": "8735da4c-b0e5-4a9a-a7b5-98549258dbdb",
+      "text": "我觉得",
+      "createdAt": "2026-10-22T01:47:09.312Z"
+    },
+    {
+      "clipIndex": 1,
+      "clipId": "p02",
+      "slide": 2,
+      "offset": 0,
+      "time": 20.223718820861677,
+      "id": "19984a69-3a41-4506-ac09-4af206a51645",
+      "text": "这里比较适合做一个流程、系统图或者框架图，一开始就说明清楚整个研究的嵌套结构：\n\n1. 最底层是“解说标识”：它是用来帮助人进行植物学习或自然教育的方法。\n2. 引入“共创”：我们引入了共创来改善解说标识这个方法，形成了“共创方法”。\n3. 针对“共创方法”进行研究：由于共创方法本身存在问题，所以本研究是针对共创方法展开的。\n\n这样它就有一个嵌套关系，我觉得用图表的形式去说明会更好一点。",
+      "createdAt": "2026-10-22T01:47:14.824Z"
+    },
+    {
+      "clipIndex": 1,
+      "clipId": "p02",
+      "slide": 2,
+      "offset": 0,
+      "time": 20.223718820861677,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 1,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null
+        },
+        "aspectRatio": 1.3333333333333333,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.05667489,
+          "y": 0.27971948,
+          "width": 0.42532723,
+          "height": 0.42855674
+        }
+      },
+      "id": "c5023360-574f-4803-8473-af3cc6b1a507",
+      "text": "这个图不大好，虽然看是植物园，但其实更重要的是标识哈。我觉得这个图不大好，需要再找点图",
+      "createdAt": "2026-10-22T01:47:43.075Z"
+    },
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 45.19963718820861,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 2,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": "0"
+        },
+        "aspectRatio": 1.3333333333333333,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.04620683,
+          "y": 0.30642361,
+          "width": 0.09900973,
+          "height": 0.07105492
+        }
+      },
+      "id": "8f6e0289-f363-4dfd-8be0-95ff562cb17d",
+      "text": "。所以这个 JJJ 就有问题了：\n\n1. 配图问题：\nJJJ 的这个配图不好，其他文件夹应该有一些类似于合影的配图，找那种带标题的配图来替换。\n\n2. 流程位置问题：\nJJJ 不要出现在上面的流程里。上面的流程是整个共创的流程，或者说是 JJJ 整个的流程，你现在放在这，很容易让人产生误解。\n\n3. 交互与归属关系问题：\n上面这个流程目前的交互效果是行的，但是“研究 1”、“研究 2”跟流程的归属关系现在没有表达清楚。\n\n4. 内容覆盖问题：\n“研究 1”只覆盖了调研跟提取问题，没有覆盖到原型制作，这点有点错误。",
+      "createdAt": "2026-10-22T01:49:00.734Z"
+    },
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 45.19963718820861,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 2,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": "1"
+        },
+        "aspectRatio": 1.3333333333333333,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.15222382,
+          "y": 0.2775265,
+          "width": 0.83358176,
+          "height": 0.56497853
+        }
+      },
+      "id": "85ebd746-27af-4f56-b06c-9692fe2b90f3",
+      "text": "我觉得这里的内容上有一些偏好，是需要修改的。\n\n每一步的具体细节不是很重要，更重要的是说明“研究 1”、“研究 2”分别做了什么。具体修改建议如下：\n\n1. 按钮与布局调整：\n(a) “研究 1”：把“调研”跟“提取问题”这两个按钮合并成一个大按钮。点击之后，左边显示调研的图片，右边显示提取问题的图片。\n(b) “原型制作”：单独做一个按钮。\n(c) “检验评价和继续改善”：合并成另一个大按钮。点击之后，左边显示检验评价的图片，右边显示继续改善的图片。\n\n2. 图片替换：\n目前这些图片都很不好。你去其他文件夹里找一下 JJJ 做这些时候留下的影像资料。如果没有的话，我会单独把调研和提取问题的图片发给你。图片一定要准确，如果不准确，你就先留个占位符跟我说，我会把图片给你。\n\n3. 文字说明：\n图片下面可以加一些小字，简单宽泛地说明一下。比如说明调研是实地调研，以及解决问题是怎么样的；再简单说一下“研究 1”针对这两个部分做了什么改善。",
+      "createdAt": "2026-10-22T01:51:10.601Z"
+    },
+    {
+      "clipIndex": 3,
+      "clipId": "p04",
+      "slide": 4,
+      "offset": 0,
+      "time": 65.51310657596372,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 3,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null
+        },
+        "aspectRatio": 1.3333333333333333,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.03758052,
+          "y": 0.22877833,
+          "width": 0.8412058,
+          "height": 0.40625
+        }
+      },
+      "id": "d1725371-8530-4196-8d81-9019132591cf",
+      "text": "这里最好每一个方法前面有一个小的 icon，现在看起来比较累",
+      "createdAt": "2026-10-22T01:51:41.201Z"
+    },
+    {
+      "clipIndex": 3,
+      "clipId": "p04",
+      "slide": 4,
+      "offset": 0,
+      "time": 65.51310657596372,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 3,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null
+        },
+        "aspectRatio": 1.3333333333333333,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.04172663,
+          "y": 0.73025174,
+          "width": 0.47211657,
+          "height": 0.25620203
+        }
+      },
+      "id": "bb568c2e-e2cb-4bc2-87ff-dbdffba73b14",
+      "text": "。这里的选择理由其实不大对，其实很简单：\n1. 先有一定的先前研究；\n2. 用户的视线位置是一个非常重要的数据。",
+      "createdAt": "2026-10-22T01:52:30.199Z"
+    },
+    {
+      "clipIndex": 4,
+      "clipId": "p05",
+      "slide": 5,
+      "offset": 0,
+      "time": 94.32503401360545,
+      "target": {
+        "type": "slide-page",
+        "slideIndex": 4,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null
+        },
+        "aspectRatio": 1.3333333333333333,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        }
+      },
+      "id": "1d5ea1de-d45e-4c27-a9ac-714226412a92",
+      "text": "那这页整页都需要修改，首先上面的部分还可以，主要是下面。那下面这一部分的话，嗯：\n首先是这个目前放了两个这个先前研究哈，这两项研究是 OK 的，但是它俩其实同属于同一流派，就是使用这个摄像头。\n然后对屏幕上的图像进行评价。但其实目前还有另一种比较热门的这个流派或者说研究，就是使用穿戴设备，比方说专门的穿戴穿戴式实验追踪仪器或者是 VR、AR 之类的来对用户进行这个实验追踪那现在就是有个问题，就是现在缺少另一个流派。那实际上这一两页是这两个流派都要放，并且把这两个流派的它的优缺点都各放上去。比方说外部屏幕这个流派的话，它对用户的侵入性比较小，然后成本比较低。但是相对来说的话，它首先精度稍微差一点，然后的话就是它终究是用户只是看屏幕，那看屏幕跟看实际的纸质是不一样的，所以它其实对于实际的这个，呃用户的这个使用的用户体验的还原是不不够的然后另一个的话就是嗯穿戴式穿戴式的话它将精度很高，但是它一个是对用户的侵入感比较强啊，然后另一个就是它成本比较高，所以这个是两个。我觉得要把两种研究这个路径的优缺点都展示出来，这样我后面才能说我我的下一页，我的课题就是取这两者之所长啊，这样的这一页其实是要表达这样的信息",
+      "createdAt": "2026-10-22T02:00:02.791Z"
+    }
+  ]
+}

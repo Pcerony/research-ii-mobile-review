@@ -1,0 +1,15 @@
+const assert=require('node:assert/strict'),fs=require('node:fs');
+const rows=require('./research-content.cjs');
+assert.equal(rows.filter(r=>!r.supplement).length,21,'Methods overview and selection rationale have separate pages');
+assert.ok(!rows[0].zh.includes('不是改良标识'));
+assert.match(rows[2].zh,/标识专家.*共创/);
+for(const word of ['问卷','访谈','小组讨论','记忆','视线'])assert.ok(rows[3].zh.includes(word),word);
+assert.match(rows[4].zh,/WebGazer/);assert.match(rows[4].zh,/Spooner/);
+assert.match(rows[2].zh,/评价工具|评价.*工具/);assert.match(rows[5].ja,/二つの利点|非装着/);
+assert.ok(!/成本最低|最小侵入.*证明/.test(rows[2].zh));
+const html=fs.readFileSync('04_PPT工作区/index.html','utf8');
+assert.ok(html.includes('data-layout="gaze-prior"'));
+assert.ok(html.includes('data-cocreation-key'));
+assert.ok(html.includes('data-gaze-toggle'));
+assert.ok(html.includes('route-limitation-item'));
+console.log('PASS: opening feedback items, flat co-creation flow, interactive gaze status and bounded deployment goal');

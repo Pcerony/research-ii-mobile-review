@@ -1,0 +1,173 @@
+{
+  "version": 2,
+  "scope": "main",
+  "speechVersion": 26,
+  "language": "zh-CN",
+  "speechHash": "45f6def494e17da5b7fef477cf6e9958a78f0afe0a5075d31404be564b6df37d",
+  "deckHash": "8062cf2ce7b462af874162f0f042d33545da9935c2c1e9060dbb6de5f1610da6",
+  "audioVoice": "Tingting",
+  "audioMatchesDraft": true,
+  "edits": [],
+  "notes": [
+    {
+      "clipIndex": 7,
+      "clipId": "p08",
+      "slide": 8,
+      "offset": 0,
+      "time": 182.08054421768708,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 7,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333330708165323,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.55073647,
+          "y": 0.27727445,
+          "width": 0.28873966,
+          "height": 0.40574597
+        }
+      },
+      "id": "b7f06b9d-882e-4db5-b376-0bfc9397ebf7",
+      "text": "这里关于软件的 说明，只是这样分点的简单信息 是不够的，需要有成段的说明了",
+      "createdAt": "2026-10-22T07:01:28.038Z"
+    },
+    {
+      "clipIndex": 7,
+      "clipId": "p08",
+      "slide": 8,
+      "offset": 0,
+      "time": 182.08054421768708,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 7,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333330708165323,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.04363109,
+          "y": 0.76077999,
+          "width": 0.25246351,
+          "height": 0.06422631
+        }
+      },
+      "id": "65897647-31ca-4c04-8927-3baca58488ac",
+      "text": "这里需要有个小标题：基础功能",
+      "createdAt": "2026-10-22T07:01:40.917Z"
+    },
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 45.826575963718824,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 2,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": "0",
+          "gaze": false
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.05441776,
+          "y": 0.5875693,
+          "width": 0.4330881,
+          "height": 0.2640877
+        }
+      },
+      "id": "e15bf3a7-934f-494e-8cb3-3dc188b0582d",
+      "text": "这里是交接材料里的考察图片",
+      "createdAt": "2026-10-22T07:03:25.197Z"
+    },
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 45.826575963718824,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 2,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": "0",
+          "gaze": false
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.51592855,
+          "y": 0.58102949,
+          "width": 0.43504438,
+          "height": 0.26946195
+        }
+      },
+      "id": "e5cf8600-f4d5-4f32-9174-691e305f1314",
+      "text": "这里是交接材料里的 问题 图片",
+      "createdAt": "2026-10-22T07:03:35.248Z"
+    },
+    {
+      "clipIndex": 6,
+      "clipId": "p07",
+      "slide": 7,
+      "offset": 0,
+      "time": 153.61678004535148,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 6,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333330708165323,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.04072325,
+          "y": 0.71697329,
+          "width": 0.29488728,
+          "height": 0.10285408
+        }
+      },
+      "id": "82e03f32-03b2-4c00-80eb-daf7e50ebc5b",
+      "text": "这里 04 步和前面的 123 步标题样式有点过大了，保持一样，并且从 03 步那里拉一个箭头过来",
+      "createdAt": "2026-10-22T07:04:39.146Z"
+    }
+  ]
+}

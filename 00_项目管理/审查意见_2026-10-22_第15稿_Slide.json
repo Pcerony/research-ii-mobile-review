@@ -1,0 +1,271 @@
+{
+  "version": 2,
+  "scope": "main",
+  "speechVersion": 15,
+  "language": "zh-CN",
+  "speechHash": "aa71801d7c31f1e07f14b11c5f55a7e4ebd4ee96c9b4c77389fb1a005ae8d0d9",
+  "deckHash": "94e60364b45aba05073dcfceebf3fef6de267c38c7abbdc674f191da53f33c70",
+  "audioVoice": "Tingting",
+  "audioMatchesDraft": true,
+  "edits": [],
+  "notes": [
+    {
+      "clipIndex": 1,
+      "clipId": "p02",
+      "slide": 2,
+      "offset": 0,
+      "time": 20.223718820861677,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 1,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null
+        },
+        "aspectRatio": 1.3333333661479334,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.02675843,
+          "y": 0.23476563,
+          "width": 0.46628811,
+          "height": 0.67712324
+        }
+      },
+      "id": "8b14035d-8066-4a99-9e43-631bd4f8027e",
+      "text": "这里的逻辑还是很混乱。这个递进关系并没梳理清楚。这里改为那种系统架构图的样式，不要单纯的只有文本",
+      "createdAt": "2026-10-22T03:32:04.906Z"
+    },
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 45.826575963718824,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 2,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": "intro"
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.044041,
+          "y": 0.30215474,
+          "width": 0.8978121,
+          "height": 0.08482863
+        }
+      },
+      "id": "d56bf037-306e-428a-93bb-44e7fb93de52",
+      "text": "这里视觉上不要分成三部分，调研、提取、原型、检验、改善。这五步独立的表现。只不过交互上来说是三部分而已",
+      "createdAt": "2026-10-22T03:33:03.059Z"
+    },
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 45.826575963718824,
+      "target": {
+        "type": "slide-text",
+        "slideIndex": 2,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": "intro"
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "path": [
+          0,
+          1,
+          3,
+          0,
+          1
+        ],
+        "anchor": {
+          "start": 47,
+          "end": 106,
+          "quote": "研究Ⅰ研究了从调研到问题整理的部分。研究Ⅰ涵盖调研与问题提取，原型制作是运用其成果的阶段；研究Ⅱ研究检验与评价的方法。",
+          "prefix": "s Jam围绕本地问题，由不同参与者共同讨论并试作方案的工作坊。",
+          "suffix": "",
+          "sourceText": "GGJ：Global Goals Jam围绕本地问题，由不同参与者共同讨论并试作方案的工作坊。研究Ⅰ研究了从调研到问题整理的部分。研究Ⅰ涵盖调研与问题提取，原型制作是运用其成果的阶段；研究Ⅱ研究检验与评价的方法。"
+        }
+      },
+      "id": "aeba16d5-7e7c-4b14-8a39-6b48f4528623",
+      "text": "GGJ 的部分就独立讲 GGJ，不要牵扯研究 1",
+      "createdAt": "2026-10-22T03:33:27.521Z"
+    },
+    {
+      "clipIndex": 3,
+      "clipId": "p04",
+      "slide": 4,
+      "offset": 0,
+      "time": 63.24916099773243,
+      "target": {
+        "type": "slide-text",
+        "slideIndex": 3,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "path": [
+          0,
+          1,
+          2
+        ],
+        "anchor": {
+          "start": 0,
+          "end": 27,
+          "quote": "01已有用于评价的先行研究02观看位置是重要的评价资料",
+          "prefix": "",
+          "suffix": "",
+          "sourceText": "01已有用于评价的先行研究02观看位置是重要的评价资料"
+        }
+      },
+      "id": "6ced2017-c2b6-4da2-b84e-36416e61a707",
+      "text": "这里的文本莫名其妙，不如删掉",
+      "createdAt": "2026-10-22T03:34:24.348Z"
+    },
+    {
+      "clipIndex": 3,
+      "clipId": "p04",
+      "slide": 4,
+      "offset": 0,
+      "time": 63.24916099773243,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 3,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.04063139,
+          "y": 0.3500378,
+          "width": 0.82579849,
+          "height": 0.18931452
+        }
+      },
+      "id": "5eb5b4b4-82f3-463c-a185-15ce65588a9f",
+      "text": "这里的每一种方法，下面都附上其能够收集的数据。比如访谈可能是用户 主观的体验评价、观察可能是用户无意识的行为，记忆测试可能是用户对知识的记忆 程度等等",
+      "createdAt": "2026-10-22T03:35:23.506Z"
+    },
+    {
+      "clipIndex": 4,
+      "clipId": "p05",
+      "slide": 5,
+      "offset": 0,
+      "time": 88.61297052154195,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 4,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null
+        },
+        "aspectRatio": 1.3333330708165323,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.02885359,
+          "y": 0.8625126,
+          "width": 0.48765603,
+          "height": 0.1249559
+        }
+      },
+      "id": "5d5756a4-d80c-490d-81e5-6a9d9d07ea14",
+      "text": "这一页不需要研究目的",
+      "createdAt": "2026-10-22T03:35:52.554Z"
+    },
+    {
+      "clipIndex": 4,
+      "clipId": "p05",
+      "slide": 5,
+      "offset": 0,
+      "time": 88.61297052154195,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 4,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null
+        },
+        "aspectRatio": 1.3333330708165323,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.04877074,
+          "y": 0.67044481,
+          "width": 0.78576124,
+          "height": 0.1249433
+        }
+      },
+      "id": "d152787d-bfa8-4257-9ee0-9fea90f634ab",
+      "text": "这里最好有相关的两个配图",
+      "createdAt": "2026-10-22T03:36:07.472Z"
+    },
+    {
+      "clipIndex": 5,
+      "clipId": "p06",
+      "slide": 6,
+      "offset": 0,
+      "time": 122.98430839002268,
+      "target": {
+        "type": "slide-page",
+        "slideIndex": 5,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null
+        },
+        "aspectRatio": 1.3333330708165323,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        }
+      },
+      "id": "e7b71302-0d9f-4536-9905-28a9a877e920",
+      "text": "这一页整体有点问题，其实这一页主要应该是要放上一页下面多余的那个目的。这里不用解释的那么清楚，就单纯说本研究的课题就是设计一种集合两种传统视线追踪方法的优点的改良方案就差不多了",
+      "createdAt": "2026-10-22T03:39:07.641Z"
+    }
+  ]
+}

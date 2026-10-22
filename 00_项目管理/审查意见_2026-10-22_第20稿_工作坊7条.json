@@ -1,0 +1,268 @@
+{
+  "version": 2,
+  "scope": "main",
+  "speechVersion": 20,
+  "language": "zh-CN",
+  "speechHash": "1dc912b158a37dade44443059e3e78a0094d2e08725e6ceb7c4714beccaf9579",
+  "deckHash": "267b06583e6bd10749c0c0fa22d3b859d7b5c0c0373ea93fda39f5a0b795f10d",
+  "audioVoice": "Tingting",
+  "audioMatchesDraft": true,
+  "edits": [],
+  "notes": [
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 45.826575963718824,
+      "target": {
+        "type": "slide-text",
+        "slideIndex": 2,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": "intro",
+          "gaze": false
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "path": [
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "anchor": {
+          "start": 0,
+          "end": 7,
+          "quote": "共创工作坊流程",
+          "prefix": "",
+          "suffix": "",
+          "sourceText": "共创工作坊流程"
+        }
+      },
+      "id": "d23eb65b-138a-40a3-a0b8-5619da3cd922",
+      "text": "这里改为：共创工作坊流程的改善",
+      "createdAt": "2026-10-22T05:18:53.365Z"
+    },
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 45.826575963718824,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 2,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": "intro",
+          "gaze": false
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.04194769,
+          "y": 0.81141633,
+          "width": 0.81517602,
+          "height": 0.07259325
+        }
+      },
+      "id": "73105a4d-4ba3-4fc4-a501-f677745911f0",
+      "text": "这个研究 1 和 2 的表现形式很好，但需要挪到下面流程的下方",
+      "createdAt": "2026-10-22T05:19:18.197Z"
+    },
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 45.826575963718824,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 2,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": "0",
+          "gaze": false
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.85331983,
+          "y": 0.18324723,
+          "width": 0.11544858,
+          "height": 0.04283644
+        }
+      },
+      "id": "83bc3939-e4fc-4be8-90ff-8445b90990e3",
+      "text": "这个按钮要不取消吧，现在怪占高度的",
+      "createdAt": "2026-10-22T05:19:59.516Z"
+    },
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 45.826575963718824,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 2,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": "0",
+          "gaze": false
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.01826447,
+          "y": 0.27005418,
+          "width": 0.38331177,
+          "height": 0.13067666
+        }
+      },
+      "id": "15e45d42-99fa-489f-a146-41c11811ac19",
+      "text": "因为 1 和 2 是一起的，所以应该一起变成强调色",
+      "createdAt": "2026-10-22T05:20:26.106Z"
+    },
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 45.826575963718824,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 2,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": "2",
+          "gaze": false
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.0409223,
+          "y": 0.52123236,
+          "width": 0.88932545,
+          "height": 0.39093372
+        }
+      },
+      "id": "3648750a-0449-4435-98b2-482fb0977c03",
+      "text": "这里文字没有和图片对齐，另外中间中间一个箭头，表达右侧是左侧的改良设计",
+      "createdAt": "2026-10-22T05:21:12.659Z"
+    },
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 45.826575963718824,
+      "target": {
+        "type": "slide-text",
+        "slideIndex": 2,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": "2",
+          "gaze": false
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "path": [
+          0,
+          1,
+          4,
+          1,
+          1,
+          0,
+          2
+        ],
+        "anchor": {
+          "start": 0,
+          "end": 7,
+          "quote": "用于比较的标识",
+          "prefix": "",
+          "suffix": "",
+          "sourceText": "用于比较的标识"
+        }
+      },
+      "id": "6b111037-e8f5-43d9-9493-40166c7aa6b7",
+      "text": "这里改为：当前的植物园标识设计",
+      "createdAt": "2026-10-22T05:21:40.988Z"
+    },
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 45.826575963718824,
+      "target": {
+        "type": "slide-text",
+        "slideIndex": 2,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": "2",
+          "gaze": false
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "path": [
+          0,
+          1,
+          4,
+          1,
+          1,
+          1,
+          2
+        ],
+        "anchor": {
+          "start": 0,
+          "end": 9,
+          "quote": "加入生活与感官联系",
+          "prefix": "",
+          "suffix": "",
+          "sourceText": "加入生活与感官联系"
+        }
+      },
+      "id": "c297765f-a6e0-4e47-8241-9c0eef7232b9",
+      "text": "这里改为“基于研究 1 的 ARS 原则优化后的设计”",
+      "createdAt": "2026-10-22T05:22:07.862Z"
+    }
+  ]
+}

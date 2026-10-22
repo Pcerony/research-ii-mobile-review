@@ -1,0 +1,329 @@
+{
+  "version": 2,
+  "scope": "main",
+  "speechVersion": 26,
+  "language": "zh-CN",
+  "speechHash": "45f6def494e17da5b7fef477cf6e9958a78f0afe0a5075d31404be564b6df37d",
+  "deckHash": "b999de37164354415415b7f10948147686b959bc65b4812181a915962f6a2c1d",
+  "audioVoice": "Tingting",
+  "audioMatchesDraft": true,
+  "edits": [],
+  "notes": [
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 45.826575963718824,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 2,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": "3",
+          "gaze": false
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.03722711,
+          "y": 0.51503276,
+          "width": 0.93734397,
+          "height": 0.40812122
+        }
+      },
+      "id": "9359b8f5-bb5a-4f16-9a19-efbf654188b6",
+      "text": "这里的配图应该承接原型制作的那两个配图，比如在两个标识中间加一个大于号或者小于号。或者一直变的大于号小于号约等于号。来表明这一阶段是来检验新设计是否有效的",
+      "createdAt": "2026-10-22T06:50:05.170Z"
+    },
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 45.826575963718824,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 2,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": "3",
+          "gaze": false
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.77624543,
+          "y": 0.2108808,
+          "width": 0.19367123,
+          "height": 0.07888105
+        }
+      },
+      "id": "0626e6c3-39b6-416a-b941-e11db2369a73",
+      "text": "这里改为不能交互的",
+      "createdAt": "2026-10-22T06:50:33.606Z"
+    },
+    {
+      "clipIndex": 3,
+      "clipId": "p04",
+      "slide": 4,
+      "offset": 0,
+      "time": 79.96167800453514,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 3,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": true
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.48820727,
+          "y": 0.54022807,
+          "width": 0.46594785,
+          "height": 0.07313508
+        }
+      },
+      "id": "67ebf49f-09f1-464d-babd-aa9c5f3b4124",
+      "text": "这里有点小了，从三列改为三行吧。然后去除下方的违背观看区域那一个",
+      "createdAt": "2026-10-22T06:51:27.791Z"
+    },
+    {
+      "clipIndex": 4,
+      "clipId": "p05",
+      "slide": 5,
+      "offset": 0,
+      "time": 110.74702947845805,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 4,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333330708165323,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.02849919,
+          "y": 0.52176159,
+          "width": 0.84890547,
+          "height": 0.01974546
+        }
+      },
+      "id": "edaef62f-ba01-46ed-a159-5f583076cbce",
+      "text": "这两个小标注不需要",
+      "createdAt": "2026-10-22T06:51:48.755Z"
+    },
+    {
+      "clipIndex": 9,
+      "clipId": "p10",
+      "slide": 10,
+      "offset": 0,
+      "time": 231.06580498866214,
+      "target": {
+        "type": "slide-page",
+        "slideIndex": 9,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333338583669354,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        }
+      },
+      "id": "4e930c4b-f960-409c-a1ed-fbe15fcb3844",
+      "text": "这里最好不只有目前的这个配图，能够有类似轴测图插图来解释整个流程就更好了。",
+      "createdAt": "2026-10-22T06:52:50.200Z"
+    },
+    {
+      "clipIndex": 10,
+      "clipId": "p11",
+      "slide": 11,
+      "offset": 0,
+      "time": 257.2869387755102,
+      "target": {
+        "type": "slide-text",
+        "slideIndex": 10,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333338583669354,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "path": [
+          0,
+          1,
+          2,
+          1
+        ],
+        "anchor": {
+          "start": 15,
+          "end": 32,
+          "quote": "时间窗最初10秒条件停下来观看纸面",
+          "prefix": "比较同一参与者的传统型与改良型",
+          "suffix": "",
+          "sourceText": "比较同一参与者的传统型与改良型时间窗最初10秒条件停下来观看纸面"
+        }
+      },
+      "id": "f047f455-535f-491a-8139-a58092dc58d7",
+      "text": "这两个不需要",
+      "createdAt": "2026-10-22T06:53:10.387Z"
+    },
+    {
+      "clipIndex": 10,
+      "clipId": "p11",
+      "slide": 11,
+      "offset": 0,
+      "time": 257.2869387755102,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 10,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333338583669354,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.04193704,
+          "y": 0.67226563,
+          "width": 0.91230433,
+          "height": 0.13054435
+        }
+      },
+      "id": "af47506a-15ad-4e49-bc57-2a721d15b314",
+      "text": "这里最重要的信息：时间、位置、参与人数（15 人）",
+      "createdAt": "2026-10-22T06:53:39.528Z"
+    },
+    {
+      "clipIndex": 10,
+      "clipId": "p11",
+      "slide": 11,
+      "offset": 0,
+      "time": 257.2869387755102,
+      "target": {
+        "type": "slide-text",
+        "slideIndex": 10,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333338583669354,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "path": [
+          0,
+          1,
+          4
+        ],
+        "anchor": {
+          "start": 0,
+          "end": 31,
+          "quote": "视线分析N=9与事后反馈n=4未联结，不作为精度或成功率证明。",
+          "prefix": "",
+          "suffix": "",
+          "sourceText": "视线分析N=9与事后反馈n=4未联结，不作为精度或成功率证明。"
+        }
+      },
+      "id": "47a24fcf-9a9b-4ba3-a656-5e496fa48994",
+      "text": "这个删掉",
+      "createdAt": "2026-10-22T06:53:47.437Z"
+    },
+    {
+      "clipIndex": 10,
+      "clipId": "p11",
+      "slide": 11,
+      "offset": 0,
+      "time": 257.2869387755102,
+      "target": {
+        "type": "slide-text",
+        "slideIndex": 10,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333338583669354,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "path": [
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "anchor": {
+          "start": 0,
+          "end": 6,
+          "quote": "工具开发后，",
+          "prefix": "",
+          "suffix": "",
+          "sourceText": "工具开发后，"
+        }
+      },
+      "id": "d5f10d70-cf36-41ed-9d98-8b923ae82248",
+      "text": "前面这部分删掉",
+      "createdAt": "2026-10-22T06:54:03.182Z"
+    },
+    {
+      "clipIndex": 10,
+      "clipId": "p11",
+      "slide": 11,
+      "offset": 0,
+      "time": 257.2869387755102,
+      "id": "340704ed-34ad-47bf-88b9-925fbcdf1470",
+      "text": "结果这一整个章节需要调整，只需要两页，一页是，获得了有明显差异的数据，就是目前的14、15 页，重点不是这些数据分析可以得到什么样的结论，而是这些数据是可用的，可被分析的。而另一页则放目前的 16 页的内容，一个是用户的反馈。另一个是整个流程试用时发生的问题，比如整体数据会发生方向偏移、佩戴眼镜或者口罩会影响测量精度，大幅度移动会导致追踪失败等等",
+      "createdAt": "2026-10-22T06:57:28.952Z"
+    }
+  ]
+}

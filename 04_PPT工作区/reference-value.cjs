@@ -1,0 +1,10 @@
+// Lucide paths are local; no additional runtime dependency is needed.
+const icons={
+ museum:'<path d="M10 18v-7M14 18v-7M18 18v-7M3 22h18M6 18v-7"/><path d="M11.12 2.198a2 2 0 0 1 1.76.006l7.866 3.847c.476.233.31.949-.22.949H3.474c-.53 0-.695-.716-.22-.949z"/>',
+ gallery:'<path d="M7 2h10M5 6h14"/><rect width="18" height="12" x="3" y="10" rx="2"/>',
+ store:'<path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05"/><path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244"/>'
+};
+module.exports=({t})=>{
+ const domain=(icon,ja,zh,a,b)=>`<div class="value-domain"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[icon]}</svg>${t(ja,zh,'h3')}${t(a,b,'p')}</div>`;
+ return `<div class="value-transfer"><header class="value-transfer-heading">${t('研究の価値 · 応用可能性','研究价值 · 应用可能性','div','value-transfer-label')}<div class="value-transfer-title">${t('植物園の外へ。','走出植物园。','h2')}<span>Beyond botanical gardens.</span></div>${t('現場の視線分布を、公共空間の情報改善に生かす。','将现场视线分布，用于公共空间的信息改善。','p','value-transfer-lead')}</header><div class="value-domain-groups"><div class="value-domain-group"><div class="value-domain-group-label">EDUCATION & CULTURE</div><div class="value-domain-pair">${domain('museum','博物館・美術館','博物馆・美术馆','展示や作品の解説','展览与作品解说')}${domain('gallery','動物園','动物园','各エリアの学習情報','各区域的学习信息')}</div></div><div class="value-domain-group"><div class="value-domain-group-label">COMMERCIAL</div>${domain('store','商業展示','商业展示','商品・サービスの説明','商品与服务说明')}</div><div class="value-domain-group value-domain-future"><div class="value-domain-group-label">FUTURE</div>${t('VRガイダンス','VR导览','h3')}${t('空間内の案内・タスク支援','空间中的导览与任务辅助','p')}${t('手法の拡張が必要','需要扩展现有方法','small')}</div></div><div class="value-transfer-bottom">${t('一つの標識から、公共空間の情報評価へ。','从一块标识，延伸到公共空间的信息评价。','strong')}${t('応用候補／他分野では未検証','应用候选／其他领域尚未验证','span')}</div></div>`;
+};

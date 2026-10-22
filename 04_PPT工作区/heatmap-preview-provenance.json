@@ -1,0 +1,349 @@
+{
+  "purpose": "Qualitative output previews only; not initial-10-second quantitative evidence.",
+  "warning": "Stimulus species and participant-to-analysis correspondence are not independently resolved.",
+  "authorization": "User approved deterministic identity-header and statistics-footer removal, 2026-10-21.",
+  "records": [
+    {
+      "id": "P01",
+      "condition": "control",
+      "source": "03_图表与素材/02_眼动热力图/heatmap-p01-control.jpg",
+      "sourceHash": "cb674a04f968c631c707da667c42fcafe7ba101ea23d91c29a7d9920de8d025b",
+      "sourceSize": {
+        "width": 1400,
+        "height": 1195
+      },
+      "crop": {
+        "left": 90,
+        "top": 134,
+        "width": 1221,
+        "height": 862
+      },
+      "output": "04_PPT工作区/assets/heatmaps/P01-control.png",
+      "outputHash": "e0a9ac57657fca0feac1488727f5ba2ea97a74356eb8859245be964d6534a2b6",
+      "pixelExact": true
+    },
+    {
+      "id": "P01",
+      "condition": "intervention",
+      "source": "03_图表与素材/02_眼动热力图/heatmap-p01-intervention.jpg",
+      "sourceHash": "fcee60c36e285fc7bd3329a2efe91a97afd0fa91bd5e14f61a90478addac44cb",
+      "sourceSize": {
+        "width": 1400,
+        "height": 1164
+      },
+      "crop": {
+        "left": 90,
+        "top": 134,
+        "width": 1221,
+        "height": 862
+      },
+      "output": "04_PPT工作区/assets/heatmaps/P01-intervention.png",
+      "outputHash": "86cdc2044200b30a1816aa8def14f74b34c57745184316f5536a853fa337825c",
+      "pixelExact": true
+    },
+    {
+      "id": "P02",
+      "condition": "control",
+      "source": "03_图表与素材/02_眼动热力图/heatmap-p02-control.jpg",
+      "sourceHash": "785c6738ebc81b94c1dcb19225af963cf65d5cf55c5c3fef04e423e5d56a7e69",
+      "sourceSize": {
+        "width": 1400,
+        "height": 1164
+      },
+      "crop": {
+        "left": 90,
+        "top": 134,
+        "width": 1221,
+        "height": 862
+      },
+      "output": "04_PPT工作区/assets/heatmaps/P02-control.png",
+      "outputHash": "f3562b42d6ae0835d0b6713e82f67d061fd9e00ecb038930bd100c7063b633e5",
+      "pixelExact": true
+    },
+    {
+      "id": "P02",
+      "condition": "intervention",
+      "source": "03_图表与素材/02_眼动热力图/heatmap-p02-intervention.jpg",
+      "sourceHash": "7d2aeb380c927949bb9740803440bf542aa1e18505a9d8da4b8e95f36c4ea473",
+      "sourceSize": {
+        "width": 1400,
+        "height": 1164
+      },
+      "crop": {
+        "left": 90,
+        "top": 134,
+        "width": 1221,
+        "height": 862
+      },
+      "output": "04_PPT工作区/assets/heatmaps/P02-intervention.png",
+      "outputHash": "7e83d1bde50072c6b33402d425681e010d01da3b8c86ca69a4e29401a7815f2a",
+      "pixelExact": true
+    },
+    {
+      "id": "P03",
+      "condition": "control",
+      "source": "03_图表与素材/02_眼动热力图/heatmap-p03-control.jpg",
+      "sourceHash": "7efc28cd2813c356e188021c6d946d926481e14714e04543448b6b25d37d31e3",
+      "sourceSize": {
+        "width": 1400,
+        "height": 1164
+      },
+      "crop": {
+        "left": 90,
+        "top": 134,
+        "width": 1221,
+        "height": 862
+      },
+      "output": "04_PPT工作区/assets/heatmaps/P03-control.png",
+      "outputHash": "4036cd9442195e6ee957f4aad163c02f467d43d6e1c09a328a16a20580f912ba",
+      "pixelExact": true
+    },
+    {
+      "id": "P03",
+      "condition": "intervention",
+      "source": "03_图表与素材/02_眼动热力图/heatmap-p03-intervention.jpg",
+      "sourceHash": "42eb04ffa7a7158fefaba0912056f2be3de71fad83ebdc6e5b4d6896b2a08a70",
+      "sourceSize": {
+        "width": 1400,
+        "height": 1164
+      },
+      "crop": {
+        "left": 90,
+        "top": 134,
+        "width": 1221,
+        "height": 862
+      },
+      "output": "04_PPT工作区/assets/heatmaps/P03-intervention.png",
+      "outputHash": "8afaea380fe97d9d0b0cbbfe3f01f2ad561e9ab82d4e71a16497bf5b07700066",
+      "pixelExact": true
+    },
+    {
+      "id": "P04",
+      "condition": "control",
+      "source": "03_图表与素材/02_眼动热力图/heatmap-p04-control.jpg",
+      "sourceHash": "2adfe9d05b89c140f72897134d1e780781d118b01863427143ce1a131c604050",
+      "sourceSize": {
+        "width": 1400,
+        "height": 1164
+      },
+      "crop": {
+        "left": 90,
+        "top": 134,
+        "width": 1221,
+        "height": 862
+      },
+      "output": "04_PPT工作区/assets/heatmaps/P04-control.png",
+      "outputHash": "227d545027fd6861c88eb1ab1670bed6e6c5ef88329a2a6a378c4a8b02e4659b",
+      "pixelExact": true
+    },
+    {
+      "id": "P04",
+      "condition": "intervention",
+      "source": "03_图表与素材/02_眼动热力图/heatmap-p04-intervention.jpg",
+      "sourceHash": "a622149ecd2df4046a7a4ebd46cf3c808c8fdc5136434e33326d56e83756ae6f",
+      "sourceSize": {
+        "width": 1400,
+        "height": 1164
+      },
+      "crop": {
+        "left": 90,
+        "top": 134,
+        "width": 1221,
+        "height": 862
+      },
+      "output": "04_PPT工作区/assets/heatmaps/P04-intervention.png",
+      "outputHash": "493526d305f50e226eacb2216a643e2b74810450c01c41bb74e96161841b18ae",
+      "pixelExact": true
+    },
+    {
+      "id": "P05",
+      "condition": "control",
+      "source": "03_图表与素材/02_眼动热力图/heatmap-p05-control.jpg",
+      "sourceHash": "f603e451271e6f5354c3074f34f118d7369509b930acd16b562810855fb2fbfa",
+      "sourceSize": {
+        "width": 1400,
+        "height": 1164
+      },
+      "crop": {
+        "left": 90,
+        "top": 134,
+        "width": 1221,
+        "height": 862
+      },
+      "output": "04_PPT工作区/assets/heatmaps/P05-control.png",
+      "outputHash": "298b71f5957e0233b8b8333ff040a400ed669b2c571cc931a475c1ca8cd1d2e7",
+      "pixelExact": true
+    },
+    {
+      "id": "P05",
+      "condition": "intervention",
+      "source": "03_图表与素材/02_眼动热力图/heatmap-p05-intervention.jpg",
+      "sourceHash": "8d468405e00d7e1b6229723236ea61674158624030c6074fa7d4a4595a35d884",
+      "sourceSize": {
+        "width": 1400,
+        "height": 1164
+      },
+      "crop": {
+        "left": 90,
+        "top": 134,
+        "width": 1221,
+        "height": 862
+      },
+      "output": "04_PPT工作区/assets/heatmaps/P05-intervention.png",
+      "outputHash": "f45cc4c9aee31f05751f25c6dc714b2f8feecfce0125feb0dcc2d2523a442fbb",
+      "pixelExact": true
+    },
+    {
+      "id": "P06",
+      "condition": "control",
+      "source": "03_图表与素材/02_眼动热力图/heatmap-p06-control.jpg",
+      "sourceHash": "7458f9ab845d55e4c5476bab57dd68ed99e662e270976f1a45b56f0fde597f2a",
+      "sourceSize": {
+        "width": 1400,
+        "height": 1164
+      },
+      "crop": {
+        "left": 90,
+        "top": 134,
+        "width": 1221,
+        "height": 862
+      },
+      "output": "04_PPT工作区/assets/heatmaps/P06-control.png",
+      "outputHash": "580bc6b3d89bd1327b192b6d915e9fe32868668218346fa1fe17b48b186e94a7",
+      "pixelExact": true
+    },
+    {
+      "id": "P06",
+      "condition": "intervention",
+      "source": "03_图表与素材/02_眼动热力图/heatmap-p06-intervention.jpg",
+      "sourceHash": "52e9e4bd19326f42dd63f1375966b5d3ff0cc063c458f8b9adfa412f7f4b2f3b",
+      "sourceSize": {
+        "width": 1400,
+        "height": 1164
+      },
+      "crop": {
+        "left": 90,
+        "top": 134,
+        "width": 1221,
+        "height": 862
+      },
+      "output": "04_PPT工作区/assets/heatmaps/P06-intervention.png",
+      "outputHash": "c6a1f44fa25a8a5328cbef226df51a57266903fb1a81017d26cc851b276081be",
+      "pixelExact": true
+    },
+    {
+      "id": "P07",
+      "condition": "control",
+      "source": "03_图表与素材/02_眼动热力图/heatmap-p07-control.jpg",
+      "sourceHash": "c955cfb127183e5f5871c793d12d8035df440e35241dbe7ba648d21aea1bcb7f",
+      "sourceSize": {
+        "width": 1400,
+        "height": 1164
+      },
+      "crop": {
+        "left": 90,
+        "top": 134,
+        "width": 1221,
+        "height": 862
+      },
+      "output": "04_PPT工作区/assets/heatmaps/P07-control.png",
+      "outputHash": "97e9df534e7416018bc83abc566daaabf3c4a8993e2920cc8cd608266162ff95",
+      "pixelExact": true
+    },
+    {
+      "id": "P07",
+      "condition": "intervention",
+      "source": "03_图表与素材/02_眼动热力图/heatmap-p07-intervention.jpg",
+      "sourceHash": "22f450cd401d5c1b83b32ddd82579d8d210e4190a04f3d92e577e9089669f2eb",
+      "sourceSize": {
+        "width": 1400,
+        "height": 1164
+      },
+      "crop": {
+        "left": 90,
+        "top": 134,
+        "width": 1221,
+        "height": 862
+      },
+      "output": "04_PPT工作区/assets/heatmaps/P07-intervention.png",
+      "outputHash": "60b1b05ebdf9d4e3e8de490ea8b35b8b154ee638c22cd47551e057b10c81be87",
+      "pixelExact": true
+    },
+    {
+      "id": "P08",
+      "condition": "control",
+      "source": "03_图表与素材/02_眼动热力图/heatmap-p08-control.png",
+      "sourceHash": "1e35eb6d65b1d45982d6b9524756267de5727542399057774c084aa35bc670bc",
+      "sourceSize": {
+        "width": 2200,
+        "height": 1830
+      },
+      "crop": {
+        "left": 141,
+        "top": 211,
+        "width": 1918,
+        "height": 1355
+      },
+      "output": "04_PPT工作区/assets/heatmaps/P08-control.png",
+      "outputHash": "b9d244af1ed57e3c426d45240a926e74e12910a3a051dc523216890f3443493d",
+      "pixelExact": true
+    },
+    {
+      "id": "P08",
+      "condition": "intervention",
+      "source": "03_图表与素材/02_眼动热力图/heatmap-p08-intervention.jpg",
+      "sourceHash": "f6a306fba55dd3e27fffa997e6397045187ed28bb65e0e48c0b180980eb34f6b",
+      "sourceSize": {
+        "width": 1400,
+        "height": 1164
+      },
+      "crop": {
+        "left": 90,
+        "top": 134,
+        "width": 1221,
+        "height": 862
+      },
+      "output": "04_PPT工作区/assets/heatmaps/P08-intervention.png",
+      "outputHash": "69d889479547ab03c460e252e386ebc837632b57aba7e36f2c528a260e88f3a7",
+      "pixelExact": true
+    },
+    {
+      "id": "P09",
+      "condition": "control",
+      "source": "03_图表与素材/02_眼动热力图/heatmap-p09-control.jpg",
+      "sourceHash": "6f4e336a7de65a35fd3b02c15471c40a7b0e78718b3c61c3cf27f988542625aa",
+      "sourceSize": {
+        "width": 1400,
+        "height": 1164
+      },
+      "crop": {
+        "left": 90,
+        "top": 134,
+        "width": 1221,
+        "height": 862
+      },
+      "output": "04_PPT工作区/assets/heatmaps/P09-control.png",
+      "outputHash": "57ae19e48618b1f9cdc7ea2a77d8ea0c1a4ae992af3777785bfb66c3187d77c7",
+      "pixelExact": true
+    },
+    {
+      "id": "P09",
+      "condition": "intervention",
+      "source": "03_图表与素材/02_眼动热力图/heatmap-p09-intervention.jpg",
+      "sourceHash": "7c8bd10394b1b4ecb9b4a1203c1db51da607aa49fc34d54956a8eb1fbd738b64",
+      "sourceSize": {
+        "width": 1400,
+        "height": 1164
+      },
+      "crop": {
+        "left": 90,
+        "top": 134,
+        "width": 1221,
+        "height": 862
+      },
+      "output": "04_PPT工作区/assets/heatmaps/P09-intervention.png",
+      "outputHash": "a00fe1650635cb24c40630ee7ac00b607b5979a1e444366a68eaf7c0701819fb",
+      "pixelExact": true
+    }
+  ]
+}

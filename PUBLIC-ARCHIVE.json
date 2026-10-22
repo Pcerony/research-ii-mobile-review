@@ -1,0 +1,25 @@
+{
+  "version": 35,
+  "date": "2026-10-23",
+  "replaced": [
+    "assets/co-field-study.png",
+    "assets/co-issues.png",
+    "assets/field-observation.jpg",
+    "assets/experiment-scene.jpg",
+    "assets/wearable-tracking.jpg",
+    "assets/screen-evaluation-setup.webp"
+  ],
+  "omitted": [
+    "03_图表与素材：原热图身份页眉及原始照片",
+    "01_主稿参考：未逐页隐私核验的PDF/DOCX二进制",
+    "交接材料与外部候选：未核验材料",
+    "历史音频与未引用资产",
+    "05_输出与浏览器状态"
+  ],
+  "redactions": [
+    "Google Forms/Drive非公开来源链接",
+    "本机绝对路径"
+  ],
+  "localDeckHash": "b2b9dd736353f4793cbed451a4077d7d2d781937744ab40d7a8802a7181cd0f1",
+  "note": "公开版有明确素材占位，不等同本地完整视觉；N9/n4聚合数据、讲稿、代码、当前匿名裁切热图及音频保留。"
+}

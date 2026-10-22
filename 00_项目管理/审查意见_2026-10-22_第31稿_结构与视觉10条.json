@@ -1,0 +1,287 @@
+{
+  "version": 2,
+  "scope": "main",
+  "speechVersion": 29,
+  "language": "zh-CN",
+  "speechHash": "1cb090f66f799a2cd36821b0ccee2820d3c8992897197daad620291aa37b25ed",
+  "deckHash": "9f3f143321befdd8e675ddd41834d1012c06fbd742651cd732857cad5caa526a",
+  "audioVoice": "Tingting",
+  "audioMatchesDraft": true,
+  "edits": [],
+  "notes": [
+    {
+      "clipIndex": 0,
+      "clipId": "p01",
+      "slide": 1,
+      "offset": 0,
+      "time": 0,
+      "target": {
+        "type": "slide-text",
+        "slideIndex": 0,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.6516580093687179,
+        "sourceSize": {
+          "width": 1486,
+          "height": 900
+        },
+        "path": [
+          0,
+          1,
+          2,
+          0,
+          0
+        ],
+        "anchor": {
+          "start": 0,
+          "end": 18,
+          "quote": "王 平成 · 張 彦芳 / 九州大学",
+          "prefix": "",
+          "suffix": "",
+          "sourceText": "王 平成 · 張 彦芳 / 九州大学"
+        }
+      },
+      "id": "8aabff31-9da8-49d9-87f1-911696a51bd3",
+      "text": "这里要分开来，标注两个人的所属",
+      "createdAt": "2026-10-22T07:49:42.398Z"
+    },
+    {
+      "clipIndex": 5,
+      "clipId": "p06",
+      "slide": 6,
+      "offset": 0,
+      "time": 139.41492063492063,
+      "target": {
+        "type": "slide-text",
+        "slideIndex": 5,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.333333545814295,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "path": [
+          0,
+          0,
+          0
+        ],
+        "anchor": {
+          "start": 0,
+          "end": 2,
+          "quote": "课题",
+          "prefix": "",
+          "suffix": "",
+          "sourceText": "课题"
+        }
+      },
+      "id": "6b836db9-579c-4aaa-a86c-251d0042f409",
+      "text": "这里是目的",
+      "createdAt": "2026-10-22T07:55:13.313Z"
+    },
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 45.826575963718824,
+      "target": {
+        "type": "slide-page",
+        "slideIndex": 2,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": "intro",
+          "gaze": false
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        }
+      },
+      "id": "c3841421-766e-4c95-bcdb-efc9064e7ad6",
+      "text": "嗯，这一话这一页我看一下，这一页要做一个极大的简化啊。目前来说这一页它分成两个步骤，一个步骤是先介绍一下 JJJ 以及它所代表的这个工作坊的流程啊。\n第二步是先介绍这个研究 1 做了什么，推荐研究 2 都做了什么，对不对。然后目前评估下来的话，感觉前面这两部分都不算有必要，所以这一页首先取消掉这个交互式设计，直接显示第二步，也就是直接显示这个 34 的展开的这一步就 OK 了。然后你包括讲稿方面，你需要针对性的再去优调整一下，看一下怎么跟前言和后面搭起来吧。你比方说前页背景是吧，我说我们说了这个标识，然后说了这个植物学习，然后就你就可以紧接着跟着就是说啥呢，就是说嗯，目前想想这个怎么说啊，你先看看吧，你看怎么说比较好，就直接切入到这个第四步检验这一步就 OK 了。嗯，然后其他的部分你看一下作业吧，因为你看现在啊，现在整体的这个预估是要你到 8 分钟对不对，我们以 7 分钟为目的，我们把流程简简化一下，甚至说，我说啥呢？这页不要了都行，因为这一页关键的信息放前页，我觉得都是 OK 的啊。这个你自己判断一下",
+      "createdAt": "2026-10-22T09:45:36.838Z"
+    },
+    {
+      "clipIndex": 5,
+      "clipId": "p06",
+      "slide": 6,
+      "offset": 0,
+      "time": 139.41492063492063,
+      "target": {
+        "type": "slide-page",
+        "slideIndex": 5,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333330708165323,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        }
+      },
+      "id": "8ff5b9eb-71c1-46dd-9ade-8b4608b14d87",
+      "text": "嗯，这一页还可以，但这页后面的问题很大。这一页理论首先它本身不是课题，把它的小标题改成目的，好吧，这是研究目的。\n第二点就是它后面跟着是研究设计，但是目前评估下来来说，它跟下一页研究设计中间差一页，因为我们前面刚刚就是解释了两种这个实验追踪的技术流派对不对？那现在只要后面是最好的一个位置去展示什么呢？就展示我们这次的这个技术路径是什么样的，也就是一个我们这一次这个技术路径的一个概要一样。那这里无可奈何的是，我现在还没有图片可以给你，所以你先拿一个比较大的图片作为占位符，先占着你先把文本之类的写完，然后把讲稿的衔接给做一下，那新增的这一页应该属于方法章节这个第一页了。嗯，然后有了新增的这一页，其实你可以思考一下第 8 页，第 8 页的内容可能会存在一些重复吧，或者换一种方式来说，我们这里做的其实是把第 8 页的内容提前到这里来，所以第 8 页可能需要你做一下切分，有的需要放到这一页，有的放在第 8 页。嗯，怎么切能考虑一下吗？先试一试",
+      "createdAt": "2026-10-22T09:47:50.770Z"
+    },
+    {
+      "clipIndex": 8,
+      "clipId": "p09",
+      "slide": 9,
+      "offset": 0,
+      "time": 205.60943310657598,
+      "target": {
+        "type": "slide-page",
+        "slideIndex": 8,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333330708165323,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        }
+      },
+      "id": "356a8104-1b3e-462d-b75b-d7c329041acf",
+      "text": "哎，这一页右边的图很好，但左边这个图有点没必要。因为左边这个图下一页不是也有，第 10 页也有这一页能不能做成一个小动效呢？你拿 SVG 写一个小动效试试呢？就是一开始这个是一个正正方方的矩形，它在一个类似电脑屏幕上对吧？然后诶，我就想转变一下，它变成了一个带有透视的变，然后附了一个纸质的一个标识上面，然后旁边连着一个电脑。这样表达就是我们这个算法，它是从屏幕到纸质的一个转换与映射。这个动效你可能需要独立的去评估一下难度，然后做一个出版给我",
+      "createdAt": "2026-10-22T09:48:52.159Z"
+    },
+    {
+      "clipIndex": 9,
+      "clipId": "p10",
+      "slide": 10,
+      "offset": 0,
+      "time": 231.06580498866214,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 9,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333338583669354,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.04292227,
+          "y": 0.22905746,
+          "width": 0.63598765,
+          "height": 0.54558342
+        }
+      },
+      "id": "956401a9-5799-43ef-9a93-af2b1018d5cc",
+      "text": "这 4 个插图说实话有点太丑了，嗯，你不要不要用 SVG 画了吧。我觉得比较好的方案是你我给你打开网网页的权限，你拿网页拿我的 G 那个网页版的网页端的 ChatGPT，你拿它生图模型来生吧。那画的有点丑说实话",
+      "createdAt": "2026-10-22T09:49:33.431Z"
+    },
+    {
+      "clipIndex": 11,
+      "clipId": "p12",
+      "slide": 12,
+      "offset": 0,
+      "time": 280.0501587301587,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 11,
+        "language": "zh",
+        "state": {
+          "heatmap": "P06",
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.8986627604166666,
+        "sourceSize": {
+          "width": 1709,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.33263817,
+          "y": 0.85848958,
+          "width": 0.07178572,
+          "height": 0.05595312
+        }
+      },
+      "id": "34f457be-01aa-49ba-8b4f-dc7f30d95c27",
+      "text": "这个下面这个标注有两个问题：\n首先这个相对热强度，这这个这段话没有意义啊，把这段话删掉。而且因为有了这段话，你这个中间的这个这个叫什么，这个轴它都偏了，你看到没有，一定要保持这个轴跟上面的这个图案是中心对称的关系。\n然后你这个蓝低绿中红高，这有意义吗？这根本就没有意义，根本看了也看不懂在说什么，应该是蓝关注关注低，或者是停留时间短这样的。你看这个，嗯，有很大问题，这里再改一下",
+      "createdAt": "2026-10-22T09:50:22.865Z"
+    },
+    {
+      "clipIndex": 12,
+      "clipId": "p13",
+      "slide": 13,
+      "offset": 0,
+      "time": 295.2203628117914,
+      "target": {
+        "type": "slide-page",
+        "slideIndex": 12,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333338583669354,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        }
+      },
+      "id": "7a409809-5e8d-46cb-8d9b-747650f4134c",
+      "text": "这也感觉可以删了，这也没啥必要。感觉我们重点不是数据分析的，你把有必要的放在下一页结果一里面啊，没有必要全删了，这也没啥必要",
+      "createdAt": "2026-10-22T09:50:57.472Z"
+    },
+    {
+      "clipIndex": 17,
+      "clipId": "p18",
+      "slide": 18,
+      "offset": 0,
+      "time": 451.17156462585035,
+      "target": {
+        "type": "slide-page",
+        "slideIndex": 17,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.8986627604166666,
+        "sourceSize": {
+          "width": 1709,
+          "height": 900
+        }
+      },
+      "id": "c78d29b6-5bf6-417a-b39a-11c731a34e79",
+      "text": "这个设计咋想的做这么丑？我不是上一版那个，他不是有现成的，你就把代码代码拿来用不就行了？为什么要单独弄一个这么丑的？我觉得基本上复刻我给你的参考的那一版就可以了。你顶多说是吧，给他换个颜色。那一版是一个柠檬绿，你给它换成咱这次的主题色就挺好了，不用不用改，不用改。然后谢谢大家放下一页，就是说再增加独立的营业结束页，单独整个，谢谢大家，加上我们研究的这个标题就 OK 了，好吧",
+      "createdAt": "2026-10-22T09:51:53.227Z"
+    }
+  ]
+}

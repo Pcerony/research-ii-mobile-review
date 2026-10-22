@@ -1,0 +1,220 @@
+{
+  "version": 2,
+  "scope": "main",
+  "speechVersion": 21,
+  "language": "zh-CN",
+  "speechHash": "6366ae2a2fe85349718309f50519966bd6f96c927b924d791d393ce99f52038a",
+  "deckHash": "bc4918325f2dcffc291564de7a8a76889fc98bdeb27952dd80584e0c28b3a1c8",
+  "audioVoice": "Tingting",
+  "audioMatchesDraft": true,
+  "edits": [],
+  "notes": [
+    {
+      "clipIndex": 3,
+      "clipId": "p04",
+      "slide": 4,
+      "offset": 0,
+      "time": 78.69619047619048,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 3,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": true
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.04703418,
+          "y": 0.67055822,
+          "width": 0.89038392,
+          "height": 0.23298891
+        }
+      },
+      "id": "1e95ede9-707e-44c9-83de-f3aa22a03bea",
+      "text": "这里信息不对，这里应该重点说的是，视线追踪对于整个共创流程的意义，所以这里其实是配合图文，详细解释视线追踪能够收集到什么样的数据，有什么意义",
+      "createdAt": "2026-10-22T05:24:42.037Z"
+    },
+    {
+      "clipIndex": 4,
+      "clipId": "p05",
+      "slide": 5,
+      "offset": 0,
+      "time": 107.03215419501134,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 4,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333330708165323,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.03639045,
+          "y": 0.1875504,
+          "width": 0.93116355,
+          "height": 0.10047883
+        }
+      },
+      "id": "a6a29c9e-b9a3-4c84-99c0-aeb156882124",
+      "text": "这一个其实就可以放在前一页的展开部分里了，是辅助说明视线追踪细节的材料。剩下的部分可以充分利用这一页的高度了，目前有点挤",
+      "createdAt": "2026-10-22T05:25:50.604Z"
+    },
+    {
+      "clipIndex": 4,
+      "clipId": "p05",
+      "slide": 5,
+      "offset": 0,
+      "time": 107.03215419501134,
+      "target": {
+        "type": "slide-text",
+        "slideIndex": 4,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333330708165323,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "path": [
+          0,
+          1,
+          0,
+          0
+        ],
+        "anchor": {
+          "start": 0,
+          "end": 10,
+          "quote": "比较两条视线追踪路径",
+          "prefix": "",
+          "suffix": "",
+          "sourceText": "比较两条视线追踪路径"
+        }
+      },
+      "id": "2cc3b8c5-24dd-41fe-960a-a25983158348",
+      "text": "这里改为：主流的两条视线追踪技术路径",
+      "createdAt": "2026-10-22T05:26:19.337Z"
+    },
+    {
+      "clipIndex": 3,
+      "clipId": "p04",
+      "slide": 4,
+      "offset": 0,
+      "time": 78.69619047619048,
+      "target": {
+        "type": "slide-text",
+        "slideIndex": 3,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": true
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "path": [
+          0,
+          1,
+          0,
+          0
+        ],
+        "anchor": {
+          "start": 0,
+          "end": 13,
+          "quote": "比较评价方法，选择视线追踪",
+          "prefix": "",
+          "suffix": "",
+          "sourceText": "比较评价方法，选择视线追踪"
+        }
+      },
+      "id": "4329c621-23e3-47e6-8546-d5c588776202",
+      "text": "这里改为：“视线追踪作为定量方法的补充”",
+      "createdAt": "2026-10-22T05:27:02.944Z"
+    },
+    {
+      "clipIndex": 3,
+      "clipId": "p04",
+      "slide": 4,
+      "offset": 0,
+      "time": 78.69619047619048,
+      "target": {
+        "type": "slide-page",
+        "slideIndex": 3,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": true
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        }
+      },
+      "id": "59f5ce51-4ea6-422c-9c8d-d23b51a1396f",
+      "text": "这一页最好左侧再多弄几个，这样可以凸显“定量方法”的不足这一研究空缺",
+      "createdAt": "2026-10-22T05:27:47.258Z"
+    },
+    {
+      "clipIndex": 5,
+      "clipId": "p06",
+      "slide": 6,
+      "offset": 0,
+      "time": 137.76956916099775,
+      "target": {
+        "type": "slide-text",
+        "slideIndex": 5,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333330708165323,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "path": [
+          0
+        ],
+        "anchor": {
+          "start": 2,
+          "end": 16,
+          "quote": "将两种优势结合为一种评价方法",
+          "prefix": "课题",
+          "suffix": "非穿戴式减少佩戴负担＋实环境・穿戴式边看实物边测量→本研究的课题",
+          "sourceText": "课题将两种优势结合为一种评价方法非穿戴式减少佩戴负担＋实环境・穿戴式边看实物边测量→本研究的课题结合两种视线追踪方法的优势设计一种无需佩戴、能够评价实体纸面的方法"
+        }
+      },
+      "id": "c41e4557-5b6f-426a-adca-f6969f3ba8df",
+      "text": "这里改为：非穿戴-实地性评价方法的开发",
+      "createdAt": "2026-10-22T05:28:35.763Z"
+    }
+  ]
+}

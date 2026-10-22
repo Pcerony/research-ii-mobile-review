@@ -1,0 +1,68 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const {pathToFileURL}=require('node:url'),{chromium}=require('playwright');
+async function main(){
+  const browser=await chromium.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
+  const out='05_输出/qa/review-slide';fs.mkdirSync(out,{recursive:true});const errors=[];
+  try{
+    const page=await browser.newPage({viewport:{width:1440,height:1000},acceptDownloads:true});page.on('pageerror',e=>errors.push(e.message));
+    const url=pathToFileURL(path.resolve('04_PPT工作区/review.html')).href;
+    await page.goto(url);await page.locator('#play:not([disabled])').waitFor();
+    assert.equal(await page.locator('#annotate-slide-text').count(),1);
+    const frame=()=>page.frameLocator('#deck-frame');
+    await page.locator('.clip-location').nth(1).click();
+    await frame().locator('.slide.is-current[data-index="1"]').waitFor();
+    assert.equal(await frame().locator('.slide.is-current .chapter').evaluate(n=>parseFloat(getComputedStyle(n).transitionDuration)),.76,'Normal review retains approved heading animation');
+    const textRect=await frame().locator('.slide.is-current h2').evaluate(el=>{
+      const n=el.querySelector('[data-title-line]').firstChild,r=document.createRange();r.setStart(n,0);r.setEnd(n,Math.min(4,n.length));const b=r.getBoundingClientRect();return {left:b.left,right:b.right,y:b.top+b.height/2};
+    }),frameBox=await page.locator('#deck-frame').boundingBox();
+    await page.mouse.move(frameBox.x+textRect.left+1,frameBox.y+textRect.y);await page.mouse.down();await page.mouse.move(frameBox.x+textRect.right-1,frameBox.y+textRect.y,{steps:8});await page.mouse.up();
+    await page.locator('#annotate-slide-text:not([disabled])').click();
+    assert.ok((await page.locator('#note-quote').textContent()).length>0);
+    await page.locator('#note-text').fill('Slide选文需要调整。');await page.locator('#save-note').click();
+    assert.match(await page.locator('.note-location').textContent(),/Slide.*选文/);
+    await page.locator('#annotate-slide-region').click();
+    const slide=await frame().locator('.slide.is-current').boundingBox();
+    await page.mouse.move(slide.x+slide.width*.2,slide.y+slide.height*.3);await page.mouse.down();await page.mouse.move(slide.x+slide.width*.65,slide.y+slide.height*.6,{steps:8});await page.mouse.up();
+    await page.locator('#note-text').fill('这块图文需要放大。');await page.locator('#save-note').click();
+    await page.locator('#annotate-slide-page').click();await page.locator('#note-text').fill('整页结构需要调整。');await page.locator('#save-note').click();
+    assert.equal(await page.locator('.note-entry').count(),3);
+    const downloaded=page.waitForEvent('download');await page.locator('#export-notes').click();const download=await downloaded,payload=JSON.parse(fs.readFileSync(await download.path(),'utf8'));
+    assert.deepEqual(payload.notes.map(n=>n.target.type),['slide-text','slide-region','slide-page']);assert.equal(payload.edits.length,0);
+    assert.equal(payload.notes[0].anchor,undefined,'Slide text never becomes a transcript anchor');
+    assert.ok(Math.abs(payload.notes[1].target.rect.width-.45)<.025);assert.ok(Math.abs(payload.notes[1].target.rect.height-.3)<.025);
+    await page.reload();await page.locator('#play:not([disabled])').waitFor();await page.locator('#notes-tab').click();assert.equal(await page.locator('.note-entry').count(),3);
+    await page.locator('.note-location').nth(1).click();await frame().locator('[data-slide-review-highlight="slide-region"]').waitFor();
+    await page.setViewportSize({width:390,height:844});await page.waitForTimeout(250);
+    assert.ok(await frame().locator('[data-slide-review-highlight="slide-region"]').isVisible());
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+    await page.screenshot({path:path.join(out,'mobile-region.png')});
+    await page.setViewportSize({width:1440,height:1000});await page.locator('.note-location').first().click();await frame().locator('[data-slide-review-highlight="slide-text"]').waitFor();
+    await page.screenshot({path:path.join(out,'desktop-text.png')});
+    await page.locator('.note-entry .edit-note').first().click();await page.locator('#note-text').fill('修改后的Slide批注');await page.locator('#save-note').click();assert.equal(await page.locator('.note-entry').count(),3);
+    await page.locator('#annotate-slide-region').click();await page.keyboard.press('Escape');assert.equal(await page.locator('#annotate-slide-region').getAttribute('aria-pressed'),'false');
+    await page.locator('.note-entry .delete-note').first().click();assert.equal(await page.locator('.note-entry').count(),2);
+    await page.locator('[data-deck-language="ja"]').click();
+    await frame().locator('html[data-lang="ja"]').waitFor();
+    await frame().locator('.slide.is-current h2').evaluate(el=>{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);document.dispatchEvent(new Event('selectionchange'));});
+    await page.locator('#annotate-slide-text:not([disabled])').click();await page.locator('#note-text').fill('日文标题跨行组批注');await page.locator('#save-note').click();
+    await page.locator('[data-deck-language="zh"]').click();await page.locator('.note-location').last().click();
+    await frame().locator('html[data-lang="ja"]').waitFor();await frame().locator('[data-slide-review-highlight="slide-text"]').first().waitFor();
+    await frame().locator('.slide.is-current h2').evaluate(el=>el.textContent='已替换的文字');await page.locator('.note-location').last().click();
+    await page.waitForFunction(()=>document.querySelector('#slide-review-status').textContent.includes('无法定位'));
+    assert.ok((await page.locator('#note-quote').textContent()).length>0,'Orphan keeps quote');
+    await page.locator('#cancel-note').click();
+    await page.locator('#transcript-tab').click();await page.locator('.clip-location').nth(12).click();
+    await frame().locator('#deck [data-heatmap-pick="4"]').click();await page.locator('#annotate-slide-page').click();await page.locator('#note-text').fill('热图P05整页意见');await page.locator('#save-note').click();
+    await frame().locator('#deck [data-heatmap-pick="1"]').click();await page.locator('.note-location').last().click();
+    await page.waitForTimeout(100);assert.equal(await frame().locator('#deck [data-heatmap-current]').textContent(),'P05');
+    await page.locator('#cancel-note').click();await page.locator('#annotate-slide-region').click();
+    const regionStart=await frame().locator('.slide.is-current').boundingBox();await page.mouse.click(regionStart.x+regionStart.width/2,regionStart.y+regionStart.height/2);
+    assert.match(await page.locator('#slide-review-status').textContent(),/太小/);
+    await page.goto(url+'?scope=supplement');await page.locator('#play:not([disabled])').waitFor();
+    await frame().locator('#deck [data-workflow-step="2"]').click();await page.locator('#annotate-slide-page').click();await page.locator('#note-text').fill('补充步骤3意见');await page.locator('#save-note').click();
+    await frame().locator('#deck [data-workflow-step="0"]').click();await page.locator('.note-location').last().click();
+    await page.waitForTimeout(100);assert.equal(await frame().locator('#deck [data-workflow-step="2"]').getAttribute('aria-selected'),'true');
+    assert.deepEqual(errors,[]);fs.writeFileSync(path.join(out,'qa.json'),JSON.stringify({text:true,region:true,page:true,export:true,persistence:true,replay:true,responsive:true,editDelete:true,cancel:true,languageRestore:true,orphanSafety:true,heatmapState:true,supplementState:true,tinyDrag:true,errors},null,2));console.log({text:true,region:true,page:true,export:true,persistence:true,replay:true,responsive:true,languageRestore:true,orphanSafety:true,heatmapState:true,supplementState:true,errors});
+  }finally{await browser.close();}
+}
+main().catch(e=>{console.error(e);process.exitCode=1;});

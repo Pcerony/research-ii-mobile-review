@@ -1,0 +1,161 @@
+{
+  "version": 2,
+  "scope": "main",
+  "speechVersion": 22,
+  "language": "zh-CN",
+  "speechHash": "70b2217cbab7771c5bd8d78ec04280bdaaf16a302f9db2e4f173a2a86c62fd3d",
+  "deckHash": "cb5a8d6081e4d56b72772e8b08bda6156f41503ef772da04d172d4091473013f",
+  "audioVoice": "Tingting",
+  "audioMatchesDraft": true,
+  "edits": [],
+  "notes": [
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 45.826575963718824,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 2,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": "intro",
+          "gaze": false
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.03424072,
+          "y": 0.89659778,
+          "width": 0.92858326,
+          "height": 0.05636341
+        }
+      },
+      "id": "cbcd288f-9290-497a-b44d-bb927555f89a",
+      "text": "初始状态下，不要显示这两个研究的组件",
+      "createdAt": "2026-10-22T05:36:18.731Z"
+    },
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 45.826575963718824,
+      "id": "0e0d6e4b-01be-4464-a988-d83e0c7c95cd",
+      "text": "从初始状态切换到研究 12 时，应该有过渡动画的",
+      "createdAt": "2026-10-22T05:36:39.249Z"
+    },
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 45.826575963718824,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 2,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": "0",
+          "gaze": false
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.04439539,
+          "y": 0.35705015,
+          "width": 0.92236949,
+          "height": 0.12012979
+        }
+      },
+      "id": "13d7cfd7-ce09-4497-94e9-74f3c38461fb",
+      "text": "这里不要有分割线，并且将下面的标题改为研究 1 和 2 各自的论文标题",
+      "createdAt": "2026-10-22T05:37:20.284Z"
+    },
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 45.826575963718824,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 2,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": "0",
+          "gaze": false
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.59655165,
+          "y": 0.28922631,
+          "width": 0.19019813,
+          "height": 0.06466734
+        }
+      },
+      "id": "1f47467d-c9c2-478f-b6bb-6cf8aca9aee5",
+      "text": "未选中的研究组件，改为灰色",
+      "createdAt": "2026-10-22T05:37:33.300Z"
+    },
+    {
+      "clipIndex": 3,
+      "clipId": "p04",
+      "slide": 4,
+      "offset": 0,
+      "time": 79.96167800453514,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 3,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": true
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.49201586,
+          "y": 0.5312563,
+          "width": 0.46344344,
+          "height": 0.39337198
+        }
+      },
+      "id": "b833f684-c469-4aec-ae2a-ed16756084ab",
+      "text": "将原本整个下方的空间转为只有右列下方的空间。现在左列太急促了",
+      "createdAt": "2026-10-22T05:38:17.935Z"
+    },
+    {
+      "clipIndex": 3,
+      "clipId": "p04",
+      "slide": 4,
+      "offset": 0,
+      "time": 79.96167800453514,
+      "id": "1bca4478-508c-4df6-9564-401f4d804382",
+      "text": "这里除了那个基本的三步外，最重要的信息其实是，通过视线追踪可以收集的具体数据：用户关注的区域、用户阅读的顺序、用户走神的次数、用户阅读的时间、用户无视的区域等",
+      "createdAt": "2026-10-22T05:40:36.416Z"
+    }
+  ]
+}

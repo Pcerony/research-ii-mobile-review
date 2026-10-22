@@ -1,0 +1,22 @@
+sources:
+  - id: source-aoi-analysis
+    path: materials/derived/source-extract/共创视角下植物园解说标识研究 IV.docx.txt
+    sha256: dad319f2f84f8cedc22253d37bf5e579cda457fc9f27fd66ae69d7d1545061f4
+    sourceType: corrected-analysis-extract
+    title: 共创视角下植物园解说标识研究 IV
+    versionDate: 2026-07-15
+    access: restricted-derived
+  - id: source-master-report
+    path: materials/manuscripts/master-report-en.md
+    sha256: 5b708ee159c4157e6c94275a4b35a0ee39327f333b974250bcafe5d4f74a48dd
+    sourceType: manuscript
+    title: Interpretive Signage Redesign in Botanical Gardens
+    versionDate: 2026-07-15
+    access: internal
+  - id: source-project-notes
+    path: materials/research-notes/co-creation-tool.md
+    sha256: 97e62bb5ab48fdca7385c7201ddfd6a43bc8770c23a43b2233ea88fb2fc3aca3
+    sourceType: research-notes
+    title: 解説サインのための共創ツールに関する研究
+    versionDate: 2026-07-15
+    access: internal

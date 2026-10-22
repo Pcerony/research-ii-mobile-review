@@ -1,0 +1,60 @@
+const fs=require('node:fs'),assert=require('node:assert/strict');
+const {chromium}=require('playwright');
+const out=process.env.QA_OUT||'05_输出/qa/mobile-v35';fs.mkdirSync(out,{recursive:true});
+const url=process.env.REVIEW_URL||'http://127.0.0.1:8765/04_PPT工作区/review.html';
+(async()=>{
+ const browser=await chromium.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
+ const checks=[],errors=[];
+ try{
+  const context=await browser.newContext({viewport:{width:844,height:390},isMobile:true,hasTouch:true,deviceScaleFactor:2,acceptDownloads:true});
+  const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(url);await page.locator('#play:not([disabled])').waitFor();
+  const frame=page.frameLocator('#deck-frame');
+  assert.equal(await page.locator('.inspector').isVisible(),false);
+  await page.screenshot({path:out+'/landscape-initial.png'});
+  const geometry=await page.locator('#deck-frame').boundingBox();assert.ok(geometry.height>=200);checks.push('landscape stage visible with panel collapsed');
+  await page.locator('#annotate-slide-region').tap();
+  const bounds=await frame.locator('#deck .slide.is-current').boundingBox();
+  const session=await context.newCDPSession(page);
+  const touch=async(type,x,y)=>session.send('Input.dispatchTouchEvent',{type,touchPoints:type==='touchEnd'?[]:[{x,y,id:1}]});
+  const x=bounds.x+bounds.width*.3,y=bounds.y+bounds.height*.3;
+  await touch('touchStart',x,y);await touch('touchMove',x+120,y+65);await touch('touchEnd');
+  await page.locator('#note-text').fill('手机触摸区域：保留目标与定位');
+  assert.ok(await page.locator('.inspector').isVisible());
+  await page.screenshot({path:out+'/region-note.png'});
+  await page.locator('#save-note').tap();assert.equal(await page.locator('#notes-count').textContent(),'1');
+  assert.equal(await page.locator('.inspector').isVisible(),false);checks.push('real CDP touch drag creates region note and save closes panel');
+  await page.reload();await page.locator('#play:not([disabled])').waitFor();
+  await page.locator('#toggle-inspector').tap();await page.locator('#notes-tab').tap();
+  assert.equal(await page.locator('.note-entry').count(),1);await page.locator('.note-location').tap();
+  await frame.locator('.slide-review-box.slide-region').waitFor();checks.push('refresh restores saved region and replay highlight');
+  await page.locator('#note-text').fill('尚未提交的移动意见');await page.reload();await page.locator('#play:not([disabled])').waitFor();
+  assert.equal(await page.locator('#note-text').inputValue(),'尚未提交的移动意见');assert.ok(await page.locator('.inspector').isVisible());checks.push('unfinished form survives refresh');
+  await page.reload();await page.locator('#play:not([disabled])').waitFor();assert.equal(await page.locator('#note-text').inputValue(),'尚未提交的移动意见');checks.push('unfinished edited note survives repeated refresh');
+  await page.locator('#add-note').tap();assert.equal(await page.locator('#note-text').inputValue(),'尚未提交的移动意见');checks.push('switching annotation cannot discard unsaved input');
+  await page.locator('#cancel-note').tap();await page.locator('#toggle-inspector').tap();await page.locator('#notes-tab').tap();
+  const downloadPromise=page.waitForEvent('download');await page.locator('#export-notes').tap();const download=await downloadPromise;await download.saveAs(out+'/review-export.json');
+  const exported=JSON.parse(fs.readFileSync(out+'/review-export.json'));assert.equal(exported.notes[0].target.type,'slide-region');
+  await page.locator('#import-file').setInputFiles(out+'/review-export.json');await page.waitForFunction(()=>document.getElementById('storage-status').textContent.includes('已合并'));
+  assert.equal(await page.locator('.note-entry').count(),1);checks.push('JSON round trip deduplicates notes');
+  const wrong={...exported,deckHash:'wrong'};await page.locator('#import-file').setInputFiles({name:'wrong.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(wrong))});
+  await page.waitForFunction(()=>document.getElementById('storage-status').textContent.includes('版本或范围不符'));assert.equal(await page.locator('.note-entry').count(),1);checks.push('foreign version rejected without modifying notes');
+  await page.locator('.note-location').tap();await page.locator('.delete-note').tap();await page.reload();await page.locator('#play:not([disabled])').waitFor();
+  assert.equal(await page.locator('#note-text').inputValue(),'');assert.equal(await page.locator('#notes-count').textContent(),'0');checks.push('deleted edited note does not resurrect after reload');
+  await page.locator('#toggle-inspector').tap();await page.locator('#notes-tab').tap();await page.locator('#import-file').setInputFiles(out+'/review-export.json');await page.waitForFunction(()=>document.getElementById('notes-count').textContent==='1');
+  await page.locator('#close-inspector').tap();await page.locator('#annotate-slide-region').tap();await page.locator('#annotate-slide-region').tap();assert.equal(await frame.locator('.slide-review-capture').count(),0);checks.push('visible tap cancellation');
+  await page.locator('#offline-save').tap();await page.waitForFunction(()=>document.getElementById('offline-status').textContent==='离线已就绪',{},{timeout:180000});
+  await context.setOffline(true);await page.reload();await page.locator('#play:not([disabled])').waitFor();
+  await page.locator('#play').tap();await page.waitForFunction(()=>document.getElementById('narration').currentTime>.2&&!document.getElementById('narration').paused);await page.locator('#play').tap();
+  await page.locator('#next-clip').tap();await page.waitForFunction(()=>document.getElementById('narration').readyState>=1);
+  const broken=await frame.locator('img').evaluateAll(imgs=>imgs.filter(i=>i.complete&&i.naturalWidth===0).map(i=>i.src));assert.deepEqual(broken,[]);
+  await page.goto(url+'?scope=supplement');await page.locator('#play:not([disabled])').waitFor();assert.equal(await page.locator('#notes-count').textContent(),'0');checks.push('offline reload, playback, navigation, supplement isolation and images');
+  await context.setOffline(false);await page.goto(url);await page.locator('#play:not([disabled])').waitFor();
+  for(const viewport of [{width:390,height:844},{width:667,height:375},{width:932,height:430},{width:1440,height:900}]){
+   await page.setViewportSize(viewport);await page.screenshot({path:`${out}/${viewport.width}x${viewport.height}.png`});
+   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth||document.body.scrollHeight>innerHeight+2);assert.equal(overflow,false,JSON.stringify(viewport));
+  }
+  checks.push('portrait small landscape large landscape desktop no document overflow');
+  assert.deepEqual(errors,[]);fs.writeFileSync(out+'/result.json',JSON.stringify({checks,errors},null,2));console.log(JSON.stringify({checks,errors},null,2));await context.close();
+ }finally{await browser.close();}
+})().catch(error=>{console.error(error);process.exitCode=1;});

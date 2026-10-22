@@ -1,0 +1,233 @@
+{
+  "version": 2,
+  "scope": "main",
+  "speechVersion": 18,
+  "language": "zh-CN",
+  "speechHash": "614e11211f3a214c8c9acba2abb7d4c0452e7f3bdf74066d9f3ab4c49d6856f7",
+  "deckHash": "eb9428d4fe4bf0a78ae7b297ce3880b27e56bdda4c491bc864b3d8c820de2a35",
+  "audioVoice": "Tingting",
+  "audioMatchesDraft": true,
+  "edits": [],
+  "notes": [
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 45.826575963718824,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 2,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": "intro"
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.02557924,
+          "y": 0.36500756,
+          "width": 0.94124707,
+          "height": 0.15226184
+        }
+      },
+      "id": "c224d60d-9f72-4c77-8657-561c2ddadff7",
+      "text": "这里完全多此一举去掉单独的模块",
+      "createdAt": "2026-10-22T04:18:25.330Z"
+    },
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 45.826575963718824,
+      "target": {
+        "type": "slide-page",
+        "slideIndex": 2,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": "intro"
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        }
+      },
+      "id": "fec580f0-2cf7-4e8c-b5de-e438bfa14796",
+      "text": "将这一页的逻辑改为，一开始默认显示的是 GGJ 的信息，然后 GGJ 的信息从那个五步进度条的下方改为上方，但点击五步进度里的交互内容后，GGJ 的信息消失。然后下方出现研究 1 或者研究2 的详细信息",
+      "createdAt": "2026-10-22T04:19:53.746Z"
+    },
+    {
+      "clipIndex": 1,
+      "clipId": "p02",
+      "slide": 2,
+      "offset": 0,
+      "time": 20.223718820861677,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 1,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null
+        },
+        "aspectRatio": 1.3333333661479334,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.04433655,
+          "y": 0.41321195,
+          "width": 0.50136875,
+          "height": 0.36530998
+        }
+      },
+      "id": "7705d9cb-5a1a-4491-99b1-29df99b2f97f",
+      "text": "这里太丑了",
+      "createdAt": "2026-10-22T04:20:04.916Z"
+    },
+    {
+      "clipIndex": 3,
+      "clipId": "p04",
+      "slide": 4,
+      "offset": 0,
+      "time": 66.17011337868482,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 3,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.03466334,
+          "y": 0.05034652,
+          "width": 0.9447816,
+          "height": 0.71316154
+        }
+      },
+      "id": "17cc1218-4fa4-48b2-aa02-0fde23555bcd",
+      "text": "这里右侧去除掉行为计数那个，保持左右都是三个，然后视线追踪增加一个可交互的逻辑，点击后显示这个方法目前的情况，就是有相关领域的应用（植物园或者博物馆）但是没有大规模地铺开",
+      "createdAt": "2026-10-22T04:22:16.973Z"
+    },
+    {
+      "clipIndex": 4,
+      "clipId": "p05",
+      "slide": 5,
+      "offset": 0,
+      "time": 91.53392290249434,
+      "target": {
+        "type": "slide-text",
+        "slideIndex": 4,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null
+        },
+        "aspectRatio": 1.3333330708165323,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "path": [
+          0,
+          1,
+          2,
+          0,
+          3
+        ],
+        "anchor": {
+          "start": 20,
+          "end": 46,
+          "quote": "−估计质量依赖设备与环境−屏幕评价 ≠ 实体纸面体验",
+          "prefix": "+无需头部佩戴+普通Web摄像头便于部署",
+          "suffix": "",
+          "sourceText": "+无需头部佩戴+普通Web摄像头便于部署−估计质量依赖设备与环境−屏幕评价 ≠ 实体纸面体验"
+        }
+      },
+      "id": "f1b60f6d-45c5-4222-8484-6895cdfcf64e",
+      "text": "这里两侧的缺点很重要，为缺点增加一个黄色的背景色块之类的",
+      "createdAt": "2026-10-22T04:22:45.540Z"
+    },
+    {
+      "clipIndex": 4,
+      "clipId": "p05",
+      "slide": 5,
+      "offset": 0,
+      "time": 91.53392290249434,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 4,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null
+        },
+        "aspectRatio": 1.3333330708165323,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.04832656,
+          "y": 0.31186366,
+          "width": 0.92284702,
+          "height": 0.11760333
+        }
+      },
+      "id": "3843ab27-aae7-47df-96ad-f20e36bb1650",
+      "text": "这里的配图很不好，去网上找相关的配图，并且高度也不够",
+      "createdAt": "2026-10-22T04:23:08.608Z"
+    },
+    {
+      "clipIndex": 4,
+      "clipId": "p05",
+      "slide": 5,
+      "offset": 0,
+      "time": 91.53392290249434,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 4,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null
+        },
+        "aspectRatio": 1.3333330708165323,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.03598407,
+          "y": 0.90371724,
+          "width": 0.88371678,
+          "height": 0.06171245
+        }
+      },
+      "id": "970c861f-6c0d-4882-888f-f4f33ce5509b",
+      "text": "这里的文字没有意义。删掉",
+      "createdAt": "2026-10-22T04:23:22.363Z"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const {pathToFileURL}=require('node:url');
+const {chromium}=require('playwright');
+const out='05_输出/qa/review-editor';fs.mkdirSync(out,{recursive:true});
+async function main(){
+  const browser=await chromium.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
+  const errors=[];
+  try{
+    const page=await browser.newPage({viewport:{width:1440,height:1000},acceptDownloads:true});
+    page.on('pageerror',e=>errors.push(e.message));
+    await page.goto(pathToFileURL(path.resolve('04_PPT工作区/review.html')).href);
+    await page.locator('#play:not([disabled])').waitFor();
+    assert.equal(await page.locator('#edit-script').count(),1,'Transcript edit mode is available');
+    const editor=page.locator('#clip-list [data-editor="0"]');
+    const original=await editor.textContent();
+    await page.locator('#edit-script').click();
+    await editor.fill('第一行\n第二行');
+    await editor.press('End');await editor.press('Enter');await editor.press('a');
+    assert.equal(await editor.inputValue(),'第一行\n第二行\na','Native multiline editing preserves line breaks');
+    await page.locator('#edit-script').click();assert.equal(await editor.textContent(),'第一行\n第二行\na');
+    await page.locator('#edit-script').click();
+    await editor.fill('');await page.locator('#edit-script').click();
+    await page.reload();await page.locator('#play:not([disabled])').waitFor();
+    assert.equal(await editor.textContent(),'','An intentionally empty draft is not replaced by the source');
+    await page.locator('#edit-script').click();
+    await editor.fill('审查改写。'+original);
+    await editor.press('End');await editor.press('Space');await editor.press('a');
+    assert.equal(await page.locator('#narration').evaluate(a=>a.paused),true,'Typing spaces must not start audio');
+    await editor.fill('审查改写。'+original);
+    await page.locator('#edit-script').click();
+    assert.match(await page.locator('[data-draft-badge="0"]').textContent(),/音频为原稿/);
+    await page.reload();await page.locator('#play:not([disabled])').waitFor();
+    assert.equal(await editor.textContent(),'审查改写。'+original,'Draft persists after reload');
+    async function selectText(start,end){
+      await editor.evaluate((el,{start,end})=>{const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let n,offset=0,a,b;while(n=walker.nextNode()){if(!a&&start<offset+n.length)a=[n,start-offset];if(end<=offset+n.length){b=[n,end-offset];break;}offset+=n.length;}const r=document.createRange();r.setStart(...a);r.setEnd(...b);const s=getSelection();s.removeAllRanges();s.addRange(r);document.dispatchEvent(new Event('selectionchange'));},{start,end});
+    }
+    await selectText(0,4);await page.locator('#annotate-selection').click();
+    assert.equal(await page.locator('#note-quote').textContent(),'审查改写');
+    await page.locator('#note-text').fill('这一句需要补充研究背景。');await page.locator('#save-note').click();
+    assert.equal(await page.locator('.note-entry blockquote').textContent(),'审查改写');
+    await page.locator('#transcript-tab').click();
+    assert.equal(await editor.locator('mark').textContent(),'审查改写');
+    await editor.locator('mark').click();assert.match(await page.locator('#note-text').inputValue(),/研究背景/);
+    await page.locator('#note-text').fill('修改批注：背景需要更明确。');await page.locator('#save-note').click();
+    assert.equal(await page.locator('.note-entry').count(),1,'Editing a comment does not duplicate it');
+    const download=page.waitForEvent('download');await page.locator('#export-notes').click();
+    await(await download).saveAs(path.join(out,'review-with-edits.json'));
+    const exported=JSON.parse(fs.readFileSync(path.join(out,'review-with-edits.json')));
+    assert.equal(exported.edits[0].text,'审查改写。'+original);assert.equal(exported.notes[0].anchor.quote,'审查改写');
+    assert.equal(exported.audioMatchesDraft,false);
+    await page.locator('#transcript-tab').click();
+    await page.screenshot({path:path.join(out,'desktop-annotation.png')});
+    const md=page.waitForEvent('download');await page.locator('#transcript-tab').click();await page.locator('#export-script').click();await(await md).saveAs(path.join(out,'draft.md'));
+    assert.match(fs.readFileSync(path.join(out,'draft.md'),'utf8'),/审查改写/);
+    await page.locator('#edit-script').click();await editor.fill('增加前缀。审查改写。'+original);await page.locator('#edit-script').click();
+    assert.equal(await editor.locator('mark').textContent(),'审查改写','Annotation follows a prefix insertion');
+    await page.locator('#edit-script').click();await editor.fill(original);await page.locator('#edit-script').click();
+    await page.locator('#notes-tab').click();assert.match(await page.locator('.note-anchor-status').textContent(),/原文已变更/);
+    await page.reload();await page.locator('#play:not([disabled])').waitFor();await page.locator('#notes-tab').click();
+    assert.equal(await page.locator('.note-entry').count(),1);
+    await page.locator('.delete-note').click();assert.equal(await page.locator('.note-entry').count(),0);
+    await page.locator('#transcript-tab').click();await page.locator('#add-note').click();await page.locator('#note-text').fill('普通整页意见仍可保存');await page.locator('#save-note').click();
+    assert.equal(await page.locator('.note-entry blockquote').count(),0);
+    for(const [name,size]of [['desktop',{width:1440,height:1000}],['mobile',{width:390,height:844}]]){
+      await page.setViewportSize(size);await page.locator('#transcript-tab').click();
+      assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+      await page.screenshot({path:path.join(out,`${name}.png`)});
+    }
+    await page.locator('[data-review-scope="supplement"]').click();await page.locator('#play:not([disabled])').waitFor();
+    assert.equal(await page.locator('[data-draft-badge]').count(),0,'Main drafts do not leak into supplement');
+    await page.locator('#edit-script').click();
+    const extra=page.locator('#clip-list [data-editor="0"]');
+    await extra.fill('补充专用草稿');
+    await extra.evaluate(el=>{el.focus();el.setSelectionRange(0,2);document.dispatchEvent(new Event('selectionchange'));});
+    await page.locator('#annotate-selection').click();assert.equal(await page.locator('#note-quote').textContent(),'补充');
+    await page.locator('#note-text').fill('补充选文批注');await page.locator('#save-note').click();
+    await page.locator('[data-review-scope="main"]').click();await page.locator('#play:not([disabled])').waitFor();
+    assert.equal(await page.locator('[data-draft-badge]').count(),0,'Supplement edits remain isolated');
+    const blocked=await browser.newPage();
+    await blocked.addInitScript(()=>Storage.prototype.setItem=function(){throw new DOMException('Blocked','QuotaExceededError');});
+    await blocked.goto(pathToFileURL(path.resolve('04_PPT工作区/review.html')).href);await blocked.locator('#play:not([disabled])').waitFor();
+    await blocked.locator('#edit-script').click();await blocked.locator('[data-editor="0"]').fill('保存失败时仍可导出');
+    assert.match(await blocked.locator('#draft-status').textContent(),/保存不可用/);
+    const emergency=blocked.waitForEvent('download');await blocked.locator('#export-script').click();await(await emergency).saveAs(path.join(out,'unsaved-draft.md'));
+    assert.match(fs.readFileSync(path.join(out,'unsaved-draft.md'),'utf8'),/保存失败时仍可导出/);
+    await blocked.close();
+    assert.deepEqual(errors,[]);
+    console.log({editing:true,selectionComments:true,persistence:true,anchorRelocation:true,orphanSafety:true,export:true,mobile:true,errors});
+  }finally{await browser.close();}
+}
+main().catch(e=>{console.error(e);process.exitCode=1;});

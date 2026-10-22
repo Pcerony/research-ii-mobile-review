@@ -1,0 +1,187 @@
+{
+  "version": 2,
+  "scope": "main",
+  "speechVersion": 26,
+  "language": "zh-CN",
+  "speechHash": "88a8d75d85d525ae0e83d1ef673c689c5a8a1a1a930f0af53765a3ce83cdd476",
+  "deckHash": "c2a6e7b37dc37f4bfd679c8e41cf170352ed7b4cf45cb71c4f6658155c39bdec",
+  "audioVoice": "Tingting",
+  "audioMatchesDraft": true,
+  "edits": [],
+  "notes": [
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 45.826575963718824,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 2,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": "intro",
+          "gaze": false
+        },
+        "aspectRatio": 1.3333334645917339,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.04510419,
+          "y": 0.36483745,
+          "width": 0.31913744,
+          "height": 0.47292087
+        }
+      },
+      "id": "9c4e2378-7980-404d-8f1f-95b65ad16980",
+      "text": "这里的图片可以更换为交接文件中的gjj 图片了",
+      "createdAt": "2026-10-22T06:29:53.501Z"
+    },
+    {
+      "clipIndex": 7,
+      "clipId": "p08",
+      "slide": 8,
+      "offset": 0,
+      "time": 179.64244897959185,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 7,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333330708165323,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.03559335,
+          "y": 0.24890373,
+          "width": 0.48235897,
+          "height": 0.46479335
+        }
+      },
+      "id": "7afb2cb5-b342-4fdf-a3a5-a56786b93bbf",
+      "text": "这里的图片可以更换为交接文件中的 ui图片了",
+      "createdAt": "2026-10-22T06:30:05.640Z"
+    },
+    {
+      "clipIndex": 6,
+      "clipId": "p07",
+      "slide": 7,
+      "offset": 0,
+      "time": 153.61678004535148,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 6,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333330708165323,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.04125721,
+          "y": 0.41693548,
+          "width": 0.92020557,
+          "height": 0.22217112
+        }
+      },
+      "id": "5a103e67-faf7-4a62-a002-957f7741b877",
+      "text": "这里统一配图的高度，并且和上面的流程位置互换，流程是这一页中最重要的步骤，应该最显眼。所以缩小配图的面积",
+      "createdAt": "2026-10-22T06:32:09.383Z"
+    },
+    {
+      "clipIndex": 6,
+      "clipId": "p07",
+      "slide": 7,
+      "offset": 0,
+      "time": 153.61678004535148,
+      "target": {
+        "type": "slide-text",
+        "slideIndex": 6,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333330708165323,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "path": [
+          0,
+          1,
+          4
+        ],
+        "anchor": {
+          "start": 0,
+          "end": 31,
+          "quote": "问卷为两次体验的共通回复，未与视线分析联结；现场询问未留存记录",
+          "prefix": "",
+          "suffix": "。",
+          "sourceText": "问卷为两次体验的共通回复，未与视线分析联结；现场询问未留存记录。"
+        }
+      },
+      "id": "9fb7e3da-6b2c-47f4-96ac-f020047641f8",
+      "text": "这个文本删掉",
+      "createdAt": "2026-10-22T06:32:22.685Z"
+    },
+    {
+      "clipIndex": 6,
+      "clipId": "p07",
+      "slide": 7,
+      "offset": 0,
+      "time": 153.61678004535148,
+      "target": {
+        "type": "slide-text",
+        "slideIndex": 6,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333330708165323,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "path": [
+          0,
+          1,
+          2
+        ],
+        "anchor": {
+          "start": 0,
+          "end": 11,
+          "quote": "↓04　从两个角度评价",
+          "prefix": "",
+          "suffix": "",
+          "sourceText": "↓04　从两个角度评价"
+        }
+      },
+      "id": "20972303-d8c3-4ddd-aef2-9ca6482c8649",
+      "text": "这里不要有那个箭头，并且，改为 04 检验工具与用户反馈",
+      "createdAt": "2026-10-22T06:33:01.915Z"
+    }
+  ]
+}

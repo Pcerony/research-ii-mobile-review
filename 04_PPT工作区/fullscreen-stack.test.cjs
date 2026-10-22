@@ -1,0 +1,16 @@
+const fs=require('node:fs'),assert=require('node:assert/strict');
+const rows=require('./research-content.cjs');
+const html=fs.readFileSync('04_PPT工作区/index.html','utf8');
+const sections=[...html.matchAll(/<section class="slide\b[\s\S]*?<\/section>/g)].map(m=>m[0]);
+assert.equal(rows.filter(r=>!r.supplement).length,19,'Heatmap belongs in the main talk');
+assert.equal(rows.filter(r=>r.supplement).length,2);
+assert.equal(rows.filter(r=>!r.supplement).reduce((n,r)=>n+r.seconds,0),420);
+assert.equal(sections.filter(s=>s.includes('data-fullscreen="true"')).length,4);
+const heatmap=sections.find(s=>s.includes('data-layout="heatmap-explorer"'));
+assert.ok(heatmap&&!heatmap.includes('data-supplement="true"'));
+assert.equal((heatmap.match(/data-heatmap-card=/g)||[]).length,18);
+assert.equal((heatmap.match(/data-heatmap-pick=/g)||[]).length,9);
+assert.ok(heatmap.includes('heatmap-color-legend'));
+assert.match(rows[12].ja,/前10秒.*未確認/);
+assert.ok(!/\.\.\/|ab2\//.test(heatmap));
+console.log('PASS: main heatmap, 19+2 slides, four fullscreens, 18 anonymous cards, 420-second allocation');

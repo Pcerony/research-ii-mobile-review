@@ -1,0 +1,50 @@
+claims:
+  - id: claim-visitor-learning-motivation
+    sourceId: source-project-notes
+    locator: user-confirmed page 2 content; original source verification remains pending
+    sample: not recorded in available source package
+    metric: more than 60 percent cite learning and exploration as a core motivation for visiting
+    allowedStrength: descriptive
+    reviewStatus: blocked-source-verification
+  - id: claim-long-form-deep-reading-rate
+    sourceId: source-project-notes
+    locator: user-confirmed page 3 content; original measurement definition remains pending
+    sample: not recorded in available source package
+    metric: 20 percent deep-reading rate for long-form academic content
+    allowedStrength: descriptive
+    reviewStatus: blocked-source-verification
+  - id: claim-signage-reading-gap
+    sourceId: source-aoi-analysis
+    locator: lines 14-17
+    sample: research-background synthesis; no participant-level inference
+    metric: installed or presented signage does not necessarily mean its information is read or attended
+    allowedStrength: descriptive
+    reviewStatus: reviewed-analysis
+  - id: claim-baseline-ar-absence
+    sourceId: source-master-report
+    locator: line 10
+    sample: 70 existing greenhouse signs
+    metric: principles A and R were systematically absent
+    allowedStrength: descriptive
+    reviewStatus: needs-numeric-reconciliation
+  - id: claim-initial-coverage
+    sourceId: source-aoi-analysis
+    locator: lines 349-351
+    sample: 9 valid corrected heatmaps
+    metric: relative text-region coverage in the first 10 seconds increased from 38.6 percent to 45.3 percent
+    allowedStrength: exploratory trend
+    reviewStatus: reviewed-analysis
+  - id: claim-audience-relevance
+    sourceId: source-aoi-analysis
+    locator: lines 332-353
+    sample: 9 valid corrected heatmaps
+    metric: audience-relevance attention share increased from 5.0 to 21.4 percent initially and 8.5 to 35.1 percent overall
+    allowedStrength: exploratory trend
+    reviewStatus: reviewed-analysis
+  - id: claim-analysis-limitations
+    sourceId: source-aoi-analysis
+    locator: lines 357-362
+    sample: 9 valid corrected heatmaps
+    metric: exploratory image-difference analysis is not fixation-duration inference
+    allowedStrength: descriptive
+    reviewStatus: reviewed-analysis

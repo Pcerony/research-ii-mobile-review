@@ -1,0 +1,149 @@
+{
+  "version": 2,
+  "scope": "main",
+  "speechVersion": 31,
+  "language": "zh-CN",
+  "speechHash": "7b67b535afa6dd7a78942f9af5599c70b37941012b01e6f1d71ce8047d44c6bd",
+  "deckHash": "1c0c88ab570be76694861bd481b0954e842b822879b9f440ccd2bc465d6964ee",
+  "audioVoice": "Tingting",
+  "audioMatchesDraft": true,
+  "edits": [],
+  "notes": [
+    {
+      "clipIndex": 0,
+      "clipId": "p01",
+      "slide": 1,
+      "offset": 0,
+      "time": 0,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 0,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.6680816001080452,
+        "sourceSize": {
+          "width": 1501,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.05251526,
+          "y": 0.85241855,
+          "width": 0.92126409,
+          "height": 0.07207447
+        }
+      },
+      "id": "9ae93268-2f54-4a3e-92d5-af492358c073",
+      "text": "这里这两个人都放在靠左侧放，然后右侧放那个发表日 10 月 24 日",
+      "createdAt": "2026-10-22T13:17:43.719Z"
+    },
+    {
+      "clipIndex": 2,
+      "clipId": "p03",
+      "slide": 3,
+      "offset": 0,
+      "time": 35.934875283446715,
+      "target": {
+        "type": "slide-page",
+        "slideIndex": 2,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333333333333333,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        }
+      },
+      "id": "7dc8ba05-fd1f-48a1-b603-715be5209ef4",
+      "text": "这页目前来说，跟上之前那个版本比，信息缩减的太少太太多了。就是现在信息太少，跟之前那个版本比，有点就是跨度有点太太大了，有一点",
+      "createdAt": "2026-10-22T13:18:12.152Z"
+    },
+    {
+      "clipIndex": 6,
+      "clipId": "p07",
+      "slide": 7,
+      "offset": 0,
+      "time": 88.90154195011337,
+      "target": {
+        "type": "slide-page",
+        "slideIndex": 6,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333333333333333,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        }
+      },
+      "id": "a67096db-248d-4672-848d-ce0103ab303b",
+      "text": "这也是这样，这一页主要是展示整个这个东西是个什么东西。那他可能是需要一个配图，就是说嗯，我看一下，你看能不能画出那种科研风格的配图。就是一个桌子上面，嗯，也不是一个桌子，比方说一个植物园的花坛背后面是植物园的那个小花之类的。然后呢，这个前面是一个花坛上面，比方说他摆了一个呃解说标识，然后标识上面插了一个这个网络摄像头，摄像头有一根线连到不远处，有一个电脑，电脑上运行的是我们这个软件。然后那个标识旁边的花坛上呢，就是摆着几那个用于 9 点校正的那一个图，就嗯像这几个标识还有电脑的内容，还有 9 点校正的那个纸，其实可以不用很精准，我可以后期 P 上去，但是整体的这个大的背景，我需要你嗯来画一下",
+      "createdAt": "2026-10-22T13:19:42.285Z"
+    },
+    {
+      "clipIndex": 6,
+      "clipId": "p07",
+      "slide": 7,
+      "offset": 0,
+      "time": 88.90154195011337,
+      "id": "05dfca49-ab19-4b18-a8c9-67d80ec75571",
+      "text": "这里的我看一下，现在这个排版有点怪怪的。你看你上面这个第一行的这些图跟下面这个距离太远了，然后这个 03~04 这里也隔得太远，要不试一下两行两列呢？就是第一行是 0102，第三第二行是 0304。这样当然当然第四步是最重要的一步",
+      "createdAt": "2026-10-22T13:20:32.202Z"
+    },
+    {
+      "clipIndex": 9,
+      "clipId": "p10",
+      "slide": 10,
+      "offset": 0,
+      "time": 133.21619047619046,
+      "target": {
+        "type": "slide-region",
+        "slideIndex": 9,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333333333333333,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        },
+        "rect": {
+          "x": 0.05742016,
+          "y": 0.24080546,
+          "width": 0.46005517,
+          "height": 0.36379523
+        }
+      },
+      "id": "e90c48c8-9d7b-472d-95a9-dd847ad35391",
+      "text": "左侧这个图不大行，左侧这个图理想状态是什么呢？是这个屏幕哈，屏幕现在首先屏幕这个太抽象了，稍微细节一点，然后屏幕上有一个那个 9 点的那个校准。然后右侧这个纸现在这个纸就不大像一个纸，比方说纸后面你放点花什么之类的，显显得它更像是那种真实植物园中的纸质标识，然后它需要有透视，现在是这个轴侧视角是吧？它需要有一个稍微有一个透视，近大远小透视上面这个摄像头目前也不够，那个不够具象看不出来，就这个图太太简单了。然后最好现在这个让这个显示器跟这个标识，它是一个看起来像是一个次元的东西吧，现在这俩不大像是一个次元里的东西好吧",
+      "createdAt": "2026-10-22T13:21:40.202Z"
+    },
+    {
+      "clipIndex": 9,
+      "clipId": "p10",
+      "slide": 10,
+      "offset": 0,
+      "time": 133.21619047619046,
+      "id": "014eabef-dbd1-45d9-acc3-3747100bb502",
+      "text": "这些首先排版不大好，现在排版太差了，这两个图摆得乱七八糟的，然后只保留这个 AI 生成的图片吧。好吧，只保留 AI 生成。然后这个 AI 生成图片现在说东西怪怪的，能不能改成那种科研风格的那种论文插图风格？现在这个有点怪怪的。然后 123 都就是还要这个插图，然后第四第 4 个这个就不需要这个插图了，其实，第四个就是，嗯，就只放我给的这个图片热力图就可以了。其实",
+      "createdAt": "2026-10-22T13:22:48.772Z"
+    }
+  ]
+}

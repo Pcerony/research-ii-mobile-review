@@ -1,0 +1,64 @@
+const fs=require('node:fs');
+const rows=require('./research-content.cjs');
+const fragments=require('./slide-fragments.json');
+const workflow=require('./workflow-content.cjs');
+const survey=require('./questionnaire-summary.json');
+const heatmapStack=require('./heatmap-stack-content.cjs');
+const file='04_PPT工作区/index.html';
+let html=fs.readFileSync(file,'utf8');
+const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;');
+const t=(ja,zh,tag='span',cls='')=>`<${tag} class="${cls}" data-ja="${esc(ja)}" data-zh="${esc(zh)}">${ja}</${tag}>`;
+const h=(a,b)=>`<div class="title-slot">${t(a,b,'h2','slide-title')}</div>`;
+const importantNotes=new Set([
+ '主稿§3.3の設計方針 / 保存動作・説明と同意の手順は実装監査の対象',
+ '試用条件：立ち止まって紙面を見る / 大きな姿勢変化を避ける',
+ '同一集団かは未確認 / 数値出力・使用感・精度は異なる検証項目',
+ '前10秒を同じ指標で集計 / A・R・Sとその他の領域を結果に併記',
+ '出典：証拠集計表4・5 / N=9、前10秒 / 全9名を同じ0–100%軸で表示',
+ '出典：証拠集計表6 / N=9、前10秒 / 丸めにより従来型の合計は100.1%',
+ 'N=9は分析範囲 / 成功率や全参加者の完了率とは異なる',
+ '出典：事後アンケートPart4・4-2 / 2026-10-21閲覧 / 因果・精度の証明ではない',
+ '出力例・記録全体 / 次の前10秒集計とは別',
+ '植物・版面の違いを含む / 定量結果との対応は未確認'
+]);
+const sub=(a,b)=>importantNotes.has(a)?t(a,b,'p','sub evidence-note'):'';
+const image=(src,alt)=>`<img class="body-picture" src="assets/${src}" alt="${esc(alt)}">`;
+const source=(label,url)=>`<p class="source-note"><a href="${url}" target="_blank" rel="noopener">${label}</a></p>`;
+const caption=(a,b)=>t(a,b,'figcaption');
+const slides=[];
+function add(layout,body,claim='E-04'){
+  const i=slides.length,r=rows[i],supplement=!!r.supplement;
+  const head=`<div class="slide-head">${t(...r.group,'div','chapter')}</div>`;
+  slides.push(`<section class="slide${i===0?' accent':''}" ${(i===0||layout==='heatmap-explorer'||layout==='tool-conclusion'||layout==='closing-thanks')?'data-fullscreen="true" ':''}data-index="${i}" data-chapter="${r.chapter}" data-layout="${layout}" data-title-ja="${esc(r.group[0]+'：'+r.title[0])}" data-title-zh="${esc(r.group[1]+'：'+r.title[1])}" data-claim="${claim}" data-speech="${String(i+1).padStart(2,'0')}"${supplement?' data-supplement="true"':''}><div class="canvas-card ${i===0?'conference-cover':'narrative research-narrative conference'}">${i===0?body:head+`<div class="composition ${layout}">${body}</div>`}</div></section>`);
+}
+add('SWISS-COVER-HEATFIELD',`<canvas data-heatfield aria-hidden="true"></canvas><div class="reference-cover"><div class="t-meta cover-kicker">RESEARCH II · FIELD EVALUATION TOOL</div><div class="cover-title">${t('共創による植物園解説サインに関する研究Ⅱ','关于共创植物园解说标识的研究Ⅱ','h1')}<p class="tool-name">SIGN Visual Attention</p>${t('公共実地環境向け非接触型視線計測評価ツールの開発と検証','面向公共实地环境的非接触式视线测量评价工具开发与验证','p','subtitle')}${t('共創 / 非接触視線計測 / 紙面マッピング / 実地PoC','共创 / 非接触视线测量 / 纸面映射 / 实地PoC','p','cover-keywords')}</div><div class="cover-bottom"><div class="cover-author"><span>王 平成｜九州大学大学院 芸術工学府</span><span>張 彦芳｜九州大学大学院 芸術工学研究院</span></div><time class="cover-date" datetime="2026-10-24">2026年10月24日</time></div></div>`,'CONTEXT');
+require('./opening-slides.cjs')({t,h,sub,image,caption,source}).forEach(args=>add(...args));
+add('technical-route',`${h('Webカメラの推定を、紙面の座標へ','从Web摄像头估计到纸面坐标')}<div class="technical-route-main"><figure class="route-apparatus">${image('apparatus-flat-v32.png','植物園花壇での装置構成の模式図')}${caption('装置構成の模式図／画面・紙面内容は概略','装置构成示意／屏幕与纸面内容为概略')}</figure><div class="route-overview-copy">${t('非接触で推定する','非接触式估计','h3')}${t('WebGazer.jsが眼・顔画像から視線位置を推定','WebGazer.js从眼部和面部图像估计视线位置','p')}${t('紙面に対応づける','对应到纸面','h3')}${t('四隅の対応とHで、標識画像の座標へ変換','通过四角配准与H转换到标识图像坐标','p')}${t('評価資料にする','形成评价资料','h3')}${t('熱図と領域別数値として表示・比較','显示并比较热图与区域数值','p')}</div></div>`);
+add('research-design',require('./research-design-grid.cjs')({t,h,image,caption}),'DESIGN');
+add('system-architecture',`${h('SIGN Visual Attentionの操作と機能','SIGN Visual Attention的操作与功能')}<div class="architecture-technical"><figure class="architecture-picture">${image('tool-ui.jpg','SIGN Visual Attention ツールの操作画面')}${caption('SIGN Visual Attention：操作画面','SIGN Visual Attention：工具操作界面')}</figure><div class="software-description">${t('紙のサインを、装着なしで評価する','无需佩戴设备，评价真实纸面','h3')}${t('SIGN Visual Attentionは、Webカメラで得た眼や顔の画像から視線位置を推定し、紙のサインを見るときの分布を記録するツールです。参加者は紙面を見て、操作者がPCで校正と記録を行います。','SIGN Visual Attention利用Web摄像头获取眼部与面部图像，估计视线位置，记录观看纸质标识时的位置分布。参与者观看纸面，操作者负责在电脑上校准和记录。','p')}${t('ソフトウェアは、校正から記録、結果の確認までを一つの画面で扱います。参加者の閲覧と操作者のPC作業を分け、現場での測定を支えます。','软件在同一界面中连接校准、记录与结果查看，将参与者的观看任务和操作者的电脑操作分开，支持现场测量。','p')}</div></div>${t('基本機能','基础功能','h3','software-functions-heading')}<div class="software-functions">${[['01','マッピング・校正','映射校准','9点校正と、紙面の四隅の対応づけ','9点校准与纸面四角配准'],['02','視線の記録','视线追踪','推定位置を紙面上に記録する','记录纸面上的估计位置'],['03','データ分析','数据分析','熱図・文字被覆率・AOI熱強度','热图・文字覆盖率・AOI热强度']].map(([n,a,b,c,d])=>`<div><b>${n}</b>${t(a,b,'h3')}${t(c,d,'p')}</div>`).join('')}</div>`);
+add('mapping-method',`${h('9点校正と、四隅の位置合わせ','区分9点校准与四角配准')}<div class="mapping-main">${require('./mapping-animation.cjs')({t})}<div class="homography-diagram"><svg viewBox="0 0 580 260" role="img" aria-label="Schematic four-corner perspective mapping"><polygon points="35,75 230,35 250,210 65,235" fill="#f0f1ed" stroke="#444" stroke-width="3"/><rect x="350" y="40" width="180" height="190" fill="#f0f1ed" stroke="#0B5D3B" stroke-width="3"/>${[[35,75],[230,35],[250,210],[65,235],[350,40],[530,40],[530,230],[350,230]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="7" fill="#0B5D3B"/>`).join('')}<text x="290" y="140" text-anchor="middle" font-size="38">H →</text></svg><div class="homography-equation" data-homography>[u, v, 1]ᵀ ∝ H [x, y, 1]ᵀ</div>${t('4隅 → 紙面座標への透視変換','4角 → 纸面坐标透视变换','p')}${t('H：3 × 3の変換行列','H：3 × 3变换矩阵','small')}</div></div><div class="mapping-details"><div>${t('9点校正：推定の調整','9点校准：调整估计','h3')}${t('紙の既知の点を順に見てもらい、指定点と推定値の対応を調整する。','依次观看纸面已知点，调整目标点与估计位置的对应关系。','p')}</div><div>${t('四隅マッピング：紙面への変換','四角映射：转换到纸面','h3')}${t('紙面と画像の四隅を対応づけ、Hで推定位置を紙面画像の座標へ変換する。','对应纸面与图像的四角，用H将估计位置转换到标识图像坐标。','p')}</div></div>${t('Hは平面への幾何学的対応。姿勢や配置が変われば再確認し、誤差は別に検証する。','H用于平面几何映射，不代表误差已消除。姿势或布置改变后需重新确认，精度另行验证。','p','mapping-constraint')}${sub('図は座標処理の模式図 / Hは紙面への対応を表す','图为坐标处理示意 / H表示纸面位置映射')}`);
+add('workflow-overview',`${h('参加者は紙面を見る。PCは操作者が扱う','参与者看纸面，电脑由操作者负责')}<div class="static-workflow">${workflow.map((step,i)=>`<figure><div class="workflow-visuals single-workflow-visual">${i===3?image(step.image,step.alt):`<div class="workflow-schematic" role="img" aria-label="${esc(step.alt)}" style="--scene-x:${i/2*100}%"></div>`}</div><figcaption class="workflow-step-copy"><header><b>${String(i+1).padStart(2,'0')}</b>${t(...step.title,'h3')}</header><dl><div>${t('参加者','参与者','dt')}${t(...step.participant,'dd')}</div><div>${t('操作者','操作者','dt')}${t(...step.operator,'dd')}</div></dl>${t(...step.result,'p','workflow-step-result')}${i===3?t('熱図は全記録の表示例／前10秒集計とは別','热图为完整记录示例／与前10秒统计分开','small','workflow-output-boundary'):''}</figcaption></figure>`).join('')}</div>`);
+add('field-validation',`${h('福岡市植物園で試す','在福冈市植物园实地试用')}<div class="field-photo-story"><figure class="photo-fill">${image('field-observation.jpg','論文図3の温室実験環境')}${caption('温室回廊：実験の環境','温室回廊：实验环境')}</figure><figure class="photo-fill">${image('experiment-scene.jpg','論文図3の参加者と誘導員の計測風景')}${caption('参加者と誘導員：計測の様子','参与者与引导人员：测量现场')}</figure></div><div class="field-facts"><div>${t('時期','时间','span')}${t('2026年5月28日','2026年5月28日','strong')}</div><div>${t('場所','地点','span')}${t('福岡市植物園・温室','福冈市植物园・温室','strong')}</div><div>${t('累計参加者','累计参与者','span')}<strong>15${t('名','人')}</strong>${t('第一期9名＋追加6名','第一批9人＋追加6人','small')}</div></div>${t('本報告の視線分析：第一期9名','本报告视线分析：第一批9人','p','field-analysis-scope')}`,'E-02');
+add('heatmap-explorer',heatmapStack({t,h,sub}),'OUTPUT');
+const pairs=fragments['individual-variation'].match(/<svg[\s\S]*?<\/svg>/)[0];
+const aoi=[['A',33.7,26.4,'−7.3','導入・情景','引入・情景'],['R',5,21.4,'+16.4','生活・感覚','生活・感官'],['S',31.3,33.5,'+2.2','基礎情報','基础信息'],['other',30.1,18.7,'−11.4','その他','其他']];
+require('./tool-results-content.cjs')({t,h,pairs,aoi,survey}).forEach(args=>add(...args));
+add('engineering-discussion',`${h('初期試用から得た、二つの結論','初步试用得到的两项结论')}<div class="conclusion-two-outcomes"><div><b>01</b><div>${t('ツールの初期運用は成立','工具具备初步运行可行性','h3')}${t('実地の記録から、熱図と領域別の比較資料を作れた','现场记录能够生成热图与分区域比较资料','p')}</div></div><div><b>02</b><div>${t('条件差・個人差を確認できる','能够检查条件差异与个体差异','h3')}${t('画像と領域別数値を、評価の資料として使う','将图像与区域数值作为评价资料','p')}</div></div></div>`);
+add('validation-roadmap',`${h('対象・推定・手順を、次の試験で改善する','下一轮改进样本、估计与操作流程')}<div class="future-three-tracks">${[['01','対象を広げる','扩大参与者范围','高齢の方を含め、条件別に評価','纳入老年参与者，按使用条件评价','動き・眼鏡・マスク・照明を記録','记录移动、眼镜、口罩与光照条件'],['02','推定モデルを比較','比较估计模型','Transformer等も候補として検討','将Transformer等列为候选','基準誤差・欠落・計算負荷で比較','比较基准误差、缺失和计算负荷'],['03','手順を簡単にする','简化操作流程','9点校正・説明・支援を見直す','改进9点校准、说明和辅助','再試行・所要時間・使用感を測る','记录重试、耗时与使用感受']].map(([n,a,b,c,d,e,f])=>`<div><b>${n}</b>${t(a,b,'h3')}${t(c,d,'p')}${t(e,f,'small')}</div>`).join('')}</div><div class="future-validation-rule">${t('改善案は、同じ条件で比較して確かめる','改进方案需要在相同条件下比较验证','strong')}${t('材料・面積・順序をそろえ、保存動作も監査する。モデル変更だけで改善を仮定しない。','统一材料、面积和顺序，并审计保存行为；不预设更换模型就一定改善。','p')}</div>`);
+add('tool-conclusion',require('./reference-value.cjs')({t}));
+add('closing-thanks',`<div class="closing-thanks-main">${t('ご清聴ありがとうございました','谢谢大家','h2')}${t('共創による植物園解説サインに関する研究Ⅱ','共创植物园解说标识研究Ⅱ','p')}<span>SIGN Visual Attention</span></div>`);
+add('operating-panorama',`${h('補足：四つの操作を詳しく見る','补充：查看四步操作详情')}<div class="workflow-tabs" role="tablist" aria-label="Workflow">${workflow.map((step,i)=>`<button type="button" role="tab" id="workflow-tab-${i}" aria-controls="workflow-panel-${i}" aria-selected="${i===0}" tabindex="${i===0?0:-1}" data-workflow-step="${i}"><b>${String(i+1).padStart(2,'0')}</b>${t(...step.title)}</button>`).join('')}</div><div class="workflow-stage">${workflow.map((step,i)=>`<div class="workflow-panel" role="tabpanel" id="workflow-panel-${i}" aria-labelledby="workflow-tab-${i}" data-workflow-panel="${i}" ${i?'hidden':''}><figure class="workflow-photo">${image(step.image,step.alt)}${caption(...step.caption)}</figure><div class="workflow-detail">${t(...step.title,'h3')}<dl><div>${t('参加者','参与者','dt')}${t(...step.participant,'dd')}</div><div>${t('操作者','操作者','dt')}${t(...step.operator,'dd')}</div></dl>${step.secondary?`<figure class="workflow-screen">${image(step.secondary,'操作者の確認画面')}</figure>`:''}${t(...step.result,'p','workflow-result')}</div></div>`).join('')}</div>`);
+add('privacy-flow',`${h('Privacy by Design：保存する情報を絞る','Privacy by Design：限制保存的信息')}<div class="privacy-intent">${t('保存方針','保存方针','span')}${t('映像の入力と、分析データの保存を分ける','将图像输入与分析数据保存分开','h3')}</div><div class="privacy-pipeline">${[['カメラ映像','摄像头图像','入力','输入'],['端末内で推定','本机估计','処理中の映像を使用','使用处理中的图像'],['匿名座標','匿名坐标','分析用データ','分析数据'],['熱図・AOI','热图・AOI','集計結果','统计结果']].map(([a,b,c,d])=>`<div>${t(a,b,'h3')}${t(c,d,'p')}</div>`).join('')}</div><div class="privacy-exclusion">${t('録画として残さない方針','不保留录像的方针','strong')}${t('映像フレームは処理用 / 保存対象は座標と集計','图像帧用于处理 / 保存对象为坐标和统计','p')}</div>${sub('主稿§3.3の設計方針 / 保存動作・説明と同意の手順は実装監査の対象','主稿§3.3的设计方针 / 保存行为、告知与同意流程纳入实现审计')}`,'DESIGN');
+if(slides.length!==rows.length)throw new Error('Speech and slide counts differ');
+html=html.replace(/<div id="deck">[\s\S]*?(?=<footer id="presentation-footer">)/,`<div id="deck">${slides.join('\n')}</div>\n`);
+for(const id of ['talk-layout','narrative-layout','research-layout','conference-layout','fullscreen-layout'])html=html.replace(new RegExp(`<style id="${id}">[\\s\\S]*?<\\/style>`),'');
+html=html.replace('</head>',['narrative','research','conference','fullscreen'].map(id=>`<style id="${id+'-layout'}">${fs.readFileSync('04_PPT工作区/'+id+'-slides.css','utf8')}</style>`).join('')+'</head>');
+const start=html.indexOf('<script>(() => {'),end=html.indexOf('</script>',start)+9;
+if(start<0)throw new Error('Navigation slot missing');
+html=html.slice(0,start)+`<script>${fs.readFileSync('04_PPT工作区/reference-navigation.js','utf8')}</script>`+html.slice(end);
+html=html.replace(/<footer id="presentation-footer">[\s\S]*?<\/footer>/,'<footer id="presentation-footer"><button id="prev" title="Previous slide" aria-label="Previous slide">←</button><span id="indicator-page" class="indicator-page-wrapper"></span><button id="next" title="Next slide" aria-label="Next slide">→</button><button id="overview-toggle" title="Overview (Esc)" aria-label="Overview">▦</button></footer>');
+if(!html.includes('id="overview-language"'))html=html.replace('<button id="overview-close"', '<div class="language-switch" id="overview-language"><button data-language="ja">JA</button><button data-language="zh">ZH</button></div><button id="overview-close"');
+html=html.replace(/<script id="cover-heatfield">[\s\S]*?<\/script>/g,'');
+html=html.replace('</body>',`<script id="cover-heatfield">${fs.readFileSync('04_PPT工作区/cover-heatfield.js','utf8')}</script></body>`);
+fs.writeFileSync(file,html);
+console.log({main:rows.filter(r=>!r.supplement).length,supplements:rows.filter(r=>r.supplement).length,pictureSlides:slides.filter(s=>s.includes('<img')).length});

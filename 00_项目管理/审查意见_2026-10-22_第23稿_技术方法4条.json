@@ -1,0 +1,117 @@
+{
+  "version": 2,
+  "scope": "main",
+  "speechVersion": 23,
+  "language": "zh-CN",
+  "speechHash": "ff2fa8506de3c053629e0fbb4ab3ef3c2b2332af9dbb735b65e6f072120da8a9",
+  "deckHash": "1d5fdafb71f5f6c48be81b887beecc07778b019abbbf1732e2c1e745e518b29c",
+  "audioVoice": "Tingting",
+  "audioMatchesDraft": true,
+  "edits": [],
+  "notes": [
+    {
+      "clipIndex": 6,
+      "clipId": "p07",
+      "slide": 7,
+      "offset": 0,
+      "time": 153.61678004535148,
+      "target": {
+        "type": "slide-page",
+        "slideIndex": 6,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333330708165323,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        }
+      },
+      "id": "678799ac-7e5e-4fae-8ff0-3d6777659200",
+      "text": "这一页最重要的是，解释这个新方法的技术路径，即，基于传统非接触式视线追踪的技术，增加投影算法，使其可以脱离屏幕，对纸质标识进行视线追踪",
+      "createdAt": "2026-10-22T05:49:23.530Z"
+    },
+    {
+      "clipIndex": 6,
+      "clipId": "p07",
+      "slide": 7,
+      "offset": 0,
+      "time": 153.61678004535148,
+      "target": {
+        "type": "slide-page",
+        "slideIndex": 6,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333330708165323,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        }
+      },
+      "id": "806aecce-3f60-480b-9ee8-5a23e57987a4",
+      "text": "然后这一页需要简单解释软件的基础功能，包括【映射校准】【视线追踪】【数据分析】三个",
+      "createdAt": "2026-10-22T05:50:11.379Z"
+    },
+    {
+      "clipIndex": 7,
+      "clipId": "p08",
+      "slide": 8,
+      "offset": 0,
+      "time": 173.314693877551,
+      "target": {
+        "type": "slide-page",
+        "slideIndex": 7,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333330708165323,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        }
+      },
+      "id": "8ae00b69-22ac-43ec-8ea6-e55a9a852e82",
+      "text": "这里的下方需要更多的文本来说明技术的细节部分",
+      "createdAt": "2026-10-22T05:50:49.159Z"
+    },
+    {
+      "clipIndex": 8,
+      "clipId": "p09",
+      "slide": 9,
+      "offset": 0,
+      "time": 195.5318820861678,
+      "target": {
+        "type": "slide-page",
+        "slideIndex": 8,
+        "language": "zh",
+        "state": {
+          "heatmap": null,
+          "workflow": null,
+          "cocreation": null,
+          "gaze": false
+        },
+        "aspectRatio": 1.3333330708165323,
+        "sourceSize": {
+          "width": 1200,
+          "height": 900
+        }
+      },
+      "id": "6c7ad7fd-002c-43e0-928b-262279c121c2",
+      "text": "这里最后改为两行两列的，并且丰富每一步的信息。",
+      "createdAt": "2026-10-22T05:51:18.424Z"
+    }
+  ]
+}

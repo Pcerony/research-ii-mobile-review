@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>研究Ⅱ · Continuous Heatfield</title>
+<link rel="icon" href="data:,">
+<style>
+  :root{--accent:#0b5d3b;--paper:#fafaf8;--aux:#f29d67;--sans:"Inter","Helvetica Neue","Arial","PingFang SC","Hiragino Kaku Gothic ProN",sans-serif;--mono:"SF Mono","Consolas",monospace}
+  *{box-sizing:border-box;letter-spacing:0}
+  html,body{margin:0;width:100%;height:100%;overflow:hidden}
+  body{display:grid;place-items:center;background:#e7e9e6;font-family:var(--sans);-webkit-font-smoothing:antialiased}
+  .stage{position:absolute;left:50%;top:50%;width:1200px;height:900px;background:var(--accent);color:var(--paper);overflow:hidden;transform:translate(-50%,-50%) scale(var(--scale,1));transform-origin:center}
+  canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  .content{position:absolute;inset:48px 52px;display:grid;grid-template-rows:auto 1fr auto}
+  .top{display:flex;justify-content:space-between;align-items:center;font:14px var(--mono);color:#d4e5d6}
+  .research{display:flex;align-items:center;gap:13px}
+  .research::before{content:"";width:7px;height:7px;background:var(--aux)}
+  .edition{color:#c0d4c2}
+  .title{align-self:center;padding-bottom:10px;max-width:970px}
+  h1{font-size:44px;font-weight:300;line-height:1.55;margin:0;max-width:820px;text-wrap:balance}
+  .tool{font-size:48px;font-weight:400;line-height:1.2;margin:32px 0 24px}
+  .subtitle{font-size:27px;font-weight:300;line-height:1.7;max-width:850px;margin:0;color:#e0e9df;text-wrap:pretty}
+  .keywords{font-size:18px;line-height:1.6;margin:27px 0 0;color:#c1d7c4}
+  .bottom{border-top:1px solid #b8d0ad55;padding-top:24px}
+  .event{font-size:19px;margin:0 0 22px}
+  .authors{display:flex;justify-content:space-between;gap:30px;font-size:19px;line-height:1.5;color:#d0dfcd}
+  @media(prefers-reduced-motion:reduce){canvas{opacity:1}}
+</style>
+</head>
+<body>
+<main class="stage" aria-label="研究Ⅱ 封面预览">
+  <canvas data-heatfield aria-hidden="true"></canvas>
+  <div class="content">
+    <header class="top"><span class="research">RESEARCH II · FIELD EVALUATION TOOL</span><span class="edition">芸術工学会</span></header>
+    <div class="title">
+      <h1 data-zh="关于共创植物园解说标识的研究Ⅱ">共創による植物園解説サインに関する研究Ⅱ</h1>
+      <p class="tool">SIGN Visual Attention</p>
+      <p class="subtitle" data-zh="面向公共实地环境的非接触式视线测量评价工具开发与验证">公共実地環境向け非接触型視線計測評価ツールの開発と検証</p>
+      <p class="keywords" data-zh="共创 / 非接触视线测量 / 纸面映射 / 实地PoC">共創 / 非接触視線計測 / 紙面マッピング / 実地PoC</p>
+    </div>
+    <footer class="bottom"><p class="event">10 min · 芸術工学会</p><div class="authors"><span>王 平成 · 張 彦芳 / 九州大学</span><span>芸術工学府 · 芸術工学研究院</span></div></footer>
+  </div>
+</main>
+<script>
+  function fit(){document.documentElement.style.setProperty('--scale',Math.min(innerWidth/1200,innerHeight/900));}
+  fit();addEventListener('resize',fit);
+  if(new URLSearchParams(location.search).get('lang')==='zh'){
+    document.documentElement.lang='zh';
+    document.querySelectorAll('[data-zh]').forEach(node=>node.textContent=node.dataset.zh);
+  }
+</script>
+<script src="cover-heatfield.js"></script>
+</body>
+</html>

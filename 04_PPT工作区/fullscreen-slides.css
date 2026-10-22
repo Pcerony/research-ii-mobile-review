@@ -1,0 +1,64 @@
+/* Full-bleed slides share the deck's type system, not the carousel's frame. */
+#deck{height:100vh;align-items:center}
+.slide-shell[data-fullscreen="true"]{transition:flex-basis .76s cubic-bezier(.16,1,.3,1),width .76s cubic-bezier(.16,1,.3,1),height .76s cubic-bezier(.16,1,.3,1),border-radius .76s cubic-bezier(.16,1,.3,1),opacity .42s}
+.slide-shell[data-fullscreen="true"].is-current{flex-basis:100vw;width:100vw;height:100vh;border-radius:0}
+#deck .slide[data-fullscreen="true"]{transition:width .76s cubic-bezier(.16,1,.3,1),height .76s cubic-bezier(.16,1,.3,1),transform .76s cubic-bezier(.16,1,.3,1),border-radius .76s cubic-bezier(.16,1,.3,1),box-shadow .42s,opacity .42s}
+#deck .slide[data-fullscreen="true"].is-current{width:var(--full-width);height:var(--full-height);transform:scale(var(--full-scale));border-radius:0;box-shadow:none}
+body.canvas-mode #deck .slide[data-fullscreen="true"] .canvas-card{padding:62px 72px 80px}
+body.canvas-mode #deck .slide[data-fullscreen="true"].is-current .canvas-card{border-radius:0}
+body.full-bleed #presentation-indicator{opacity:0;pointer-events:none}
+body.full-bleed #presentation-footer{position:fixed;bottom:14px;z-index:30;opacity:.3;transition:opacity .2s}
+body.full-bleed #presentation-footer:hover,body.full-bleed #presentation-footer:focus-within{opacity:1}
+body.full-bleed #indicator-title{display:none}
+body.cover-screen #presentation-footer,body.cover-screen #presentation-footer button,body.cover-screen #indicator-page{color:#e3e9df!important}
+body.cover-screen #presentation-footer [data-language].active{color:#f2b588!important}
+#deck .slide[data-fullscreen="true"] .composition{height:auto;flex:1;min-height:0}
+#deck .slide[data-fullscreen="true"] .conference-cover{justify-content:center}
+#deck .slide[data-fullscreen="true"] .reference-cover{width:100%;max-height:1000px}
+#deck .slide[data-layout="tool-conclusion"] .composition{justify-content:stretch;max-height:none;width:100%;margin:0}
+#deck .slide[data-layout="tool-conclusion"] .conference-thanks{margin-top:32px}
+
+.slide .heatmap-explorer{gap:24px!important}
+.slide .heatmap-explorer .preview-head{flex:none}
+.slide .heatmap-explorer .preview-head h2{font-size:42px!important}
+.slide .heatmap-stage{display:grid;grid-template-columns:minmax(0,1fr) 78px minmax(0,1fr);gap:30px;flex:1;min-height:0}
+.slide .heatmap-side{display:grid;grid-template-rows:34px minmax(0,1fr);gap:18px;min-width:0;min-height:0}
+.slide .heatmap-label{font:16px var(--mono);letter-spacing:0;border-top:1px solid #737b71;padding-top:12px;color:#525c54}
+.slide .heatmap-stack{position:relative;perspective:900px;min-height:0}
+.slide .heatmap-card{left:3%;top:50%;width:94%;height:76%;max-height:calc(100% - 42px);margin:0;background:#fff;border:1px solid #dadfd7;border-top:2px solid var(--accent);border-radius:0;overflow:hidden;pointer-events:none;transform:translateY(calc(-50% + var(--heat-y,0px))) rotateX(var(--heat-rx,0deg)) scale(var(--heat-scale,1));opacity:var(--heat-opacity,.38);transition:transform .36s ease,opacity .28s ease,filter .28s ease;filter:saturate(.78) contrast(.94);box-shadow:0 18px 34px #0000001f}
+.slide .heatmap-card.active{filter:none;box-shadow:0 24px 46px #0000002e}
+.slide .heatmap-card img{width:100%;height:100%;max-width:100%;object-fit:contain;background:#fff}
+.slide .heatmap-card{aspect-ratio:var(--heatmap-aspect,1.414);height:auto;max-height:none}
+.slide .heatmap-card img{height:auto;display:block}
+.heatmap-color-legend{display:grid;grid-template-columns:minmax(0,560px);align-items:center;justify-content:center;flex:none;padding-top:12px}
+.heatmap-color-legend>strong{font-size:20px;font-weight:400;color:#4d5d53}
+.heatmap-color-scale{display:grid;gap:8px}
+.heatmap-color-ramp{height:12px;background:linear-gradient(to right,#2456ce 0%,#27bce5 25%,#43cc65 50%,#f4df38 72%,#ed8b32 85%,#dc302d 100%)}
+.heatmap-color-labels{display:flex;justify-content:space-between;font-size:16px;color:#4d5d53}
+.slide .heatmap-card figcaption{position:absolute;left:0;top:0;font:14px var(--mono);letter-spacing:0;padding:7px 10px;background:var(--accent);color:white}
+.slide .heatmap-wheel{align-self:center;justify-self:center;width:70px;min-height:0;display:flex;flex-direction:column;gap:5px;border-inline:1px solid #dce0d8}
+.slide .heatmap-picker{width:56px;height:42px;min-height:0;border:0;border-radius:0;padding:0;letter-spacing:0;font:16px var(--mono);background:transparent;color:#667269;cursor:pointer;transition:background .22s ease,color .22s ease,transform .22s ease}
+.slide .heatmap-picker.active{background:var(--accent);color:#fff;transform:scale(1.08)}
+.slide .heatmap-picker:focus-visible{outline:2px solid #c37a47;outline-offset:3px}
+.slide .heatmap-explorer .preview-boundary{border-top:1px solid #dce0d8;padding-top:16px;flex:none;display:flex;flex-direction:column;gap:4px}
+.slide .heatmap-explorer .preview-boundary p{font-size:18px;margin:0;line-height:1.45;color:#555f56}
+#deck .slide.is-current .heatmap-stack{animation:heat-stack-enter .6s cubic-bezier(.16,1,.3,1) .08s both}
+#deck .slide.is-current .heatmap-wheel{animation:heat-stack-enter .45s cubic-bezier(.16,1,.3,1) .18s both}
+@keyframes heat-stack-enter{from{opacity:0;translate:0 18px}to{opacity:1;translate:0 0}}
+#overview .slide[data-fullscreen="true"]{width:1200px;height:900px;border-radius:0}
+@media(max-aspect-ratio:1/1){
+  #deck .slide[data-fullscreen="true"].is-current .canvas-card{justify-content:center}
+  #deck .slide[data-fullscreen="true"].is-current .reference-cover{flex:none;height:1200px;max-height:none}
+  #deck .slide[data-layout="heatmap-explorer"].is-current .composition{flex:none;height:2000px;max-height:calc(var(--full-height) - 330px)}
+  #deck .slide[data-layout="heatmap-explorer"].is-current .slide-head{margin-bottom:30px}
+  #deck .slide[data-layout="heatmap-explorer"].is-current .bottom{margin-top:40px}
+  #deck .slide.is-current .heatmap-stage{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) 70px minmax(0,1fr);gap:24px}
+  #deck .slide.is-current .heatmap-wheel{width:100%;height:70px;flex-direction:row;border-inline:0;border-block:1px solid #dce0d8;gap:8px}
+  #deck .slide.is-current .heatmap-picker{width:96px;height:58px;font-size:28px}
+  #deck .slide.is-current .heatmap-label{font-size:24px}
+  #deck .slide.is-current .heatmap-card{height:auto;max-height:none}
+  #deck .slide.is-current .heatmap-card figcaption{font-size:22px}
+  #deck .slide.is-current .heatmap-explorer .eyebrow{font-size:26px}
+  body.full-bleed #presentation-footer{opacity:.8}
+}
+@media(prefers-reduced-motion:reduce){#deck,#deck .slide,#deck .slide-shell,.slide .heatmap-card,.slide .heatmap-picker{transition:none!important}.slide .heatmap-stack,.slide .heatmap-wheel{animation:none!important}}

@@ -12,6 +12,7 @@
   let index=0,wantPlay=false,loading=true,complete=false,frameReady=false,language='zh',token=0,seeking=false;
   let notes=[],noteContext=null,storageAvailable=true;
   let drafts={},draftStorageAvailable=true,editing=false,pendingSelection=null,editingNoteId=null;
+  const draftDirty=new Set(),draftBases=new Map();let draftConflict=false;
   let slideReview=null,slideStateOverride=null,restoredPending=null;
   const clock=seconds=>`${String(Math.floor(Math.max(0,seconds)/60)).padStart(2,'0')}:${String(Math.floor(Math.max(0,seconds)%60)).padStart(2,'0')}`;
   const globalTime=()=>core.elapsedBefore(clips,index)+(Number.isFinite(audio.currentTime)?audio.currentTime:0);
@@ -26,7 +27,7 @@
   const draftText=i=>Object.hasOwn(drafts,i)?drafts[i].text:clips[i].text;
   function renderDraftStatus(){
     const count=Object.keys(drafts).length;
-    $('draft-status').textContent=draftStorageAvailable?(count?`已存本机 · ${count}段已修改`:'原稿'):'本机保存不可用，请导出';
+    $('draft-status').textContent=draftConflict?'另一窗口草稿冲突，未覆盖，请导出':draftStorageAvailable?(count?`已存本机 · ${count}段已修改`:'原稿'):'本机保存不可用，请导出';
     clips.forEach((clip,i)=>{
       const row=document.querySelector(`.clip-row[data-clip="${i}"]`);
       let badge=row?.querySelector('[data-draft-badge]');
@@ -37,9 +38,20 @@
     });
   }
   function persistDrafts(){
-    try{localStorage.setItem(draftKey,JSON.stringify(drafts));draftStorageAvailable=true;}catch{draftStorageAvailable=false;}
+    try{const result=window.ScriptEditorCore.mergeWrite(localStorage,draftKey,clips,drafts,draftDirty,draftBases);draftConflict=!result.ok;if(result.ok)drafts=result.drafts;draftStorageAvailable=true;}catch{draftStorageAvailable=false;}
     renderDraftStatus();
   }
+  function markDraft(i){if(!draftDirty.has(i))draftBases.set(i,draftText(i));draftDirty.add(i);}
+  window.addEventListener('storage',event=>{
+    if(event.key!==draftKey)return;
+    try{
+      const latest=window.ScriptEditorCore.sanitizeDrafts(JSON.parse(event.newValue||'{}'),clips),active=document.activeElement;
+      if(active?.matches('.clip-edit')){const i=Number(active.dataset.editor);if(window.ScriptEditorCore.draftText(clips,latest,i)!==draftText(i)){markDraft(i);draftConflict=true;}}
+      for(const i of draftDirty){if(Object.hasOwn(drafts,i))latest[i]=drafts[i];else delete latest[i];}drafts=latest;
+      document.querySelectorAll('.clip-edit').forEach((input,i)=>{if(input!==active)input.value=draftText(i);});
+      renderDraftStatus();if(!editing)renderAnnotations();
+    }catch{draftStorageAvailable=false;renderDraftStatus();}
+  });
   function renderAnnotations(){
     if(editing)return;
     document.querySelectorAll('[data-editor]').forEach(el=>{
@@ -185,6 +197,7 @@
     input.oninput=()=>{
       if(!editing)return;
       const value=input.value;
+      markDraft(i);
       if(value===clip.text)delete drafts[i];else drafts[i]={text:value,updatedAt:new Date().toISOString()};
       persistDrafts();input.style.height='auto';input.style.height=input.scrollHeight+'px';
     };
@@ -257,7 +270,7 @@
       const merged=new Map(notes.map(n=>[n.id,n]));let conflicts=0;
       for(const n of incoming.notes){const old=merged.get(n.id);if(old&&old.text!==n.text){merged.set(crypto.randomUUID(),{...n,id:crypto.randomUUID()});conflicts++;}else merged.set(n.id,n);}
       for(const e of incoming.edits){if(drafts[e.clipIndex]&&drafts[e.clipIndex].text!==e.text)throw Error('讲稿草稿有冲突，请先导出本机副本');}
-      notes=[...merged.values()];for(const e of incoming.edits)drafts[e.clipIndex]={text:e.text,updatedAt:e.updatedAt};
+      notes=[...merged.values()];for(const e of incoming.edits){markDraft(e.clipIndex);drafts[e.clipIndex]={text:e.text,updatedAt:e.updatedAt};}
       persistNotes();persistDrafts();setEditing(editing);renderNotes();
       $('storage-status').textContent=`已合并 ${incoming.notes.length} 条意见${conflicts?'，冲突保留双份':''}`;
       if(incoming.pending?.text&&typeof incoming.pending.text==='string'&&clips[incoming.pending.clipIndex]&&!$('note-text').value.trim())showNoteForm(incoming.pending,{text:incoming.pending.text});

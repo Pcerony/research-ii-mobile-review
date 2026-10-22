@@ -1,5 +1,6 @@
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const root=__dirname,files=new Set(['review.html','review.html?scope=supplement','index.html','review.css','review.js','review-mobile.js','review-core.js','review-slide.js','review-data.js','review.webmanifest']);
+for(const file of ['script.html','script.html?scope=supplement','script-editor.js','script-editor.css','script-data.js','script-core.js','script.webmanifest','review-offline.js'])files.add(file);
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'review-audio-manifest.json')));
 for(const c of [...manifest.clips,...manifest.appendixClips])files.add(c.audio);
 for(const f of ['index.html','review.css','review-mobile.js']){

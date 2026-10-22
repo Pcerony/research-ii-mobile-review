@@ -19,6 +19,7 @@
   share.onclick=()=>window.dispatchEvent(new Event('review-share'));
   importButton.onclick=()=>file.click();file.onchange=()=>{if(file.files[0])window.dispatchEvent(new CustomEvent('review-import',{detail:file.files[0]}));file.value='';};
   const offline=button('offline-save','下载离线资料','⇩'),status=document.createElement('span');status.id='offline-status';status.role='status';status.textContent='未下载离线';
+  const scriptMode=document.createElement('a');scriptMode.href=new URLSearchParams(location.search).get('scope')==='supplement'?'script.html?scope=supplement':'script.html';scriptMode.className='script-mode-link';scriptMode.textContent='讲稿模式';scriptMode.title='竖屏直接编辑讲稿';document.querySelector('.slide-review-tools').append(scriptMode);
   document.querySelector('.slide-review-tools').append(offline,status);
   const viewport=()=>{
     const height=window.visualViewport?.height||innerHeight;
@@ -30,21 +31,7 @@
   window.visualViewport?.addEventListener('resize',viewport);window.addEventListener('resize',viewport);
   document.addEventListener('focusin',()=>{if(document.activeElement?.matches('textarea'))viewport();});
   document.addEventListener('focusout',()=>setTimeout(viewport,200));viewport();
-  if(!('serviceWorker' in navigator)||!['https:','http:'].includes(location.protocol)){status.textContent='离线下载需HTTPS入口';offline.disabled=true;return;}
-  let worker,busy=false;
-  const ready=navigator.serviceWorker.register('review-sw.js').then(async registration=>{await navigator.serviceWorker.ready;worker=registration.active;return worker;});
-  ready.then(()=>worker.postMessage({type:'offline-status'})).catch(()=>{status.textContent='离线初始化失败，可重试';});
-  navigator.serviceWorker.addEventListener('message',e=>{
-    if(e.data?.type==='offline-status'){status.textContent=e.data.ready?'离线已就绪':'未下载离线';return;}
-    if(e.data?.type!=='offline-progress')return;
-    status.textContent=e.data.error?'下载失败，请重试':e.data.done?'离线已就绪':`离线 ${e.data.current}/${e.data.total}`;
-    if(e.data.done||e.data.error){busy=false;offline.disabled=false;}
-  });
-  offline.onclick=async()=>{
-    if(busy)return;busy=true;offline.disabled=true;status.textContent='准备离线资料…';
-    try{await ready;await navigator.storage?.persist?.();worker.postMessage({type:'offline-save'});}
-    catch{status.textContent='下载失败，请重试';busy=false;offline.disabled=false;}
-  };
+  window.setupReviewOffline(offline,status);
 })();
 
 if(window.PUBLIC_REDACTED)document.querySelector('.review-header h1 span').textContent='公开审查版';

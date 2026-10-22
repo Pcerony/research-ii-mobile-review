@@ -1,6 +1,7 @@
 /* The configuration is generated from the exact current runtime dependencies. */
 importScripts('review-offline-config.js');
 const cacheName='researchII-offline-'+self.OFFLINE_PACK.version;
+const scriptEditor=Array.isArray(self.OFFLINE_PACK.files)&&self.OFFLINE_PACK.files.includes('script.html');
 let saving=null;
 self.addEventListener('install',event=>event.waitUntil(self.skipWaiting()));
 self.addEventListener('activate',event=>event.waitUntil(self.clients.claim()));
@@ -23,10 +24,10 @@ self.addEventListener('fetch',event=>{
 });
 self.addEventListener('message',event=>{
   if(event.data?.type==='offline-status'){
-    event.waitUntil((async()=>{const cache=await caches.open(cacheName);event.source?.postMessage({type:'offline-status',ready:!!await cache.match(new URL('offline-ready.json',self.registration.scope).href)});})());return;
+    event.waitUntil((async()=>{const cache=await caches.open(cacheName);event.source?.postMessage({type:'offline-status',scriptEditor,ready:!!await cache.match(new URL('offline-ready.json',self.registration.scope).href)});})());return;
   }
   if(event.data?.type!=='offline-save')return;
-  const notify=message=>event.source?.postMessage({type:'offline-progress',...message});
+  const notify=message=>event.source?.postMessage({type:'offline-progress',scriptEditor,...message});
   if(saving){notify({error:'下载已在进行'});return;}
   saving=(async()=>{
     const pack=self.OFFLINE_PACK,cache=await caches.open(cacheName);let current=0;

@@ -1,6 +1,6 @@
 {
-  "version": "3fdf4a78fe97a60c",
-  "bytes": 61881520,
+  "version": "6845d5e02c3f0daf",
+  "bytes": 61929695,
   "files": [
     "assets/apparatus-flat-v32.png",
     "assets/calibration-panel.jpg",
@@ -68,11 +68,19 @@
     "review-core.js",
     "review-data.js",
     "review-mobile.js",
+    "review-offline.js",
     "review-slide.js",
     "review.css",
     "review.html",
     "review.html?scope=supplement",
     "review.js",
-    "review.webmanifest"
+    "review.webmanifest",
+    "script-core.js",
+    "script-data.js",
+    "script-editor.css",
+    "script-editor.js",
+    "script.html",
+    "script.html?scope=supplement",
+    "script.webmanifest"
   ]
 }

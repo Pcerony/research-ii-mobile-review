@@ -63,3 +63,4 @@ fs.writeFileSync(path.join(base,'review-data.js'),'window.REVIEW_DATA='+JSON.str
 const {deckHtml,...manifest}=data;
 fs.writeFileSync(path.join(base,'review-audio-manifest.json'),JSON.stringify(manifest,null,2));
 console.log(JSON.stringify({mainClips:clips.length,appendixClips:appendixClips.length,duration:data.duration,appendixDuration:data.appendixDuration,voice,deckHash:data.deckHash},null,2));
+require('./build-script-data.cjs');

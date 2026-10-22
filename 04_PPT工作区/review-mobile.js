@@ -8,6 +8,7 @@
   toggle.onclick=()=>setOpen(!document.body.classList.contains('inspector-open'));close.onclick=()=>{setOpen(false);toggle.focus();};
   window.addEventListener('review-restore-pending',()=>setOpen(true));
   window.addEventListener('review-open-form',()=>setOpen(true));
+  if($('note-text').value.trim()&&!$('notes-panel').hidden)setOpen(true);
   for(const id of ['add-note','annotate-slide-page','annotate-slide-text','notes-tab','transcript-tab'])$(id).addEventListener('click',()=>setOpen(true));
   $('note-text').addEventListener('focus',()=>setOpen(true));
   $('cancel-note').addEventListener('click',()=>setOpen(false));
@@ -19,8 +20,16 @@
   importButton.onclick=()=>file.click();file.onchange=()=>{if(file.files[0])window.dispatchEvent(new CustomEvent('review-import',{detail:file.files[0]}));file.value='';};
   const offline=button('offline-save','下载离线资料','⇩'),status=document.createElement('span');status.id='offline-status';status.role='status';status.textContent='未下载离线';
   document.querySelector('.slide-review-tools').append(offline,status);
-  const viewport=()=>{if(window.visualViewport)document.documentElement.style.setProperty('--visible-height',`${visualViewport.height}px`);};
-  visualViewport?.addEventListener('resize',viewport);viewport();
+  const viewport=()=>{
+    const height=window.visualViewport?.height||innerHeight;
+    document.documentElement.style.setProperty('--visible-height',`${height}px`);
+    const compact=height<320&&!!document.activeElement?.matches('textarea'),wasCompact=document.body.classList.contains('keyboard-open');
+    document.body.classList.toggle('keyboard-open',compact);
+    if(compact&&!wasCompact&&document.activeElement===$('note-text'))$('notes-panel').scrollTop=0;
+  };
+  window.visualViewport?.addEventListener('resize',viewport);window.addEventListener('resize',viewport);
+  document.addEventListener('focusin',()=>{if(document.activeElement?.matches('textarea'))viewport();});
+  document.addEventListener('focusout',()=>setTimeout(viewport,200));viewport();
   if(!('serviceWorker' in navigator)||!['https:','http:'].includes(location.protocol)){status.textContent='离线下载需HTTPS入口';offline.disabled=true;return;}
   let worker,busy=false;
   const ready=navigator.serviceWorker.register('review-sw.js').then(async registration=>{await navigator.serviceWorker.ready;worker=registration.active;return worker;});

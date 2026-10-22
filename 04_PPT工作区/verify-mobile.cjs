@@ -58,6 +58,8 @@ const url=process.env.REVIEW_URL||'http://127.0.0.1:8765/04_PPT工作区/review.
    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth||document.body.scrollHeight>innerHeight+2);assert.equal(overflow,false,JSON.stringify(viewport));
   }
   checks.push('portrait small landscape large landscape desktop no document overflow');
+  await page.setViewportSize({width:844,height:230});await page.locator('#add-note').tap();await page.locator('#note-text').fill('键盘收缩视口下的保存检查');
+  assert.equal(await page.locator('.player').isVisible(),false);assert.equal(await page.locator('.notes-tools').isVisible(),false);await page.screenshot({path:out+'/keyboard-compact.png'});await page.locator('#save-note').tap();checks.push('keyboard-sized viewport prioritizes reachable note form');
   assert.deepEqual(errors,[]);fs.writeFileSync(out+'/result.json',JSON.stringify({checks,errors},null,2));console.log(JSON.stringify({checks,errors},null,2));await context.close();
  }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});

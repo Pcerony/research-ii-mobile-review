@@ -5,7 +5,7 @@ const out=process.env.QA_OUT||'05_输出/qa/review-v32';fs.mkdirSync(out,{recurs
 const hash=x=>crypto.createHash('sha256').update(x).digest('hex');
 async function main(){
   const m=JSON.parse(fs.readFileSync('04_PPT工作区/review-audio-manifest.json'));
-  assert.equal(m.speechVersion,37);assert.equal(m.clips.length,19);assert.equal(m.appendixClips.length,5);
+  assert.equal(m.speechVersion,38);assert.equal(m.clips.length,19);assert.equal(m.appendixClips.length,5);
   assert.equal(hash(fs.readFileSync('04_PPT工作区/index.html')),m.deckHash);
   assert.equal(hash(fs.readFileSync('04_PPT工作区/演讲稿_中文审查.md')),m.speechHash);
   assert.equal(hash(fs.readFileSync('04_PPT工作区/补充稿_中文审查.md')),m.appendixSpeechHash);

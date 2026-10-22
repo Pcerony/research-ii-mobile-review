@@ -57,7 +57,7 @@ if(workflowClips.length!==4)throw new Error('Each workflow step needs its own au
 workflowClips.forEach((row,i)=>row.workflowStep=i);
 if(rows.some(r=>r.slide>=slideCount))throw new Error('Speech points outside the deck.');
 const clips=rows.filter(r=>r.slide<mainSlideCount),appendixClips=rows.filter(r=>r.slide>=mainSlideCount);
-const data={version:3,speechVersion:37,slideCount,mainSlideCount,heatmapSlide,workflowSlide,language:'zh-CN',voice,rate,deckHash:hash(deck),speechHash:hash(speech),appendixSpeechHash:hash(supplementSpeech),duration:clips.reduce((n,r)=>n+r.duration,0),appendixDuration:appendixClips.reduce((n,r)=>n+r.duration,0),clips,appendixClips,deckHtml:deck};
+const data={version:3,speechVersion:38,slideCount,mainSlideCount,heatmapSlide,workflowSlide,language:'zh-CN',voice,rate,deckHash:hash(deck),speechHash:hash(speech),appendixSpeechHash:hash(supplementSpeech),duration:clips.reduce((n,r)=>n+r.duration,0),appendixDuration:appendixClips.reduce((n,r)=>n+r.duration,0),clips,appendixClips,deckHtml:deck};
 // A script payload, rather than fetch, lets the review page run directly from file://.
 fs.writeFileSync(path.join(base,'review-data.js'),'window.REVIEW_DATA='+JSON.stringify(data)+';\n');
 const {deckHtml,...manifest}=data;

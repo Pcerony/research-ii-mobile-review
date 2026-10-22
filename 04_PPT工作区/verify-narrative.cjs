@@ -24,5 +24,5 @@ assert.match(spoken,/累計15名/);assert.ok(!/排除|除外した6名/.test(spo
 for(const n of ['38.6','45.3'])assert.ok(spoken.includes(n),n);
 assert.match(qaJa[1].paragraphs.join(''),/方針/);
 assert.ok(!/ホーソン効果を解消|無誤差|因果効果を証明|理解率が向上/.test(spoken));
-const result={version:37,mainSections:19,supplementSections:2,mainParagraphs:19,supplementParagraphs:5,spokenCharacters:chars,allocatedSeconds:420,timedBySpeaker:false,bilingualNumbersMatch:true,longestJapaneseSentence:Math.max(...spoken.split('。').map(s=>s.length)),contentAndLanguageNeedHumanReview:true};
-fs.mkdirSync('05_输出/qa/narrative-v37',{recursive:true});fs.writeFileSync('05_输出/qa/narrative-v37/check.json',JSON.stringify(result,null,2));console.log(result);
+const result={version:38,mainSections:19,supplementSections:2,mainParagraphs:19,supplementParagraphs:5,spokenCharacters:chars,allocatedSeconds:420,timedBySpeaker:false,bilingualNumbersMatch:true,longestJapaneseSentence:Math.max(...spoken.split('。').map(s=>s.length)),contentAndLanguageNeedHumanReview:true};
+fs.mkdirSync('05_输出/qa/narrative-v38',{recursive:true});fs.writeFileSync('05_输出/qa/narrative-v38/check.json',JSON.stringify(result,null,2));console.log(result);

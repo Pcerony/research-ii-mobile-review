@@ -13,8 +13,8 @@ test('v37 adopts phone opening while retaining research and measurement boundari
   assert.match(rows[2].ja,/研究者とサインの専門家/);
   assert.equal(rows.filter(r=>!r.supplement).reduce((n,r)=>n+r.seconds,0),420);
 });
-test('generated script and audio metadata identify the new source edition',()=>{
+test('generated script and audio metadata identify the current source edition',()=>{
   const audio=JSON.parse(fs.readFileSync(__dirname+'/review-audio-manifest.json'));
-  assert.equal(audio.speechVersion,37);
-  assert.match(fs.readFileSync(__dirname+'/演讲稿_中文审查.md','utf8'),/第37稿/);
+  assert.equal(audio.speechVersion,38);
+  assert.match(fs.readFileSync(__dirname+'/演讲稿_中文审查.md','utf8'),/第38稿/);
 });

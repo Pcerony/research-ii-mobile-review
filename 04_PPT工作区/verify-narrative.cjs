@@ -18,11 +18,11 @@ for(const [left,right]of [[ja,zh],[qaJa,qaZh]]){
 }
 assert.equal(ja.at(-1).end,'07:00');assert.equal(qaJa[0].id,'20');assert.equal(qaJa[0].paragraphs.length,4);
 const spoken=ja.flatMap(s=>s.paragraphs).join(''),chars=spoken.replace(/\s/g,'').length;
-assert.ok(chars>=1900&&chars<=2500,'Incremental research narrative remains a ten-minute candidate, not a timed rehearsal.');
+assert.ok(chars>=1900&&chars<=2500,'Incremental research narrative remains a seven-minute allocation, not a timed rehearsal.');
 assert.match(spoken,/SIGN Visual Attention/);
 assert.match(spoken,/累計15名/);assert.ok(!/排除|除外した6名/.test(spoken));
 for(const n of ['38.6','45.3'])assert.ok(spoken.includes(n),n);
 assert.match(qaJa[1].paragraphs.join(''),/方針/);
 assert.ok(!/ホーソン効果を解消|無誤差|因果効果を証明|理解率が向上/.test(spoken));
-const result={version:31,mainSections:19,supplementSections:2,mainParagraphs:19,supplementParagraphs:5,spokenCharacters:chars,allocatedSeconds:420,timedBySpeaker:false,bilingualNumbersMatch:true,longestJapaneseSentence:Math.max(...spoken.split('。').map(s=>s.length)),contentAndLanguageNeedHumanReview:true};
-fs.mkdirSync('05_输出/qa/narrative-v31',{recursive:true});fs.writeFileSync('05_输出/qa/narrative-v31/check.json',JSON.stringify(result,null,2));console.log(result);
+const result={version:37,mainSections:19,supplementSections:2,mainParagraphs:19,supplementParagraphs:5,spokenCharacters:chars,allocatedSeconds:420,timedBySpeaker:false,bilingualNumbersMatch:true,longestJapaneseSentence:Math.max(...spoken.split('。').map(s=>s.length)),contentAndLanguageNeedHumanReview:true};
+fs.mkdirSync('05_输出/qa/narrative-v37',{recursive:true});fs.writeFileSync('05_输出/qa/narrative-v37/check.json',JSON.stringify(result,null,2));console.log(result);

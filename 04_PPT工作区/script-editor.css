@@ -11,3 +11,5 @@ body.is-embedded,body.is-embedded.is-typing{grid-template-rows:44px 0 minmax(0,1
 @media(max-height:340px){body.is-typing{grid-template-rows:0 52px minmax(0,1fr) 46px}.is-typing .script-header{display:none}.is-typing .script-footer .icon{height:44px}}
 .is-embedded.is-typing .script-header{display:flex}
 @media(min-width:1025px){body:not(.is-embedded){grid-template-columns:minmax(0,1fr) minmax(380px,480px);grid-template-rows:48px minmax(0,1fr) 64px}body:not(.is-embedded)>.script-header{grid-column:1/-1;grid-row:1;padding:0 16px;display:flex}body:not(.is-embedded)>.script-preview{grid-column:1;grid-row:2}body:not(.is-embedded)>.script-workspace{grid-column:2;grid-row:2;border-left:1px solid var(--border)}body:not(.is-embedded)>.script-footer{grid-column:1/-1;grid-row:3;padding:0 16px}body:not(.is-embedded) .script-navigation,body:not(.is-embedded) .script-tools{padding:0 12px}body:not(.is-embedded) #script-fields{padding:12px 16px}}
+
+@media(min-width:1025px){body:not(.is-embedded) #script-frame{pointer-events:auto}}

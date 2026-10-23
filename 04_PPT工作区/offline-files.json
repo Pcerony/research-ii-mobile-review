@@ -1,6 +1,6 @@
 {
-  "version": "cd1441bdd84e57cf",
-  "bytes": 63293929,
+  "version": "10c6eaf97cfb83c0",
+  "bytes": 63296132,
   "files": [
     "assets/apparatus-flat-v32.png",
     "assets/calibration-panel.jpg",
@@ -64,6 +64,7 @@
     "assets/wearable-tracking.jpg",
     "assets/workflow-greenhouse-topcamera.png",
     "assets/workflow-schematic-v32.png",
+    "deck-page-sync.js",
     "index.html",
     "review-core.js",
     "review-data.js",

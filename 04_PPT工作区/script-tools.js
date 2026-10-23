@@ -10,7 +10,7 @@
   }
   function undo(h){const step=h.past.pop();if(!step)return null;h.future.push(step);return {...step.before};}
   function redo(h){const step=h.future.pop();if(!step)return null;h.past.push({...step,time:-Infinity});return {...step.after};}
-  // Curated presentation terms only. Unknown words remain unannotated.
+  // Presentation terms override the general Japanese dictionary.
   const lexicon={
     '非接触型':'ヒセッショクガタ','非装着型':'ヒソウチャクガタ','視線追跡':'シセンツイセキ','視線計測':'シセンケイソク','視線推定':'シセンスイテイ',
     '透視変換行列':'トウシヘンカンギョウレツ','透視変換':'トウシヘンカン','文字被覆率':'モジヒフクリツ','熱強度':'ネツキョウド','共創':'キョウソウ',
@@ -26,14 +26,28 @@
     '定量':'テイリョウ','質疑応答':'シツギオウトウ','記憶':'キオク','調整':'チョウセイ','配置':'ハイチ','実装':'ジッソウ','検査':'ケンサ'
   };
   const terms=Object.keys(lexicon).sort((a,b)=>b.length-a.length);
-  function readings(text){
+  const readingData=typeof module!=='undefined'&&module.exports?require('./script-reading-data.js'):root.ScriptReadingData;
+  let tokenizer=null,loading=null;
+  function prepareReadings(){
+    if(tokenizer)return Promise.resolve();if(loading)return loading;
+    if(typeof document==='undefined'||location.protocol==='file:')return Promise.resolve();
+    loading=new Promise((resolve,reject)=>{const script=document.createElement('script');script.src='assets/kuromoji/kuromoji.js';script.onload=()=>root.kuromoji.builder({dicPath:'assets/kuromoji/dict/'}).build((error,value)=>{if(error){loading=null;reject(error);}else{tokenizer=value;resolve();}});script.onerror=()=>{loading=null;reject(Error('注音词典加载失败'));};document.head.append(script);});return loading;
+  }
+  function ordinary(text){
+    if(tokenizer)return tokenizer.tokenize(text).map(t=>/\p{Script=Han}|々|〆/u.test(t.surface_form)?{text:t.surface_form,reading:t.reading&&t.reading!=='*'?t.reading:'？',unresolved:!t.reading||t.reading==='*'}:{text:t.surface_form});
+    const words=Object.keys(readingData?.lexicon||{}).sort((a,b)=>b.length-a.length),result=[];let plain='';
+    for(let i=0;i<text.length;){const term=words.find(w=>text.startsWith(w,i));if(term){if(plain){result.push({text:plain});plain='';}result.push({text:term,reading:readingData.lexicon[term]});i+=term.length;}else{const character=String.fromCodePoint(text.codePointAt(i));if(/\p{Script=Han}|々|〆/u.test(character)){if(plain){result.push({text:plain});plain='';}result.push({text:character,reading:'？',unresolved:true});}else plain+=character;i+=character.length;}}
+    if(plain)result.push({text:plain});return result;
+  }
+  function readings(text,curatedOnly=false){
+    if(!curatedOnly&&readingData?.pages?.[text])return readingData.pages[text];
     const result=[];let plain='';
     for(let i=0;i<text.length;){const word=terms.find(term=>text.startsWith(term,i));
       if(word){if(plain){result.push({text:plain});plain='';}result.push({text:word,reading:lexicon[word]});i+=word.length;}
       else plain+=text[i++];
     }
-    if(plain)result.push({text:plain});return result;
+    if(plain)result.push({text:plain});return curatedOnly?result:result.flatMap(t=>t.reading?[t]:ordinary(t.text));
   }
-  const api={history,record,undo,redo,readings};
+  const api={history,record,undo,redo,readings,prepareReadings};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.ScriptEditorTools=api;
 })(typeof window==='undefined'?globalThis:window);

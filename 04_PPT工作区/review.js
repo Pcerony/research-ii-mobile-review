@@ -7,8 +7,8 @@
   if(!data||!core){$('status').textContent='审查数据缺失，请重新生成。';return;}
   document.querySelectorAll('[data-review-scope]').forEach(link=>link.setAttribute('aria-current',link.dataset.reviewScope===(supplemental?'supplement':'main')?'page':'false'));
   const clips=data.clips,audio=$('narration'),frame=$('deck-frame');
-  const editorFrame=$('script-editor-frame');let editorReady=false,editorLanguage='ja';
-  editorFrame.src='script.html?layout=review'+(supplemental?'&scope=supplement':'');
+  const editorFrame=$('script-editor-frame');let editorReady=false,editorLanguage='ja',editorRevision=0;
+  editorFrame.src='script.html?layout=review&runtime=63&speech=65'+(supplemental?'&scope=supplement':'');
   const storageKey=`researchII.review.${data.speechHash}.${data.deckHash}`;
   const draftKey=storageKey+'.drafts';
   let index=0,wantPlay=false,loading=true,complete=false,frameReady=false,language='zh',token=0,seeking=false;
@@ -110,7 +110,7 @@
     link.href=url;link.download=filename;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   }
   function send(){
-    if(editorReady)editorFrame.contentWindow.postMessage({type:'review-editor-cue',slide:clips[index].slide,language},location.protocol==='file:'||location.origin==='null'?'*':location.origin);
+    if(editorReady)editorFrame.contentWindow.postMessage({type:'review-editor-cue',slide:clips[index].slide,language,revision:editorRevision},location.protocol==='file:'||location.origin==='null'?'*':location.origin);
     if(!frameReady)return;
     const workflow=slideStateOverride?.workflow==null?clips[index].workflowStep:Number(slideStateOverride.workflow),heatmap=slideStateOverride?.heatmap?Number(slideStateOverride.heatmap.slice(1))-1:core.heatmapAt(clips[index].slide,audio.currentTime,clips[index].duration,data.heatmapSlide);
     frame.contentWindow.postMessage({type:'review-cue',slide:clips[index].slide,language,workflow,heatmap},'*');
@@ -307,12 +307,14 @@
   document.querySelectorAll('[data-deck-language]').forEach(button=>button.onclick=()=>{slideReview?.reset();slideStateOverride=null;language=button.dataset.deckLanguage;editorLanguage=language;document.querySelectorAll('[data-deck-language]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));send();});
   window.addEventListener('message',event=>{
     if(event.source!==editorFrame.contentWindow)return;const d=event.data;
+    if(d.type==='script-review-action'){pause();return;}
     if(!d||!['ja','zh'].includes(d.language))return;
     if(d.type==='script-editor-ready'){editorReady=true;editorLanguage=d.language;language=d.language;document.querySelectorAll('[data-deck-language]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.deckLanguage===language)));send();return;}
     if(d.type!=='script-editor-change'||!Number.isInteger(d.slide))return;
     const next=clips.findIndex(c=>c.slide===d.slide);if(next<0)return;
-    if(language!==d.language){editorLanguage=d.language;document.querySelector(`[data-deck-language="${d.language}"]`).click();}
-    if(clips[index].slide!==d.slide)loadClip(next,0,false);
+    if(Number.isInteger(d.revision)){if(d.revision<editorRevision)return;editorRevision=d.revision;}
+    if(language!==d.language){editorLanguage=d.language;language=d.language;document.querySelectorAll('[data-deck-language]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.deckLanguage===language)));}
+    if(clips[index].slide!==d.slide)loadClip(next,0,false);else send();
   });
   $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{$('status').textContent='当前窗口不支持全屏';}};
   document.addEventListener('keydown',event=>{if(['ArrowRight','ArrowLeft','PageDown','PageUp','Home','End'].includes(event.key)&&!event.target.closest('textarea,input,select,[contenteditable]')&&!frame.contentDocument?.querySelector('#overview')?.open){event.preventDefault();stepPage(event.key);return;}if(event.key==='Escape'&&!event.target.closest('textarea,input,select,[contenteditable]')){if(frame.contentWindow.__slideReviewCancel?.()){event.preventDefault();return;}event.preventDefault();pause();frame.contentWindow.__toggleOverview?.();return;}if(event.code==='Space'&&!event.target.closest('textarea,input,select,button,[contenteditable="plaintext-only"],[contenteditable="true"],[role="textbox"]')){event.preventDefault();toggle();}});

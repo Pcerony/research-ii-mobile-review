@@ -2,6 +2,11 @@ const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypt
 const root=__dirname,files=new Set(['review.html','review.html?scope=supplement','index.html','review.css','review.js','review-mobile.js','review-core.js','review-slide.js','review-data.js','review.webmanifest']);
 files.add('ui-theme.js');files.add('ui-theme.css');
 files.add('deck-page-sync.js');
+for(const file of ['review-data.js?v=65','script-data.js?v=65','script-reading-data.js?v=65','review.js?v=65','review.html?runtime=63&speech=65','review.html?runtime=63&speech=65&scope=supplement','script.html?layout=review&runtime=63&speech=65','script.html?layout=review&runtime=63&speech=65&scope=supplement'])files.add(file);
+for(const file of ['script-tools.js?v=63','script-editor.js?v=63','review.html?runtime=63','review.html?runtime=63&scope=supplement','script.html?runtime=63','script.html?layout=review&runtime=63','script.html?layout=review&runtime=63&scope=supplement'])files.add(file);
+for(const file of ['review.js?v=63','review-data.js?v=63','script-data.js?v=63','script-editor.css?v=63'])files.add(file);
+for(const file of ['script-reading-data.js','script-feedback.js','script-feedback-ui.js','assets/kuromoji/kuromoji.js','assets/kuromoji/LICENSE-2.0.txt','assets/kuromoji/NOTICE.md'])files.add(file);
+for(const file of fs.readdirSync(path.join(root,'assets/kuromoji/dict')))files.add('assets/kuromoji/dict/'+file);
 for(const file of ['script.html','script.html?scope=supplement','script.html?layout=review','script.html?layout=review&scope=supplement','script-editor.js','script-editor.css','script-data.js','script-core.js','script-tools.js','script.webmanifest','review-offline.js'])files.add(file);
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'review-audio-manifest.json')));
 for(const c of [...manifest.clips,...manifest.appendixClips])files.add(c.audio);

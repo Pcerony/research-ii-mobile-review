@@ -2,10 +2,11 @@
   'use strict';
   const $=id=>document.getElementById(id),core=window.ScriptEditorCore,tools=window.ScriptEditorTools,data=window.SCRIPT_DATA,deck=window.REVIEW_DATA;
   const scope=new URLSearchParams(location.search).get('scope')==='supplement'?'supplement':'main',cache=new Map();
-  const embedded=new URLSearchParams(location.search).get('layout')==='review'&&parent!==window;let embeddedReady=false;
+  const embedded=new URLSearchParams(location.search).get('layout')==='review'&&parent!==window;let embeddedReady=false,navigationRevision=0;
   if(embedded){document.body.classList.add('is-embedded');document.querySelectorAll('[data-script-language]').forEach(b=>b.textContent=b.dataset.scriptLanguage==='ja'?'日本語':'中文');}
   let language='ja',pageIndex=0,ready=false,activeIndex=0,readingMode=false;
   const viewKey=`researchII.script.view.${data.deckHash}.${scope}`;
+  let feedbackUI;
   // Lucide icon paths, vendored locally under assets/LICENSE.lucide.
   const paths={
     'undo-2':'<path d="M9 14 4 9l5-5"/><path d="M4 9h10a7 7 0 0 1 7 7v4"/>',
@@ -29,13 +30,13 @@
     }
     return cache.get(key);
   }
-  function status(){const s=state(),n=Object.keys(s.drafts).length;message(s.conflict?'另一窗口草稿冲突，未覆盖，请导出':s.available?(n?`已存本机 · ${n}段修改`:'原稿 · 已存本机'):'本机保存不可用，请导出',!s.available||s.conflict);syncTools();}
+  function status(){const s=state(),n=Object.keys(s.drafts).length;message(s.conflict?'另一窗口草稿冲突，未覆盖，请导出':s.available?(n?`已存本机 · ${n}段修改`:'原稿 · 已存本机'):'本机保存不可用，请导出',!s.available||s.conflict);syncTools();feedbackUI?.refresh();}
   function history(s,i){if(!s.histories.has(i))s.histories.set(i,tools.history());return s.histories.get(i);}
   function syncTools(){const s=state(),h=history(s,activeIndex);$('script-undo').disabled=s.conflict||!h.past.length;$('script-redo').disabled=s.conflict||!h.future.length;$('script-readings').disabled=language!=='ja';$('script-readings').checked=language==='ja'&&readingMode;}
   function snapshot(input){return {text:input.value,start:input.selectionStart,end:input.selectionEnd};}
   function reading(target,text){target.replaceChildren();for(const token of tools.readings(text)){
     if(!token.reading){target.append(document.createTextNode(token.text));continue;}
-    const ruby=document.createElement('ruby'),rt=document.createElement('rt');ruby.append(document.createTextNode(token.text));rt.textContent=token.reading;ruby.append(rt);target.append(ruby);
+    const ruby=document.createElement('ruby'),rt=document.createElement('rt');ruby.append(document.createTextNode(token.text));rt.textContent=token.reading;if(token.unresolved)ruby.title='读音待确认';ruby.append(rt);target.append(ruby);
   }}
   function travel(direction){
     const s=state(),h=history(s,activeIndex);if(s.conflict)return;
@@ -58,7 +59,7 @@
   }
   function saveView(){try{localStorage.setItem(viewKey,JSON.stringify({language,slide:core.pages(state().edition.clips)[pageIndex].slide}));}catch{}}
   try{const saved=JSON.parse(localStorage.getItem(viewKey)||'null');if(saved&&['ja','zh'].includes(saved.language)){language=saved.language;pageIndex=Math.max(0,core.pages(state().edition.clips).findIndex(p=>p.slide===saved.slide));}}catch{}
-  function cue(){const page=core.pages(state().edition.clips)[pageIndex];if(embedded){if(embeddedReady)parent.postMessage({type:'script-editor-change',slide:page.slide,language},location.protocol==='file:'||location.origin==='null'?'*':location.origin);return;}if(ready)$('script-frame').contentWindow.postMessage({type:'script-cue',slide:page.slide,language,interactive:innerWidth>=1025},'*');}
+  function cue(){const page=core.pages(state().edition.clips)[pageIndex];if(embedded){if(embeddedReady)parent.postMessage({type:'script-editor-change',slide:page.slide,language,revision:++navigationRevision},location.protocol==='file:'||location.origin==='null'?'*':location.origin);return;}if(ready)$('script-frame').contentWindow.postMessage({type:'script-cue',slide:page.slide,language,interactive:innerWidth>=1025},'*');}
   function render(){
     const s=state(),pages=core.pages(s.edition.clips);pageIndex=Math.max(0,Math.min(pageIndex,pages.length-1));
     const page=pages[pageIndex];$('script-page').replaceChildren();
@@ -84,7 +85,7 @@
       input.oninput=e=>{if(input.isConnected&&s===state()&&core.pages(s.edition.clips)[pageIndex].indices.includes(i))activeIndex=i;const after=snapshot(input);if(!composing&&!e.isComposing)tools.record(history(s,i),before,after,e.inputType||'replace');before=after;update(i,input.value,s);};
       row.append(label,input,guide);$('script-fields').append(row);
     });
-    $('script-fields').scrollTop=0;saveView();status();cue();
+    $('script-fields').scrollTop=0;saveView();status();feedbackUI?.render();cue();
   }
   function navigate(next){persist();document.activeElement?.blur();pageIndex=next;render();}
   $('script-page').onchange=()=>navigate(Number($('script-page').value));$('script-previous').onclick=()=>navigate(pageIndex-1);$('script-next').onclick=()=>navigate(pageIndex+1);
@@ -93,15 +94,16 @@
   $('back-review').href=scope==='supplement'?'review.html?scope=supplement':'review.html';
   $('script-save').onclick=()=>{persist();document.activeElement?.blur();};
   for(const direction of ['undo','redo']){$('script-'+direction).onpointerdown=e=>e.preventDefault();$('script-'+direction).onclick=()=>travel(direction);}
-  $('script-readings').onchange=()=>{readingMode=$('script-readings').checked;document.activeElement?.blur();render();resize();};
+  $('script-readings').onchange=()=>{readingMode=$('script-readings').checked;document.activeElement?.blur();render();resize();if(readingMode)tools.prepareReadings().then(()=>{if(readingMode&&!getSelection()?.toString()&&!$('script-feedback-dialog')?.open)render();}).catch(()=>message('完整词典未就绪，当前原稿注音仍可用；未知新词标？',true));};
   document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&!e.altKey&&!e.isComposing&&e.key.toLowerCase()==='z'&&document.activeElement?.matches('.script-input')){e.preventDefault();travel(e.shiftKey?'redo':'undo');}});
-  const pack=()=>core.package(data,language,scope,state().drafts);
+  const pack=()=>feedbackUI.package(core.package(data,language,scope,state().drafts));
   const filename=extension=>`研究Ⅱ_${language==='ja'?'日本語':'中文'}_${scope==='main'?'正文':'补充'}_讲稿修订.${extension}`;
   function download(content,type,name){const url=URL.createObjectURL(new Blob([content],{type})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
   $('script-export-json').onclick=()=>download(JSON.stringify(pack(),null,2),'application/json',filename('json'));
-  $('script-export-md').onclick=()=>download(core.markdown(pack()),'text/markdown;charset=utf-8',filename('md'));
+  const markdown=p=>core.markdown(p)+feedbackUI.markdown(p);
+  $('script-export-md').onclick=()=>download(markdown(pack()),'text/markdown;charset=utf-8',filename('md'));
   $('script-share').onclick=async()=>{
-    const p=pack(),files=[new File([JSON.stringify(p,null,2)],filename('json'),{type:'application/json'}),new File([core.markdown(p)],filename('md'),{type:'text/markdown'})];
+    const p=pack(),files=[new File([JSON.stringify(p,null,2)],filename('json'),{type:'application/json'}),new File([markdown(p)],filename('md'),{type:'text/markdown'})];
     try{if(navigator.canShare?.({files}))await navigator.share({files,title:'研究Ⅱ讲稿修订'});else $('script-export-json').click();}
     catch(error){if(error.name!=='AbortError'){$('script-export-json').click();message('分享失败，已改为下载修改文件');}}
   };
@@ -110,15 +112,17 @@
     const file=$('script-import-file').files[0];$('script-import-file').value='';if(!file)return;
     try{
       if(file.size>5*1024*1024)throw Error('文件过大');
-      const incoming=core.importEdits(JSON.parse(await file.text()),data,language,scope),s=state();
+      const parsed=JSON.parse(await file.text());
+      if(parsed.styleVersion)throw Error('多方案混选包已停用，请使用原稿修改包');
+      const incoming=core.importEdits(parsed,data,language,scope),s=state();feedbackUI.validateImport(parsed);
       const conflicts=Object.keys(incoming).filter(i=>Object.hasOwn(s.drafts,i)&&s.drafts[i].text!==incoming[i].text);
       if(conflicts.length&&!confirm(`本机有${conflicts.length}段不同草稿。是否用导入文件替换这些段落？`)){message('未导入，保留本机草稿');return;}
       for(const [i,draft] of Object.entries(incoming)){const index=Number(i),original=core.draftText(s.edition.clips,s.drafts,index);tools.record(history(s,index),{text:original,start:0,end:0},{text:draft.text,start:0,end:0},'import');if(!s.dirty.has(index))s.bases.set(index,original);if(draft.text===s.edition.clips[i].text)delete s.drafts[i];else s.drafts[i]=draft;s.dirty.add(index);}
-      persist(s);render();if(s.available&&!s.conflict)message(`已导入 · ${Object.keys(incoming).length}段修改`);
+      persist(s);feedbackUI.import(parsed);render();if(s.available&&!s.conflict)message(`已导入原稿 · ${Object.keys(incoming).length}段修改`);
     }catch(error){message('导入失败：'+error.message,true);}
   };
   window.addEventListener('storage',event=>{
-    const s=state();if(event.key!==s.key||s.dirty.size)return;
+    const s=state();if(event.key!==s.key){const inactive=cache.get(event.key);if(inactive&&!inactive.dirty.size)cache.delete(event.key);return;}if(s.dirty.size)return;
     if(document.activeElement?.matches('.script-input')){
       try{const latest=core.sanitizeDrafts(JSON.parse(event.newValue||'{}'),s.edition.clips),i=Number(document.activeElement.dataset.clipIndex);
         if(core.draftText(s.edition.clips,latest,i)!==core.draftText(s.edition.clips,s.drafts,i)){s.conflict=true;status();return;}
@@ -138,10 +142,11 @@
   const bridge=`<script>addEventListener('message',e=>{if(e.source!==parent||e.data?.type!=='script-cue')return;const d=e.data;document.body.classList.toggle('preview-interactive',!!d.interactive);if(['ja','zh'].includes(d.language))document.querySelector('[data-language="'+d.language+'"]')?.click();if(Number.isInteger(d.slide)&&d.slide>=0&&d.slide<${deck.slideCount})window.__goSlide(d.slide);});parent.postMessage({type:'script-preview-ready'},'*');<\/script>`;
   if(!embedded)$('script-frame').srcdoc=deck.deckHtml.replace('<head>',`<head><base href="${new URL('.',location.href).href}">`).replace('</head>','<style>#presentation-footer{display:none!important}.preview-interactive #presentation-footer{display:flex!important}#supplement-toggle,#overview [data-language]{display:none!important}*{transition:none!important}</style></head>').replace('</body>',bridge+'<script src="deck-page-sync.js" data-mode="script"><\/script></body>');
   if(embedded)window.addEventListener('message',event=>{
-    if(event.source!==parent||event.data?.type!=='review-editor-cue')return;const d=event.data;if(!['ja','zh'].includes(d.language))return;
+    if(event.source!==parent||event.data?.type!=='review-editor-cue')return;const d=event.data;if(!['ja','zh'].includes(d.language)||(d.revision||0)<navigationRevision)return;
     const pages=core.pages(core.edition(data,d.language,scope).clips),next=pages.findIndex(p=>p.slide===d.slide);if(next<0)return;embeddedReady=true;
     if(language===d.language&&pageIndex===next)return;persist();document.activeElement?.blur();language=d.language;pageIndex=next;render();
   });
+  feedbackUI=window.ScriptFeedbackUI.create({data,scope,getLanguage:()=>language,getState:state,getPage:()=>core.pages(state().edition.clips)[pageIndex],message,rerender:render,commit(i,text,start,end){const s=state(),before=core.draftText(s.edition.clips,s.drafts,i);activeIndex=i;tools.record(history(s,i),{text:before,start,end},{text,start,end:start},'delete-selection');update(i,text,s);render();}});
   window.setupReviewOffline($('offline-save'),$('offline-status'));render();resize();
   if(embedded)parent.postMessage({type:'script-editor-ready',language},location.protocol==='file:'||location.origin==='null'?'*':location.origin);
 })();

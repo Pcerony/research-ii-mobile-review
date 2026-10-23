@@ -10,7 +10,7 @@ for(const [lang,mainPath,supplementPath]of [['ja','発表原稿_日本語.md','�
       time=end;return `${heading}\n\n${r[lang]}`;
     });
     if(!supplemental&&time!==420)throw new Error('Main talk must allocate exactly 420 seconds.');
-    const title=lang==='ja'?`研究Ⅱ・${supplemental?'補足原稿':'発表原稿'}（第38稿）`:`研究Ⅱ・${supplemental?'补充稿':'演讲稿'}（第38稿・中文对照）`;
+    const title=lang==='ja'?`研究Ⅱ・${supplemental?'補足原稿':'発表原稿'}（第52稿）`:`研究Ⅱ・${supplemental?'补充稿':'演讲稿'}（第52稿・中文对照）`;
     const count=rows.filter(r=>!r.supplement).length;
     const intro=supplemental?(lang==='ja'?'質疑応答用。本編には含めない。':'问答用补充，不计入发表正文。'):(lang==='ja'?`本文のみを読み上げる。${count}枚・7分は配分であり、本人の実測ではない。`:`只朗读正文。${count}页、7分钟为分配目标，尚未本人朗读实测。`);
     const memo=lang==='ja'?'編集メモ：実験年、刺激対応、測定条件と保存実装は引き続き核査する。本編の熱図は記録全体の出力例。':'编辑备注：继续核对实验年份、刺激对应、测量条件与保存实现；正文热图是完整记录输出示例。';

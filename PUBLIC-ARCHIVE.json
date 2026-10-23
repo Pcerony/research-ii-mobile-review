@@ -26,5 +26,7 @@
   "editorFeatures": [
     "paragraph-undo-redo",
     "offline-katakana-readings"
-  ]
+  ],
+  "slideVersion": 38,
+  "speechVersion": 52
 }

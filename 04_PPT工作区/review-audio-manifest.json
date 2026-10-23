@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "speechVersion": 38,
+  "speechVersion": 52,
   "slideCount": 21,
   "mainSlideCount": 19,
   "heatmapSlide": 12,
@@ -9,8 +9,8 @@
   "voice": "Tingting",
   "rate": 190,
   "deckHash": "b2b9dd736353f4793cbed451a4077d7d2d781937744ab40d7a8802a7181cd0f1",
-  "speechHash": "4976e7442c0da81483b53d135369c44cf3e1f5a9f185be34f0b49e24e65cfc83",
-  "appendixSpeechHash": "3de52cc29b2f4b7dbe6a2c07d1175df337d3670f3beb7c1ff8c02d5d8b558d52",
+  "speechHash": "5c84da14c926db06d9b71159671668d49747d2adc4927008f24a1c1da846afa7",
+  "appendixSpeechHash": "9d64fe8d08faf3713f7b7233f02d68bbfbbf8daba43f8d9dbd105b3acc5452d1",
   "duration": 330.4631292517007,
   "appendixDuration": 36.593922902494334,
   "clips": [

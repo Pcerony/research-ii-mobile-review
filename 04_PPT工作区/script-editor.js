@@ -1,11 +1,13 @@
 (() => {
   'use strict';
-  const $=id=>document.getElementById(id),core=window.ScriptEditorCore,data=window.SCRIPT_DATA,deck=window.REVIEW_DATA;
+  const $=id=>document.getElementById(id),core=window.ScriptEditorCore,tools=window.ScriptEditorTools,data=window.SCRIPT_DATA,deck=window.REVIEW_DATA;
   const scope=new URLSearchParams(location.search).get('scope')==='supplement'?'supplement':'main',cache=new Map();
-  let language='ja',pageIndex=0,ready=false;
+  let language='ja',pageIndex=0,ready=false,activeIndex=0,readingMode=false;
   const viewKey=`researchII.script.view.${data.deckHash}.${scope}`;
   // Lucide icon paths, vendored locally under assets/LICENSE.lucide.
   const paths={
+    'undo-2':'<path d="M9 14 4 9l5-5"/><path d="M4 9h10a7 7 0 0 1 7 7v4"/>',
+    'redo-2':'<path d="m15 14 5-5-5-5"/><path d="M20 9H10a7 7 0 0 0-7 7v4"/>',
     'arrow-left':'<path d="m12 19-7-7 7-7M5 12h14"/>','chevron-left':'<path d="m15 18-6-6 6-6"/>','chevron-right':'<path d="m9 18 6-6-6-6"/>',
     save:'<path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M17 21v-7H7v7M7 3v5h8"/>',
     download:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>',
@@ -19,13 +21,28 @@
   function state(){
     const key=core.storageKey(data,language,scope);
     if(!cache.has(key)){
-      const edition=core.edition(data,language,scope),s={key,edition,drafts:{},dirty:new Set(),bases:new Map(),available:true,conflict:false};
+      const edition=core.edition(data,language,scope),s={key,edition,drafts:{},dirty:new Set(),bases:new Map(),histories:new Map(),available:true,conflict:false};
       try{s.drafts=core.sanitizeDrafts(JSON.parse(localStorage.getItem(key)||'{}'),edition.clips);}catch{s.available=false;}
       cache.set(key,s);
     }
     return cache.get(key);
   }
-  function status(){const s=state(),n=Object.keys(s.drafts).length;message(s.conflict?'另一窗口草稿冲突，未覆盖，请导出':s.available?(n?`已存本机 · ${n}段修改`:'原稿 · 已存本机'):'本机保存不可用，请导出',!s.available||s.conflict);}
+  function status(){const s=state(),n=Object.keys(s.drafts).length;message(s.conflict?'另一窗口草稿冲突，未覆盖，请导出':s.available?(n?`已存本机 · ${n}段修改`:'原稿 · 已存本机'):'本机保存不可用，请导出',!s.available||s.conflict);syncTools();}
+  function history(s,i){if(!s.histories.has(i))s.histories.set(i,tools.history());return s.histories.get(i);}
+  function syncTools(){const s=state(),h=history(s,activeIndex);$('script-undo').disabled=s.conflict||!h.past.length;$('script-redo').disabled=s.conflict||!h.future.length;$('script-readings').disabled=language!=='ja';$('script-readings').checked=language==='ja'&&readingMode;}
+  function snapshot(input){return {text:input.value,start:input.selectionStart,end:input.selectionEnd};}
+  function reading(target,text){target.replaceChildren();for(const token of tools.readings(text)){
+    if(!token.reading){target.append(document.createTextNode(token.text));continue;}
+    const ruby=document.createElement('ruby'),rt=document.createElement('rt');ruby.append(document.createTextNode(token.text));rt.textContent=token.reading;ruby.append(rt);target.append(ruby);
+  }}
+  function travel(direction){
+    const s=state(),h=history(s,activeIndex);if(s.conflict)return;
+    const step=direction==='undo'?h.past.at(-1):h.future.at(-1);if(!step)return;
+    const expected=direction==='undo'?step.after.text:step.before.text;
+    if(core.draftText(s.edition.clips,s.drafts,activeIndex)!==expected){s.histories.delete(activeIndex);syncTools();return;}
+    const next=tools[direction](h);update(activeIndex,next.text,s);
+    const input=$('script-fields').querySelector(`[data-clip-index="${activeIndex}"]`);if(input){input.value=next.text;input.dispatchEvent(new Event('history-restored'));input.setSelectionRange(next.start,next.end);if(!input.hidden)input.focus();reading(input.nextElementSibling,next.text);}syncTools();
+  }
   function persist(s=state()){
     try{
       const result=core.mergeWrite(localStorage,s.key,s.edition.clips,s.drafts,s.dirty,s.bases);
@@ -43,6 +60,7 @@
   function render(){
     const s=state(),pages=core.pages(s.edition.clips);pageIndex=Math.max(0,Math.min(pageIndex,pages.length-1));
     const page=pages[pageIndex];$('script-page').replaceChildren();
+    if(!page.indices.includes(activeIndex))activeIndex=page.indices[0];
     pages.forEach((p,i)=>{const option=document.createElement('option');option.value=i;option.textContent=`${String(p.slide+1).padStart(2,'0')} · ${p.heading}`;$('script-page').append(option);});
     $('script-page').value=pageIndex;$('script-previous').disabled=pageIndex===0;$('script-next').disabled=pageIndex===pages.length-1;
     $('preview-label').textContent=`${language==='ja'?'日本語':'中文'} · ${String(page.slide+1).padStart(2,'0')} / ${deck.slideCount}${window.PUBLIC_REDACTED?' · 公开版':''}`;
@@ -52,7 +70,17 @@
     page.indices.forEach((i,n)=>{
       const row=document.createElement('section');row.className='script-paragraph';const label=document.createElement('label');label.htmlFor=`script-input-${i}`;label.textContent=`${n+1} / ${page.indices.length}`;
       const input=document.createElement('textarea');input.id=label.htmlFor;input.className='script-input';input.dataset.clipIndex=i;input.lang=language==='ja'?'ja':'zh-CN';input.spellcheck=false;input.setAttribute('aria-label',`第${page.slide+1}页${language==='ja'?'日文':'中文'}讲稿${page.indices.length>1?' · 第'+(n+1)+'段':''}`);input.value=core.draftText(s.edition.clips,s.drafts,i);
-      input.oninput=()=>update(i,input.value,s);row.append(label,input);$('script-fields').append(row);
+      const guide=document.createElement('div');guide.className='script-reading';guide.lang='ja';guide.setAttribute('aria-label','片假名注音讲稿');guide.tabIndex=0;
+      const annotated=language==='ja'&&readingMode;input.hidden=annotated;guide.hidden=!annotated;if(annotated)reading(guide,input.value);
+      let before=snapshot(input),composing=false,compositionBefore=null;
+      input.addEventListener('history-restored',()=>{before=snapshot(input);});
+      input.onfocus=()=>{activeIndex=i;before=snapshot(input);syncTools();};
+      guide.onfocus=()=>{activeIndex=i;syncTools();};
+      input.onbeforeinput=e=>{if(e.inputType==='historyUndo'||e.inputType==='historyRedo'){e.preventDefault();activeIndex=i;travel(e.inputType==='historyUndo'?'undo':'redo');return;}if(!composing)before=snapshot(input);};
+      input.addEventListener('compositionstart',()=>{composing=true;compositionBefore=snapshot(input);});
+      input.addEventListener('compositionend',()=>{composing=false;tools.record(history(s,i),compositionBefore||before,snapshot(input),'composition');before=snapshot(input);update(i,input.value,s);});
+      input.oninput=e=>{activeIndex=i;const after=snapshot(input);if(!composing&&!e.isComposing)tools.record(history(s,i),before,after,e.inputType||'replace');before=after;update(i,input.value,s);};
+      row.append(label,input,guide);$('script-fields').append(row);
     });
     $('script-fields').scrollTop=0;saveView();status();cue();
   }
@@ -62,6 +90,9 @@
   document.querySelectorAll('[data-scope]').forEach(link=>link.setAttribute('aria-current',link.dataset.scope===scope?'page':'false'));
   $('back-review').href=scope==='supplement'?'review.html?scope=supplement':'review.html';
   $('script-save').onclick=()=>{persist();document.activeElement?.blur();};
+  for(const direction of ['undo','redo']){$('script-'+direction).onpointerdown=e=>e.preventDefault();$('script-'+direction).onclick=()=>travel(direction);}
+  $('script-readings').onchange=()=>{readingMode=$('script-readings').checked;document.activeElement?.blur();render();resize();};
+  document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&!e.altKey&&!e.isComposing&&e.key.toLowerCase()==='z'&&document.activeElement?.matches('.script-input')){e.preventDefault();travel(e.shiftKey?'redo':'undo');}});
   const pack=()=>core.package(data,language,scope,state().drafts);
   const filename=extension=>`研究Ⅱ_${language==='ja'?'日本語':'中文'}_${scope==='main'?'正文':'补充'}_讲稿修订.${extension}`;
   function download(content,type,name){const url=URL.createObjectURL(new Blob([content],{type})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
@@ -80,7 +111,7 @@
       const incoming=core.importEdits(JSON.parse(await file.text()),data,language,scope),s=state();
       const conflicts=Object.keys(incoming).filter(i=>Object.hasOwn(s.drafts,i)&&s.drafts[i].text!==incoming[i].text);
       if(conflicts.length&&!confirm(`本机有${conflicts.length}段不同草稿。是否用导入文件替换这些段落？`)){message('未导入，保留本机草稿');return;}
-      for(const [i,draft] of Object.entries(incoming)){const index=Number(i);if(!s.dirty.has(index))s.bases.set(index,core.draftText(s.edition.clips,s.drafts,index));if(draft.text===s.edition.clips[i].text)delete s.drafts[i];else s.drafts[i]=draft;s.dirty.add(index);}
+      for(const [i,draft] of Object.entries(incoming)){const index=Number(i),original=core.draftText(s.edition.clips,s.drafts,index);tools.record(history(s,index),{text:original,start:0,end:0},{text:draft.text,start:0,end:0},'import');if(!s.dirty.has(index))s.bases.set(index,original);if(draft.text===s.edition.clips[i].text)delete s.drafts[i];else s.drafts[i]=draft;s.dirty.add(index);}
       persist(s);render();if(s.available&&!s.conflict)message(`已导入 · ${Object.keys(incoming).length}段修改`);
     }catch(error){message('导入失败：'+error.message,true);}
   };
@@ -89,7 +120,8 @@
     if(document.activeElement?.matches('.script-input')){
       try{const latest=core.sanitizeDrafts(JSON.parse(event.newValue||'{}'),s.edition.clips),i=Number(document.activeElement.dataset.clipIndex);
         if(core.draftText(s.edition.clips,latest,i)!==core.draftText(s.edition.clips,s.drafts,i)){s.conflict=true;status();return;}
-        s.drafts=latest;document.querySelectorAll('.script-input').forEach(input=>{if(input!==document.activeElement)input.value=core.draftText(s.edition.clips,s.drafts,Number(input.dataset.clipIndex));});status();
+        for(const [index,h] of s.histories)if(core.draftText(s.edition.clips,latest,index)!==core.draftText(s.edition.clips,s.drafts,index))s.histories.delete(index);
+        s.drafts=latest;document.querySelectorAll('.script-input').forEach(input=>{if(input!==document.activeElement){input.value=core.draftText(s.edition.clips,s.drafts,Number(input.dataset.clipIndex));input.dispatchEvent(new Event('history-restored'));}});status();
       }catch{message('另一窗口草稿无法读取，请导出当前版本',true);}return;
     }
     cache.delete(s.key);render();

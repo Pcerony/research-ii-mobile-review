@@ -22,10 +22,11 @@
   ],
   "localDeckHash": "b2b9dd736353f4793cbed451a4077d7d2d781937744ab40d7a8802a7181cd0f1",
   "note": "公开版有明确素材占位，不等同本地完整视觉；N9/n4聚合数据、讲稿、代码、当前匿名裁切热图及音频保留。",
-  "editorVersion": 51,
+  "editorVersion": 54,
   "editorFeatures": [
     "paragraph-undo-redo",
-    "offline-katakana-readings"
+    "offline-katakana-readings",
+    "unified-review-editor"
   ],
   "slideVersion": 38,
   "speechVersion": 52

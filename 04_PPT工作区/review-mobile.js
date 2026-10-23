@@ -20,6 +20,7 @@
   importButton.onclick=()=>file.click();file.onchange=()=>{if(file.files[0])window.dispatchEvent(new CustomEvent('review-import',{detail:file.files[0]}));file.value='';};
   const offline=button('offline-save','下载离线资料','⇩'),status=document.createElement('span');status.id='offline-status';status.role='status';status.textContent='未下载离线';
   const scriptMode=document.createElement('a');scriptMode.href=new URLSearchParams(location.search).get('scope')==='supplement'?'script.html?scope=supplement':'script.html';scriptMode.className='script-mode-link';scriptMode.textContent='讲稿模式';scriptMode.title='竖屏直接编辑讲稿';document.querySelector('.slide-review-tools').append(scriptMode);
+  scriptMode.onclick=event=>{if(matchMedia('(min-width:1025px)').matches){event.preventDefault();$('editor-tab').click();setOpen(true);}};
   document.querySelector('.slide-review-tools').append(offline,status);
   const viewport=()=>{
     const height=window.visualViewport?.height||innerHeight;
@@ -33,5 +34,3 @@
   document.addEventListener('focusout',()=>setTimeout(viewport,200));viewport();
   window.setupReviewOffline(offline,status);
 })();
-
-if(window.PUBLIC_REDACTED)document.querySelector('.review-header h1 span').textContent='公开审查版';

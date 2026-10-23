@@ -1,6 +1,6 @@
 {
-  "version": "455dd9c13b9d543f",
-  "bytes": 63272996,
+  "version": "36f32880644ed6b2",
+  "bytes": 63284563,
   "files": [
     "assets/apparatus-flat-v32.png",
     "assets/calibration-panel.jpg",
@@ -81,6 +81,8 @@
     "script-editor.js",
     "script-tools.js",
     "script.html",
+    "script.html?layout=review",
+    "script.html?layout=review&scope=supplement",
     "script.html?scope=supplement",
     "script.webmanifest"
   ]

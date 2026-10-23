@@ -7,6 +7,8 @@
   if(!data||!core){$('status').textContent='审查数据缺失，请重新生成。';return;}
   document.querySelectorAll('[data-review-scope]').forEach(link=>link.setAttribute('aria-current',link.dataset.reviewScope===(supplemental?'supplement':'main')?'page':'false'));
   const clips=data.clips,audio=$('narration'),frame=$('deck-frame');
+  const editorFrame=$('script-editor-frame');let editorReady=false,editorLanguage='ja';
+  editorFrame.src='script.html?layout=review'+(supplemental?'&scope=supplement':'');
   const storageKey=`researchII.review.${data.speechHash}.${data.deckHash}`;
   const draftKey=storageKey+'.drafts';
   let index=0,wantPlay=false,loading=true,complete=false,frameReady=false,language='zh',token=0,seeking=false;
@@ -23,7 +25,7 @@
       if(/^\d+$/.test(key)&&Number(key)<clips.length&&typeof value?.text==='string')drafts[key]={text:value.text,updatedAt:value.updatedAt};
     }
   }catch{draftStorageAvailable=false;}
-  document.querySelector('.review-meta').textContent=`中文讲稿 · 第${data.speechVersion}稿`;
+  document.querySelector('.review-meta').textContent=`双语讲稿 · 中文音频 · 第${data.speechVersion}稿`;
   const draftText=i=>Object.hasOwn(drafts,i)?drafts[i].text:clips[i].text;
   function renderDraftStatus(){
     const count=Object.keys(drafts).length;
@@ -108,6 +110,7 @@
     link.href=url;link.download=filename;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   }
   function send(){
+    if(editorReady)editorFrame.contentWindow.postMessage({type:'review-editor-cue',slide:clips[index].slide,language},location.origin==='null'?'*':location.origin);
     if(!frameReady)return;
     const workflow=slideStateOverride?.workflow==null?clips[index].workflowStep:Number(slideStateOverride.workflow),heatmap=slideStateOverride?.heatmap?Number(slideStateOverride.heatmap.slice(1))-1:core.heatmapAt(clips[index].slide,audio.currentTime,clips[index].duration,data.heatmapSlide);
     frame.contentWindow.postMessage({type:'review-cue',slide:clips[index].slide,language,workflow,heatmap},'*');
@@ -150,7 +153,7 @@
     wantPlay=true;render();if(!loading)startAudio();
   }
   function selectTab(name){
-    for(const panel of ['transcript','notes']){
+    for(const panel of ['editor','transcript','notes']){
       $(panel+'-panel').hidden=panel!==name;
       $(panel+'-tab').setAttribute('aria-selected',String(panel===name));
     }
@@ -203,7 +206,7 @@
     };
     row.append(label,text,input);row.onclick=e=>{if(!e.target.closest('.clip-text,.clip-edit'))loadClip(i,0,wantPlay);};$('clip-list').append(row);
   });
-  $('edit-script').onclick=()=>setEditing(!editing);
+  $('edit-script').onclick=()=>{selectTab('editor');document.querySelector('[data-deck-language="zh"]').click();};
   document.addEventListener('selectionchange',()=>{
     pendingSelection=null;$('annotate-selection').disabled=true;
     const input=document.activeElement;
@@ -233,6 +236,7 @@
     downloadFile(`# 研究Ⅱ・中文${supplemental?'补充':'讲稿'}审查修订稿\n\n本机草稿；配套音频仍为原稿。来源版本：${data.speechVersion}，讲稿哈希：${data.speechHash}。\n\n${blocks.join('\n\n')}\n`,'text/markdown;charset=utf-8',`研究Ⅱ_${supplemental?'补充':'讲稿'}_审查修订稿.md`);
   };
   $('transcript-tab').onclick=()=>selectTab('transcript');
+  $('editor-tab').onclick=()=>selectTab('editor');
   $('notes-tab').onclick=()=>{selectTab('notes');if(!noteContext){noteContext=captureContext();$('note-context').textContent=contextLabel(noteContext);}};
   $('add-note').onclick=()=>showNoteForm(captureContext());
   $('cancel-note').onclick=()=>{slideReview?.reset();editingNoteId=null;noteContext=null;$('note-text').value='';$('save-note').disabled=true;$('note-quote').hidden=true;selectTab('transcript');};
@@ -295,7 +299,16 @@
   audio.ontimeupdate=()=>{render();send();};audio.onplay=render;audio.onpause=render;
   audio.onerror=()=>failure(`音频加载失败：第${index+1}段`);
   audio.onended=()=>{if(!wantPlay)return;if(index+1<clips.length)loadClip(index+1,0,true);else{wantPlay=false;complete=true;render();}};
-  document.querySelectorAll('[data-deck-language]').forEach(button=>button.onclick=()=>{slideReview?.reset();slideStateOverride=null;language=button.dataset.deckLanguage;document.querySelectorAll('[data-deck-language]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));send();});
+  document.querySelectorAll('[data-deck-language]').forEach(button=>button.onclick=()=>{slideReview?.reset();slideStateOverride=null;language=button.dataset.deckLanguage;editorLanguage=language;document.querySelectorAll('[data-deck-language]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));send();});
+  window.addEventListener('message',event=>{
+    if(event.source!==editorFrame.contentWindow)return;const d=event.data;
+    if(!d||!['ja','zh'].includes(d.language))return;
+    if(d.type==='script-editor-ready'){editorReady=true;editorLanguage=d.language;language=d.language;document.querySelectorAll('[data-deck-language]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.deckLanguage===language)));send();return;}
+    if(d.type!=='script-editor-change'||!Number.isInteger(d.slide))return;
+    const next=clips.findIndex(c=>c.slide===d.slide);if(next<0)return;
+    if(language!==d.language){editorLanguage=d.language;document.querySelector(`[data-deck-language="${d.language}"]`).click();}
+    if(clips[index].slide!==d.slide)loadClip(next,0,false);
+  });
   $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{$('status').textContent='当前窗口不支持全屏';}};
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!event.target.closest('textarea,input,select,[contenteditable]')){if(frame.contentWindow.__slideReviewCancel?.()){event.preventDefault();return;}event.preventDefault();pause();frame.contentWindow.__toggleOverview?.();return;}if(event.code==='Space'&&!event.target.closest('textarea,input,select,button,[contenteditable="plaintext-only"],[contenteditable="true"],[role="textbox"]')){event.preventDefault();toggle();}});
   window.addEventListener('message',event=>{

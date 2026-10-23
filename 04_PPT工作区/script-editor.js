@@ -2,6 +2,8 @@
   'use strict';
   const $=id=>document.getElementById(id),core=window.ScriptEditorCore,tools=window.ScriptEditorTools,data=window.SCRIPT_DATA,deck=window.REVIEW_DATA;
   const scope=new URLSearchParams(location.search).get('scope')==='supplement'?'supplement':'main',cache=new Map();
+  const embedded=new URLSearchParams(location.search).get('layout')==='review'&&parent!==window;let embeddedReady=false;
+  if(embedded){document.body.classList.add('is-embedded');document.querySelectorAll('[data-script-language]').forEach(b=>b.textContent=b.dataset.scriptLanguage==='ja'?'日本語':'中文');}
   let language='ja',pageIndex=0,ready=false,activeIndex=0,readingMode=false;
   const viewKey=`researchII.script.view.${data.deckHash}.${scope}`;
   // Lucide icon paths, vendored locally under assets/LICENSE.lucide.
@@ -56,7 +58,7 @@
   }
   function saveView(){try{localStorage.setItem(viewKey,JSON.stringify({language,slide:core.pages(state().edition.clips)[pageIndex].slide}));}catch{}}
   try{const saved=JSON.parse(localStorage.getItem(viewKey)||'null');if(saved&&['ja','zh'].includes(saved.language)){language=saved.language;pageIndex=Math.max(0,core.pages(state().edition.clips).findIndex(p=>p.slide===saved.slide));}}catch{}
-  function cue(){if(ready){const page=core.pages(state().edition.clips)[pageIndex];$('script-frame').contentWindow.postMessage({type:'script-cue',slide:page.slide,language},'*');}}
+  function cue(){const page=core.pages(state().edition.clips)[pageIndex];if(embedded){if(embeddedReady)parent.postMessage({type:'script-editor-change',slide:page.slide,language},location.origin==='null'?'*':location.origin);return;}if(ready)$('script-frame').contentWindow.postMessage({type:'script-cue',slide:page.slide,language},'*');}
   function render(){
     const s=state(),pages=core.pages(s.edition.clips);pageIndex=Math.max(0,Math.min(pageIndex,pages.length-1));
     const page=pages[pageIndex];$('script-page').replaceChildren();
@@ -79,7 +81,7 @@
       input.onbeforeinput=e=>{if(e.inputType==='historyUndo'||e.inputType==='historyRedo'){e.preventDefault();activeIndex=i;travel(e.inputType==='historyUndo'?'undo':'redo');return;}if(!composing)before=snapshot(input);};
       input.addEventListener('compositionstart',()=>{composing=true;compositionBefore=snapshot(input);});
       input.addEventListener('compositionend',()=>{composing=false;tools.record(history(s,i),compositionBefore||before,snapshot(input),'composition');before=snapshot(input);update(i,input.value,s);});
-      input.oninput=e=>{activeIndex=i;const after=snapshot(input);if(!composing&&!e.isComposing)tools.record(history(s,i),before,after,e.inputType||'replace');before=after;update(i,input.value,s);};
+      input.oninput=e=>{if(input.isConnected&&s===state()&&core.pages(s.edition.clips)[pageIndex].indices.includes(i))activeIndex=i;const after=snapshot(input);if(!composing&&!e.isComposing)tools.record(history(s,i),before,after,e.inputType||'replace');before=after;update(i,input.value,s);};
       row.append(label,input,guide);$('script-fields').append(row);
     });
     $('script-fields').scrollTop=0;saveView();status();cue();
@@ -133,6 +135,12 @@
   window.addEventListener('pagehide',()=>{for(const s of cache.values())persist(s);});
   window.addEventListener('message',e=>{if(e.source===$('script-frame').contentWindow&&e.data?.type==='script-preview-ready'){ready=true;cue();}});
   const bridge=`<script>addEventListener('message',e=>{if(e.source!==parent||e.data?.type!=='script-cue')return;const d=e.data;if(['ja','zh'].includes(d.language))document.querySelector('[data-language="'+d.language+'"]')?.click();if(Number.isInteger(d.slide)&&d.slide>=0&&d.slide<${deck.slideCount})window.__goSlide(d.slide);});parent.postMessage({type:'script-preview-ready'},'*');<\/script>`;
-  $('script-frame').srcdoc=deck.deckHtml.replace('<head>',`<head><base href="${new URL('.',location.href).href}">`).replace('</head>','<style>#presentation-footer{display:none!important}*{transition:none!important}</style></head>').replace('</body>',bridge+'</body>');
+  if(!embedded)$('script-frame').srcdoc=deck.deckHtml.replace('<head>',`<head><base href="${new URL('.',location.href).href}">`).replace('</head>','<style>#presentation-footer{display:none!important}*{transition:none!important}</style></head>').replace('</body>',bridge+'</body>');
+  if(embedded)window.addEventListener('message',event=>{
+    if(event.source!==parent||event.data?.type!=='review-editor-cue')return;const d=event.data;if(!['ja','zh'].includes(d.language))return;
+    const pages=core.pages(core.edition(data,d.language,scope).clips),next=pages.findIndex(p=>p.slide===d.slide);if(next<0)return;embeddedReady=true;
+    if(language===d.language&&pageIndex===next)return;persist();document.activeElement?.blur();language=d.language;pageIndex=next;render();
+  });
   window.setupReviewOffline($('offline-save'),$('offline-status'));render();resize();
+  if(embedded)parent.postMessage({type:'script-editor-ready',language},location.origin==='null'?'*':location.origin);
 })();
